@@ -100,11 +100,11 @@ graph
     1. Le système affiche un message d'erreur "Format invalide"
     2. Retour au point 10 du scénario nominal avec le même joueur
 
-12. b Le joueur n'a pas entré a demander un tas qui n'existe pas ou est déjà vide
+12. b Le joueur a demandé un tas qui n'existe pas ou est déjà vide
     1. Le système affiche un message d'erreur "Tas inexistant ou vide"
     2. Retour au point 10 du scénario nominal avec le même joueur
 
-12. c Le joueur n'a pas veut prendre un nombre d'allumette supérieur au nombre contenue dans le tas
+12. c Le joueur veut prendre un nombre d'allumette supérieur au nombre contenue dans le tas
     1. Le système affiche un message d'erreur "Pas assez d'allumette dans ce tas"
     2. Retour au point 10 du scénario nominal avec le même joueur
 
