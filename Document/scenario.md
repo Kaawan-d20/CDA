@@ -32,8 +32,7 @@ graph LR
     1. Le système affiche un message d'erreur
     2. Retour au point 2 du scénario nominal
 
-
-
+---
 
 ## **UC : Sélectionner le jeu**
 **Périmètre** : Le jeu <br>
@@ -54,9 +53,7 @@ graph LR
     1. Le système affiche un message d'erreur 
     2. Retour au point 1 du scénario nominal
 
-
-
-
+---
 
 ## **UC : Jeu de Nim**
 **Périmètre** : Le jeu <br>
@@ -122,8 +119,7 @@ graph LR
     1. Le système affiche le classement entre les deux joueur
     2. Le système attend une action de l'utilisateur pour arrêter le programme
 
-
-
+---
 
 ## **UC : Jeu de puissance 4**
 **Périmètre** : Le jeu <br>
@@ -173,3 +169,54 @@ graph LR
     1. Le système affiche le classement entre les deux joueur
     2. Le système attend une action de l'utilisateur pour arrêter le programme
 
+# Diagrammes de Classes
+
+## Jeu de Nim (Itération 1)
+
+```mermaid
+classDiagram
+    class Ihm {
+        Scanner sc
+
+        String lire()
+        void ecrire(String s)
+    }
+
+    class ControleurJeuNim {
+        int numJoueurCourant
+
+        void commencerPartie()
+        int tourSuivant()
+        bool retirerBatonnet(int m, int n, int j)
+        bool verifierFin()
+    }
+
+    class Joueur {
+        String nom
+        int nbrVictoires
+
+        bool setNom(String s)
+        String getNom()
+        void incrementeVictoires()
+        int getVictoires()
+    }
+
+    class Tas {
+        int nombreBatonnet
+
+        Tas (nombreBatonnet)
+
+        bool retirerBatonnet(x)
+        bool estVide()
+    }
+
+    class Plateau {
+        Plateau (int nombreTas)
+        bool verifierFin()
+    }
+
+    Tas "1..n" --* "1" Plateau : lesTas
+    ControleurJeuNim "1" <-- "1" Plateau
+    ControleurJeuNim "1" <-- "1" Ihm
+    ControleurJeuNim "1" <-- "2" Joueur : lesJoueurs
+```
