@@ -1,11 +1,13 @@
 # Diagramme de cas d'utilisation
 
-```mermaid
-graph
-    Joueur --- solo[Choisir entre solo ou multi]
-    solo --> Jeu[Sélectionner le jeu]
-    Jeu --> Nim
-    Jeu --> puissance[Puissance 4]
+```Mermaid
+graph LR
+    Joueur[🧍‍♂️ Joueur] --- Solo([Choisir entre solo ou multi])
+    Joueur --- Nim([Sélectionner le jeu Nim])
+    Joueur --- Puissance([Sélectionner le jeu Puissance 4])
+    Nim -. include .- Selectionner([Selectionner un Jeu])
+    Puissance -. include .- Selectionner
+
 ```
 
 # Scénario
@@ -65,50 +67,51 @@ graph
 
 ### Scénario nominal
 
-1. Le système demande à l'utilisateur le nombre de tas qu'il souhaite
-2. L'utilisateur répond à la question
-3. Le système enregistre le nombre de tas
-4. Le système demande le nom du joueur 1
-5. Le joueur 1 répond
-6. Le système enregistre le nom du joueur 1
-7. Le système demande au joueur 2
-8. Le joueur 2 répond
-9. Le système enregistre le nom du joueur 2
-10. Le système affiche les tas ainsi que le nom du joueur qui doit jouer
-11. Le joueur choisi dans quel tas il souhaite prendre un certain nombre d'allumette 
-12. Le système vérifie si la partie est gagné
-13. Le système affiche le vainqueur et demande si l'utilisateur souhaite refaire une partie (y or n)
-14. L'utilisateur répond
-15. Le système retourne au point 8 du scénario nominal et incrément le classement entre les deux joueur
+1. UC Selectionner le jeu
+2. Le système demande à l'utilisateur le nombre de tas qu'il souhaite
+3. L'utilisateur répond à la question
+4. Le système enregistre le nombre de tas
+5. Le système demande le nom du joueur 1
+6. Le joueur 1 répond
+7. Le système enregistre le nom du joueur 1
+8. Le système demande au joueur 2
+9. Le joueur 2 répond
+10. Le système enregistre le nom du joueur 2
+11. Le système affiche les tas ainsi que le nom du joueur qui doit jouer
+12. Le joueur choisi dans quel tas il souhaite prendre un certain nombre d'allumette 
+13. Le système vérifie si la partie est gagné
+14. Le système affiche le vainqueur et demande si l'utilisateur souhaite refaire une partie (y or n)
+15. L'utilisateur répond "y"
+16. Le système retourne au point 8 du scénario nominal et incrément le classement entre les deux joueur
 
 
 ### Extensions
 
-3. a Le joueur répond autre chose ou un nombre inférieur à 1
+4. a Le joueur répond autre chose ou un nombre inférieur à 1
     1. Le système affiche un message d'erreur
     2. Retour au point 1 du scénario nominal
 
-6. a L'utilisateur répond à la question avec une chaîne vide
+7. a L'utilisateur répond à la question avec une chaîne vide
     1. Le système affiche un message d'erreur
     2. Retour au point 4 du scénario nominal
 
-9. a L'utilisateur répond à la question avec une chaîne vide
+10. a L'utilisateur répond à la question avec une chaîne vide
     1. Le système affiche un message d'erreur
     2. Retour au point 7 du scénario nominal
 
-12. a Le joueur n'a pas entré une réponse au format $m\ n$
+13. a Le joueur n'a pas entré une réponse au format $m\ n$
     1. Le système affiche un message d'erreur "Format invalide"
     2. Retour au point 10 du scénario nominal avec le même joueur
 
-12. b Le joueur a demandé un tas qui n'existe pas ou est déjà vide
+13. b Le joueur a demandé un tas qui n'existe pas ou est déjà vide
     1. Le système affiche un message d'erreur "Tas inexistant ou vide"
     2. Retour au point 10 du scénario nominal avec le même joueur
 
-12. c Le joueur veut prendre un nombre d'allumette supérieur au nombre contenue dans le tas
+13. c Le joueur veut prendre un nombre d'allumette supérieur au nombre contenue dans le tas
     1. Le système affiche un message d'erreur "Pas assez d'allumette dans ce tas"
     2. Retour au point 10 du scénario nominal avec le même joueur
 
-12. d La partie n'est pas fini 
+14. d La partie n'est pas fini 
     1. Retour au point 10 du scénario nominal avec l'autre joueur
 
 15. a L'utilisateur à répondu autre chose que y ou n
