@@ -161,3 +161,25 @@ Dans la class Ihm la méthode demanderNomJoueur, elle demande pour un seul joueu
 Dans la class Ihm la méthode demanderCoupNim, je sais pas si on renvoie un tableau de int avec la colonne et le nombre, ou on renvoi directement la String, perso je ferait plus  le tableau de int
 
 Il reste juste les associations entre les classes en précisant le sens de navigation mais je suis pas super chaud la dessus
+
+
+# Répartition des tâches
+## Itération 1
+
+### Publication du sujet
+
+Dany : Premier jet du diagramme des UC et scénario
+
+Nathan : Review et premier jet du diagramme de classe
+
+### Premier CM avec des questions
+
+Dany : Review et amélioration du diagramme de classe
+
+
+# Utilisation de l'IA
+## Itération 1
+
+Nathan : Aucun usage
+Dany : Aucun usage
+Agathe : Aucun usage
