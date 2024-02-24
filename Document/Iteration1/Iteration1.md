@@ -1,7 +1,7 @@
 # Diagramme de cas d'utilisation
 
 ```Mermaid
-graph LR
+flowchart LR
     Joueur[🧍‍♂️ Joueur] --- Nim([Jouer au jeu de Nim])
 ```
 
