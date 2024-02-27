@@ -98,13 +98,13 @@ classDiagram
     }
 
     class ControleurJeuNim {
-        int numJoueurCourant
+        Joueur joueurCourant
 
         + ControleurJeuNim(Ihm ihm)
-        + Jouer () void
+        + jouer () void
         - commencerPartie() void
         - tourSuivant() int
-        - retirerBatonnet(int m, int n, int j) bool
+        - retirerBatonnet(int m, int n) bool
         - verifierFin() bool
     }
 
@@ -138,9 +138,10 @@ classDiagram
     ControleurJeuNim "1" <-- "1" Plateau
     ControleurJeuNim "1" <-- "1" Ihm
     ControleurJeuNim "1" <-- "2" Joueur : lesJoueurs
+    ControleurJeuNim "1" --> "1" main
+    Ihm "1" --> "1" main
 ```
 
-idTas ou avec une map idTas : Tas dans plateau ou avec une associations qualifiées
 
 
 Dans la class ControleurJeuNim la méthode jouer est celle qui est appeler par le main à voir ce qu'elle fait en réalité (peut être l'initialisation du nb de tas et du nom des joueurs)
@@ -153,14 +154,11 @@ public static void main(String[] args) {
 }
 ```
 
-Dans ControleurJeuNim la méthode retirerBatonnet(int m, int n, int j), renommer les variables en retirerBatonnet(int numTas, int nb, int j) et c'est quoi j ?
 
-Dans la class Ihm la méthode demanderNomJoueur, elle demande pour un seul joueur ou les deux, perso , je penserait 1 seul pour le future avec le robot
+Dans la class Ihm la méthode demanderNomJoueur, elle demande pour un seul joueur 
 
+Dans la class Ihm la méthode demanderCoupNim, je sais pas si on renvoie  tableau de int
 
-Dans la class Ihm la méthode demanderCoupNim, je sais pas si on renvoie un tableau de int avec la colonne et le nombre, ou on renvoi directement la String, perso je ferait plus  le tableau de int
-
-Il reste juste les associations entre les classes en précisant le sens de navigation mais je suis pas super chaud la dessus
 
 
 # Répartition des tâches
@@ -176,10 +174,15 @@ Nathan : Review et premier jet du diagramme de classe
 
 Dany : Review et amélioration du diagramme de classe
 
+Agathe, Nathan, Dany : Review des diagrammes
+
+Agathe : Finalisation du diagramme de Classes
 
 # Utilisation de l'IA
 ## Itération 1
 
 Nathan : Aucun usage
+
 Dany : Aucun usage
+
 Agathe : Aucun usage
