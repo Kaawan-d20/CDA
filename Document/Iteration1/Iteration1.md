@@ -84,52 +84,56 @@ classDiagram
     class Ihm {
         Scanner scanner
 
+        + Ihm()
         + demanderNbTas() int
-        + demanderNomJoueur(String numJoueur) String
+        + demanderNomJoueur(int numJoueur) String
         + demanderCoupNim(String nomJoueur) int[]
         + demanderJouerEncore() bool
-
-        + afficherErreurNombreTas() void
-        + afficherErreurNom() void
-        + afficherErreurFormatNim() void
-        + afficherErreurTasInexistant() void
-        + afficherErreurNombreInsuffisant() void
-        + afficherErreurRejouer() void
+        + afficherPlateau(String plateauString) void
+        + afficherVictoire(String nomJoueur, int nbVictoires, int nbParties) void
+        + afficherErreur(String message) void
     }
 
     class ControleurJeuNim {
-        Joueur joueurCourant
-
+        - int numeroJoueurCourant
+        - int nbParties
+        
         + ControleurJeuNim(Ihm ihm)
         + jouer () void
         - commencerPartie() void
-        - tourSuivant() int
-        - retirerBatonnet(int m, int n) bool
-        - verifierFin() bool
+        - toursDeJeu() void
+        - tourSuivant() void
+        - finPartie() void
+        + getNumeroJoueurCourant() int
+        + getJoueurCourant() Joueur
+        + getNomJoueurCourant() String
     }
 
     class Joueur {
-        String nom
-        int nbVictoires
+        - String nom
+        - int nbVictoires
 
         + Joueur(String nom)
         + getNom() String
-        + incrementeVictoires() void
         + getVictoires() int
+        + incrementeVictoires() void
     }
 
     class Tas {
-        int nombreBatonnet
+        - int nombreBatonnet
 
         + Tas (int nombreBatonnet)
-
-        + retirerBatonnet(int x) bool
+        + retirerBatonnet(int n) bool
         + getNombre() int
         + estVide() bool
+        + toString() String
     }
 
     class Plateau {
+        - int nombreTas
+        
         + Plateau (int nombreTas)
+        + reset() void
         + verifierFin() bool
         + getPlateau() int[]
     }
@@ -181,8 +185,6 @@ Agathe : Finalisation du diagramme de Classes
 # Utilisation de l'IA
 ## Itération 1
 
-Nathan : Aucun usage
-
-Dany : Aucun usage
-
-Agathe : Aucun usage
+- Nathan : Génération de Javadoc sur les fonctions simples (ex set-get, afficherErreur etc.) [Lien vers la conversation ChatGPT](https://chat.openai.com/share/2db9f292-a089-4935-a584-acebe06836a9)
+- Dany : 
+- Agathe : Aucun usage
