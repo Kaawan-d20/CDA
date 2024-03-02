@@ -7,13 +7,13 @@ import java.util.regex.Pattern;
 /**
  * La classe Ihm (Interface Humain Machine) représente l'interface utilisateur du jeu.
  */
-
 public class Ihm {
+    /** Le scanner qui permet de récupérer les inputs de l'utilisateur */
     Scanner scanner;
 
     /**
      * Constructeur de la classe Ihm.
-     * Initialise le scanner pour la lecture des entrées utilisateur.
+     * Initialise le scanner pour la lecture des entrées utilisateurs.
      */
     public Ihm() {
         scanner = new Scanner(System.in);
@@ -23,6 +23,7 @@ public class Ihm {
      * Demande à l'utilisateur le nombre de tas pour jouer.
      *
      * @return Le nombre de tas saisi par l'utilisateur.
+     * @throws IllegalArgumentException Si l'utilisateur entre autre chose qu'un int
      */
     public int demanderNbTas() {
         int candidate;
@@ -58,7 +59,7 @@ public class Ihm {
      * La réponse doit être au format `m n`, où `m` est le numéro du tas et `n` est le nombre de bâtonnets à retirer.
      *
      * @param nomJoueur Le nom du joueur pour lequel la demande est effectuée.
-     * @return Un tableau d'entiers de taille 2, contenant le numéro du tas et le nombre de bâtonnets à retirer.
+     * @return Un tableau d'entiers de taille 2, contenant le numéro du tas et le nombre de bâtonnets à retirer [m, n].
      * @throws IllegalArgumentException Si la réponse de l'utilisateur n'est pas au format attendu.
      */
     public int[] demanderCoupNim(String nomJoueur) {
@@ -69,8 +70,8 @@ public class Ihm {
             String line = scanner.nextLine();
             System.out.println("DEBUG : `" + line + "`");
             // Le pattern s'assure que la ligne est composée de deux nombres séparés par un espace.
-            Pattern pattern = Pattern.compile("^[0-9]+ [0-9]+$");
-            Matcher matcher = pattern.matcher(line);
+            Pattern pattern = Pattern.compile("^[0-9]+ [0-9]+$"); //Permet de créer le regex.
+            Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
             // On utilise un autre scanner pour extraire les deux nombres de la ligne.
             if (matcher.find()) {
                 Scanner sc2 = new Scanner(line);
@@ -98,8 +99,8 @@ public class Ihm {
         if (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             // Le pattern s'assure que la ligne contient uniquement "y" ou "n".
-            Pattern pattern = Pattern.compile("^[y|n]$");
-            Matcher matcher = pattern.matcher(line);
+            Pattern pattern = Pattern.compile("^[y|n]$"); //Permet de créer le regex.
+            Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
             // On vérifie la réponse et retourne true si c'est "y" et false si c'est "n".
             if (matcher.find()) {
                 if (line.equals("y")) {

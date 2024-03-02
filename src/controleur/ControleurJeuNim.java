@@ -4,20 +4,23 @@ import modele.Joueur;
 import modele.Plateau;
 import vue.Ihm;
 
+import java.sql.Array;
+import java.util.Arrays;
+
 public class ControleurJeuNim {
-    // numéro du joueur courant, x ∈ [0; 1]
+    /** Numéro du joueur courant, x ∈ [0 ; 1]*/
     private int numeroJoueurCourant;
 
-    // nombres de partie jouées, incrémentée dans commencerPartie()
+    /** Nombre de parties jouées, incrémentée dans commencerPartie()*/
     private int nbParties = 0;
 
-    // array contenant les objets Joueur représentant les joueurs
+    /** Array contenant les objets Joueur représentant les joueurs*/
     private Joueur[] lesJoueurs;
 
-    // Objet Plateau representant une collection de tas
+    /** Objet Plateau représentant une collection de tas*/
     private Plateau plateau;
 
-    // Objet Interface Humain Machine chargé de récuperer les commandes du joeurs et d'afficher l'état de la partie
+    /** Objet Interface Humain Machine chargé de récupérer les commandes du joueur et d'afficher l'état de la partie*/
     private final Ihm ihm;
 
     /**
@@ -32,7 +35,7 @@ public class ControleurJeuNim {
 
     /**
      * Initialise une nouvelle partie en demandant le nombre de tas,
-     * les noms des joueurs, et en créant le plateau de jeu.
+     * Les noms des joueurs, et en créant le plateau de jeu.
      */
     public void jouer() {
         boolean isNbTasValide = false;
@@ -56,7 +59,7 @@ public class ControleurJeuNim {
             while (!nomValide) {
                 nomJoueur = ihm.demanderNomJoueur(i+1);
                 if (nomJoueur.isBlank()) {
-                    ihm.afficherErreur("Veuillez choisir un nom qui ne soit pas composé exclusivement de caractéres invisibles (Espaces, Tabulations ...).");
+                    ihm.afficherErreur("Veuillez choisir un nom qui ne soit pas composé exclusivement de caractères invisibles (Espaces, Tabulations ...).");
                 } else {
                     nomValide = true;
                 }
@@ -70,7 +73,7 @@ public class ControleurJeuNim {
     }
 
     /**
-     * Incrmente le nombre de partie, reset/crée les tas,
+     * Incrémente le nombre de parties, reset / crée les tas,
      * Puis lance la séquence de tours de jeu.
      */
     private void commencerPartie() {
@@ -79,10 +82,10 @@ public class ControleurJeuNim {
         // Incrémentation du nombre de parties jouées
         this.nbParties ++;
 
-        // crée / reset le plateau
+        // Crée / reset le plateau
         plateau.reset();
 
-        // lance la partie
+        // Lance la partie
         toursDeJeu();
     }
 

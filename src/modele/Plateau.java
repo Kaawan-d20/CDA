@@ -13,6 +13,10 @@ public class Plateau {
         this.nombreTas = nombreTas;
     }
 
+    /**
+     * Remplit le plateau en créant les tas
+     * Remplace les tas déjà existant
+     */
     public void reset() {
         for (int i = 0; i < nombreTas; i++) {
             lesTas[i] = new Tas(2*(i+1)-1);
@@ -20,7 +24,7 @@ public class Plateau {
     }
 
     /**
-     * Permet de verifier si une partie est finie, c-a-d si tout les tas sont vide
+     * Permet de verifier si une partie est finie, c'est-à-dire si tous les tas sont vides
      *
      * @return true si la partie est fini, sinon false
      */
@@ -34,9 +38,10 @@ public class Plateau {
 
     /**
      * Permet de retourner l'état du plateau sous la forme d'un tableau d'entier
-     * Inutilisé, pourra etre supprimé si jamais utilisé
+     * Inutilisé, pourra être supprimé si jamais utilisé
+     * (sera probablement utilisée quand les IA seront implémenté)
      *
-     * @return un tableau contenant le nombre de batonnet de chaque tas, au format [1, 3, 5]
+     * @return un tableau contenant le nombre de bâtonnets de chaque tas, au format [1, 3, 5]
      */
     public int[] getPlateau() {
         int[] plateau = new int[nombreTas];
