@@ -182,6 +182,11 @@ Agathe, Nathan, Dany : Review des diagrammes
 
 Agathe : Finalisation du diagramme de Classes
 
+Nathan : Développement du code
+
+Nathan et Dany : Debug
+
+
 # Utilisation de l'IA
 ## Itération 1
 
