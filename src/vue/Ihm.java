@@ -26,11 +26,9 @@ public class Ihm {
      * @throws IllegalArgumentException Si l'utilisateur entre autre chose qu'un int
      */
     public int demanderNbTas() {
-        int candidate;
         System.out.println("Avec combien de tas voulez-vous jouer ?\nEntrez un entier >= 1 : ");
         if (scanner.hasNextInt()) {
-            candidate = scanner.nextInt();
-            return candidate;
+            return scanner.nextInt();
         }
         scanner.next();
         throw new IllegalArgumentException("Format de réponse invalide.");
@@ -68,7 +66,6 @@ public class Ihm {
                 "\t`m n`\nOù `m` est le numéro du tas, et `n` le nombre de bâtonnet à retirer");
         if (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            System.out.println("DEBUG : `" + line + "`");
             // Le pattern s'assure que la ligne est composée de deux nombres séparés par un espace.
             Pattern pattern = Pattern.compile("^[0-9]+ [0-9]+$"); //Permet de créer le regex.
             Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
@@ -79,6 +76,7 @@ public class Ihm {
                 for (int i = 0; i < 2; i++) {
                     candidate[i] = sc2.nextInt();
                 }
+                sc2.close();
                 return candidate;
             }
         }
@@ -103,11 +101,7 @@ public class Ihm {
             Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
             // On vérifie la réponse et retourne true si c'est "y" et false si c'est "n".
             if (matcher.find()) {
-                if (line.equals("y")) {
-                    return true;
-                } else if (line.equals("n")) {
-                    return false;
-                }
+                return line.equals("y");
             }
         }
         // Si la réponse de l'utilisateur n'est pas valide, on lance une exception.

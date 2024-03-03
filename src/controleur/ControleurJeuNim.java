@@ -45,11 +45,16 @@ public class ControleurJeuNim {
             try {
                 isNbTasValide = true;
                 nombreTas = ihm.demanderNbTas();
+                if (nombreTas <1){
+                    throw new IllegalArgumentException("Le nombre de tas ne peut pas être inférieur à 1");
+                }
             } catch (IllegalArgumentException exception) {
                 isNbTasValide = false;
                 ihm.afficherErreur(exception.getMessage());
             }
         }
+
+        this.plateau = new Plateau(nombreTas);
 
         for (int i = 0; i < 2; i++) {
             String nomJoueur = "";
@@ -67,7 +72,6 @@ public class ControleurJeuNim {
             this.lesJoueurs[i] = new Joueur(nomJoueur);
         }
 
-        this.plateau = new Plateau(nombreTas);
 
         commencerPartie();
     }
