@@ -186,6 +186,8 @@ Nathan : Développement du code
 
 Nathan et Dany : Debug
 
+Dany : Essaie de création d'une UI mais pas réussi
+
 
 # Utilisation de l'IA
 ## Itération 1
