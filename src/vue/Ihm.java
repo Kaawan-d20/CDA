@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  */
 public class Ihm {
     /** Le scanner qui permet de récupérer les inputs de l'utilisateur */
-    Scanner scanner;
+    private Scanner scanner;
 
     /**
      * Constructeur de la classe Ihm.

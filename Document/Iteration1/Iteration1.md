@@ -82,7 +82,7 @@ classDiagram
     }
 
     class Ihm {
-        Scanner scanner
+        - Scanner scanner
 
         + Ihm()
         + demanderNbTas() int
@@ -115,15 +115,16 @@ classDiagram
 
         + Joueur(String nom)
         + getNom() String
-        + getVictoires() int
-        + incrementeVictoires() void
+        + getNbVictoires() int
+        + incrementVictoires() void
+        + compareTo(Joueur autreJoueur) int
     }
 
     class Tas {
         - int nombreBatonnet
 
         + Tas (int nombreBatonnet)
-        + retirerBatonnet(int n) bool
+        + retirerBatonnet(int n) void
         + getNombre() int
         + estVide() bool
         + toString() String
@@ -136,6 +137,8 @@ classDiagram
         + reset() void
         + verifierFin() bool
         + getPlateau() int[]
+        + retirerBatonnets(int m, int n) void
+        + toString() String
     }
 
     Tas "1..n" --* "1" Plateau : lesTas
