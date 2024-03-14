@@ -1,5 +1,9 @@
 package controleur;
 
+import exception.FormatReponseInvalide;
+import exception.NombreBatonnetsInvalide;
+import exception.NombreTasInvalides;
+import exception.NumeroTasInvalide;
 import modele.Joueur;
 import modele.Plateau;
 import vue.Ihm;
@@ -7,8 +11,11 @@ import vue.Ihm;
 import java.sql.Array;
 import java.util.Arrays;
 
+/**
+ * Classe du contrôleur du jeu de Nim
+ */
 public class ControleurJeuNim {
-    /** Numéro du joueur courant, x ∈ [0 ; 1]*/
+    /** Numéro du joueur courant, x ∈ [0 ; 1]**/
     private int numeroJoueurCourant;
 
     /** Nombre de parties jouées, incrémentée dans commencerPartie()*/
@@ -20,7 +27,9 @@ public class ControleurJeuNim {
     /** Objet Plateau représentant une collection de tas*/
     private Plateau plateau;
 
-    /** Objet Interface Humain Machine chargé de récupérer les commandes du joueur et d'afficher l'état de la partie*/
+    /**
+     * Objet Interface Humain Machine chargé de récupérer les commandes du joueur et d'afficher l'état de la partie
+     */
     private final Ihm ihm;
 
     /**
@@ -46,9 +55,9 @@ public class ControleurJeuNim {
                 isNbTasValide = true;
                 nombreTas = ihm.demanderNbTas();
                 if (nombreTas <1){
-                    throw new IllegalArgumentException("Le nombre de tas ne peut pas être inférieur à 1");
+                    throw new NombreTasInvalides("Le nombre de tas ne peut pas être inférieur à 1");
                 }
-            } catch (IllegalArgumentException exception) {
+            } catch (NombreTasInvalides exception) {
                 isNbTasValide = false;
                 ihm.afficherErreur(exception.getMessage());
             }
@@ -110,14 +119,14 @@ public class ControleurJeuNim {
                     ihm.afficherPlateau(plateau.toString());
                     int[] candidate = ihm.demanderCoupNim(getNomJoueurCourant());
                     plateau.retirerBatonnets(candidate[0], candidate[1]);
-                } catch (IllegalArgumentException exception) {
+                } catch (NombreBatonnetsInvalide | NumeroTasInvalide | FormatReponseInvalide exception) {
                     estCoupCorrect = false;
                     ihm.afficherErreur(exception.getMessage());
                 }
             }
         }
         getJoueurCourant().incrementVictoires();
-        ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties);
+        ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, false);
 
         boolean reponseAcceptee = false;
         while (!reponseAcceptee) {
@@ -129,7 +138,7 @@ public class ControleurJeuNim {
                     finPartie();
                     return;
                 }
-            } catch (IllegalArgumentException exception){
+            } catch (FormatReponseInvalide exception){
                 reponseAcceptee = false;
                 ihm.afficherErreur(exception.getMessage());
             }
@@ -144,14 +153,17 @@ public class ControleurJeuNim {
         this.numeroJoueurCourant = (numeroJoueurCourant + 1) % 2;
     }
 
+    /**
+     * Permet de verifier a la fin de la partie quel joueur a gagné la partie et le fait afficher par l'IHM.
+     */
     private void finPartie() {
         int comparaison = lesJoueurs[0].compareTo(lesJoueurs[1]);
         if (comparaison == 0) {
-            ihm.afficherVictoire("ex Aequo", lesJoueurs[0].getNbVictoires(), nbParties);
+            ihm.afficherVictoire("ex Aequo", lesJoueurs[0].getNbVictoires(), nbParties, true);
         } else if (comparaison > 0) {
-            ihm.afficherVictoire(lesJoueurs[0].getNom(), lesJoueurs[0].getNbVictoires(), nbParties);
+            ihm.afficherVictoire(lesJoueurs[0].getNom(), lesJoueurs[0].getNbVictoires(), nbParties, false);
         } else {
-            ihm.afficherVictoire(lesJoueurs[1].getNom(), lesJoueurs[1].getNbVictoires(), nbParties);
+            ihm.afficherVictoire(lesJoueurs[1].getNom(), lesJoueurs[1].getNbVictoires(), nbParties, false);
         }
     }
 

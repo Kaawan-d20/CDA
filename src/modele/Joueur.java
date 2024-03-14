@@ -1,5 +1,8 @@
 package modele;
 
+/**
+ * Classe représentant un joueur
+ */
 public class Joueur implements Comparable<Joueur> {
     /** Le nom du Joueur*/
     private String nom;
@@ -42,10 +45,10 @@ public class Joueur implements Comparable<Joueur> {
     }
 
     /**
-     * Implémentation de l'interface Comparable<Joueur> qui permet
+     * Implémentation de l'interface Comparable qui permet
      * d'efficacement comparer le nombre de victoires des joueurs
      *
-     * @return x < 0 si this < autreJoueur, x = 0 si this = autreJoueur, x > 0 si this > autreJoueur
+     * @return un int représentant la comparaison
      */
     @Override
     public int compareTo(Joueur autreJoueur) {

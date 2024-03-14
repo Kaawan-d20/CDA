@@ -1,6 +1,19 @@
 package modele;
+
+import exception.NombreBatonnetsInvalide;
+import exception.NumeroTasInvalide;
+
+/**
+ * Classe représentant un plateau de jeu de Nim
+ */
 public class Plateau {
+    /**
+     * Le tableau contenant les tas
+     */
     private Tas[] lesTas;
+    /**
+     * Le nombre de tas
+     */
     private int nombreTas;
 
     /**
@@ -56,12 +69,12 @@ public class Plateau {
      *
      * @param m Le numéro du tas à partir duquel retirer les bâtonnets.
      * @param n Le nombre de bâtonnets à retirer.
-     * @throws IllegalArgumentException Si le numéro du tas est invalide (hors des limites ou égal à zéro).
-     * @throws IllegalArgumentException Si le nombre de bâtonnets à retirer est invalide (négatif ou supérieur au nombre actuel de bâtonnets dans le tas).
+     * @throws NumeroTasInvalide Si le numéro du tas est invalide (hors des limites ou égal à zéro).
+     * @throws NombreBatonnetsInvalide Si le nombre de bâtonnets à retirer est invalide (négatif ou supérieur au nombre actuel de bâtonnets dans le tas).
      */
-    public void retirerBatonnets(int m, int n) {
+    public void retirerBatonnets(int m, int n) throws NombreBatonnetsInvalide, NumeroTasInvalide {
         if ( m > nombreTas || m <= 0 ) {
-            throw new IllegalArgumentException("Vous avez sélectionné un tas inconnu.");
+            throw new NumeroTasInvalide("Vous avez sélectionné un tas inconnu.");
         }
         lesTas[m-1].retirerBatonnet(n);
     }

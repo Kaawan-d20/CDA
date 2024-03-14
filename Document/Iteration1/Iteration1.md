@@ -141,12 +141,10 @@ classDiagram
         + toString() String
     }
 
-    Tas "1..n" --* "1" Plateau : lesTas
-    ControleurJeuNim "1" <-- "1" Plateau
-    ControleurJeuNim "1" <-- "1" Ihm
-    ControleurJeuNim "1" <-- "2" Joueur : lesJoueurs
-    ControleurJeuNim "1" --> "1" main
-    Ihm "1" --> "1" main
+    Tas "1..n" --* Plateau : lesTas
+    ControleurJeuNim --> "1" Plateau
+    ControleurJeuNim --> "1" Ihm
+    ControleurJeuNim --> "2" Joueur : lesJoueurs
 ```
 
 
