@@ -1,13 +1,19 @@
 package modele;
 
+/**
+ * Classe représentant un joueur
+ */
 public class Joueur implements Comparable<Joueur> {
+    /** Le nom du Joueur*/
     private String nom;
+    /** Le nombre de victoires du Joueur*/
     private int nbVictoires;
 
     /**
-     * Permet de créer un nouvel objet Joueur qui permet de stocker le nom et le nombre de victoire d'un joueur.
+     * Permet de créer un nouvel objet Joueur qui permet de stocker le nom et le nombre de victoires d'un joueur.
      *
-     * @param nom : nom du joueur*/
+     * @param nom : nom du joueur
+     */
     public Joueur(String nom) {
         this.nom = nom;
         this.nbVictoires = 0;
@@ -16,33 +22,36 @@ public class Joueur implements Comparable<Joueur> {
     /**
      * Getter du nom.
      *
-     * @return le nom du joueur*/
+     * @return Le nom du joueur
+     */
     public String getNom() {
         return nom;
     }
 
     /**
-     * Getter du nombre de victoire.
+     * Getter du nombre de victoires.
      *
-     * @return le nombre de victoire du joueur*/
+     * @return Le nombre de victoires du joueur
+     */
     public int getNbVictoires() {
         return nbVictoires;
     }
 
     /**
      * Incrémente le nombre de victoires de 1.
-     * */
+     */
     public void incrementVictoires() {
         this.nbVictoires ++;
     }
 
     /**
-     * Implémentation de l'interface Comparable<Joueur> qui permet
+     * Implémentation de l'interface Comparable qui permet
      * d'efficacement comparer le nombre de victoires des joueurs
      *
-     * @return x < 0 si this < o, x = 0 si this = o, x > 0 si this > o */
+     * @return un int représentant la comparaison
+     */
     @Override
-    public int compareTo(Joueur o) {
-        return getNbVictoires() - o.getNbVictoires();
+    public int compareTo(Joueur autreJoueur) {
+        return getNbVictoires() - autreJoueur.getNbVictoires();
     }
 }

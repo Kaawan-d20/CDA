@@ -82,7 +82,7 @@ classDiagram
     }
 
     class Ihm {
-        Scanner scanner
+        - Scanner scanner
 
         + Ihm()
         + demanderNbTas() int
@@ -115,15 +115,16 @@ classDiagram
 
         + Joueur(String nom)
         + getNom() String
-        + getVictoires() int
-        + incrementeVictoires() void
+        + getNbVictoires() int
+        + incrementVictoires() void
+        + compareTo(Joueur autreJoueur) int
     }
 
     class Tas {
         - int nombreBatonnet
 
         + Tas (int nombreBatonnet)
-        + retirerBatonnet(int n) bool
+        + retirerBatonnet(int n) void
         + getNombre() int
         + estVide() bool
         + toString() String
@@ -136,14 +137,14 @@ classDiagram
         + reset() void
         + verifierFin() bool
         + getPlateau() int[]
+        + retirerBatonnets(int m, int n) void
+        + toString() String
     }
 
-    Tas "1..n" --* "1" Plateau : lesTas
-    ControleurJeuNim "1" <-- "1" Plateau
-    ControleurJeuNim "1" <-- "1" Ihm
-    ControleurJeuNim "1" <-- "2" Joueur : lesJoueurs
-    ControleurJeuNim "1" --> "1" main
-    Ihm "1" --> "1" main
+    Tas "1..n" --* Plateau : lesTas
+    ControleurJeuNim --> "1" Plateau
+    ControleurJeuNim --> "1" Ihm
+    ControleurJeuNim --> "2" Joueur : lesJoueurs
 ```
 
 
@@ -185,6 +186,8 @@ Agathe : Finalisation du diagramme de Classes
 Nathan : Développement du code
 
 Nathan et Dany : Debug
+
+Dany : Essaie de création d'une UI mais pas réussi
 
 
 # Utilisation de l'IA
