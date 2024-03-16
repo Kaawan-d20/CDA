@@ -31,7 +31,7 @@ flowchart LR
 13. Le système vérifie si la partie est gagné
 14. Le système affiche le vainqueur et demande si l'utilisateur souhaite refaire une partie ("y" or "n")
 15. L'utilisateur répond "y" ou "n"
-16. Le système retourne au point 8 du scénario nominal et incrément le classement entre les deux joueur
+16. Le système retourne au point 11 du scénario nominal et incrément le classement entre les deux joueur
 
 
 ### Extensions
