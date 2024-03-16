@@ -1,4 +1,4 @@
-package main;
+package main.nim;
 
 import controleur.ControleurJeuNim;
 import vue.Ihm;

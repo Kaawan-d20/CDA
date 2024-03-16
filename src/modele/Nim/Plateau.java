@@ -1,4 +1,4 @@
-package modele;
+package modele.Nim;
 
 import exception.NombreBatonnetsInvalide;
 import exception.NumeroTasInvalide;

@@ -5,11 +5,8 @@ import exception.NombreBatonnetsInvalide;
 import exception.NombreTasInvalides;
 import exception.NumeroTasInvalide;
 import modele.Joueur;
-import modele.Plateau;
+import modele.Nim.Plateau;
 import vue.Ihm;
-
-import java.sql.Array;
-import java.util.Arrays;
 
 /**
  * Classe du contrôleur du jeu de Nim

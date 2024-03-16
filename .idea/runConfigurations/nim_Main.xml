@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Main" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="main.Main" />
+  <configuration default="false" name="nim.Main" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="main.nim.Main" />
     <module name="CDA" />
     <method v="2">
       <option name="Make" enabled="true" />

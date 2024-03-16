@@ -39,7 +39,11 @@ flowchart LR
 - 6.a L'utilisateur répond à la question avec une chaîne vide
     1. Retour au point 5 du scénario nominal
 
-- 9.a L'utilisateur choisi un nombre n $ n \notin \lbrace x \in \R, \text{ tq } 0 < x < 7 \rbrace$
+- 9.a L'utilisateur choisit un numéro de colonne $n \notin \lbrace x \in \R, \text{ tq } 0 < x < 7 \rbrace$
+    1. Le systeme affiche un message d'erreur
+    2. retour au point 8
+
+- 9.a L'utilisateur choisit un numéro de colonne valide, mais la colonne est pleine
     1. Le systeme affiche un message d'erreur
     2. retour au point 8
 
@@ -109,10 +113,12 @@ classDiagram
 
     class Plateau {
         - int dernierCoup
+        - int[][] plateau
                 
         + Plateau ()
         + reset() void
         + verifierFin() bool
+        - estPlein() bool
         + getPlateau() int[]
         + placerJeton(int colonne, String couleur) void
         + toString() String
