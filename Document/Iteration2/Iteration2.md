@@ -85,11 +85,11 @@ classDiagram
         + afficherErreur(String message) void
     }
 
-    class ControleurPuissance4 {
+    class ControleurP4 {
         - int numeroJoueurCourant
         - int nbParties
         
-        + ControleurPuissance4(Ihm ihm)
+        + ControleurP4(Ihm ihm)
         + jouer () void
         - commencerPartie() void
         - toursDeJeu() void
@@ -124,9 +124,9 @@ classDiagram
         + toString() String
     }
 
-    ControleurPuissance4 --> "1" Plateau
-    ControleurPuissance4 --> "1" Ihm
-    ControleurPuissance4 --> "2" Joueur : lesJoueurs
+    ControleurP4 --> "1" Plateau
+    ControleurP4 --> "1" Ihm
+    ControleurP4 --> "2" Joueur : lesJoueurs
 ```
 
 ![Lien vers le png](https://mermaid.ink/img/pako:eNqNVbGO2zAM_RVBk4NLhhadMnS5uwIN0EOAFF3qDjqZSdTaYkBLAYpD_r20ZcWOrOCqxZb4SJN8fPKb1FiBXEtdq7Z9MupAqimt4NWfiEYZK95KG84u8SUYvx6bziaGtRI7rawFEm14RnS3Hjp0sZgeVNAoWwG9YLNBD54KY52wftgtxM6RsYecyyP609abtlVWw6ciAIXFqytH-vkr59kB6NlqJCgW4hWxnqLUfm_0EWhbKwfKx8CnsA27hTijqXJeP4x2aDhwms9S9JW9RkAbD7aKnIH2fshnoq4xQ8AGuOIDTOEJJY9oHWHNPmN7bjkaegyEITduJSnrZpCY22iY5pf7TtHNgzk2NyT_7votirTCldDYNMBuFL6TQTjOrH2CDfg7xp03Z049Y90beyfsgziAe5nXX_Qzk-BSRNinwSLLI246uAlBAZrI5joucxauI3MrpkEwo-dinlWRU1BnGoPOqzZWEzAxbopJW8jcnRTBdyyGcpR3BBPtZUsfRDUfR5alNUHUoyk3dTHC7T3COYLLZHkGMnuO-8XYjNS5EVHlmeuCFc-juQGHtr-VNNbIV9oycqXR132x6UcdBsS9KcgKdLX6LEr5oZSxwv_CstzexX1k3MDRWtTQhvdWLiUrgC_3iu_-no9SuiPzXso1v1aK_pSytBfGMbW4-2u1XDvysJT-VHGKw68iHkJlHNK34V_SPS7_APtv-bM?type=png)
@@ -137,8 +137,8 @@ classDiagram
 ```java
 public static void main(String[] args) {
     Ihm ihm = new Ihm();
-    ControleurPuissance4 controleurPuissance4=new ControleurPuissance4(ihm);
-    controleurPuissance4.jouer();
+    ControleurP4 controleurP4=new ControleurP4(ihm);
+    controleurP4.jouer();
 }
 ```
 
