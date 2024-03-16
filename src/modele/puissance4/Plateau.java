@@ -2,8 +2,6 @@ package modele.puissance4;
 
 import exception.ColonnePleine;
 
-import java.util.Arrays;
-
 /**
  * Classe représentant un plateau de jeu de puissance 4
  */
@@ -36,7 +34,7 @@ public class Plateau {
      */
     public boolean verifierFin() {
         return false;
-        //avoir une string des 4 directions possibles
+        //généré une string des 4 directions possibles (horizontal, vertical et les deux diagonales)
         //pour chaque string, check avec une regex la présence de 4 nombre d'affilés
     }
 

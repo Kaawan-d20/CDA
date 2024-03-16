@@ -149,7 +149,7 @@ public class Ihm {
 
 
     /**
-     * Demande à un joueur de saisir un coup pour le jeu de puissance 4.
+     * Demande à un joueur de saisir le numéro d'une colonne pour le jeu de puissance 4.
      * Affiche un message d'invitation et attend une réponse de l'utilisateur.
      * La réponse doit être un entier.
      *
@@ -158,6 +158,7 @@ public class Ihm {
      * @throws FormatReponseInvalide Si la réponse de l'utilisateur n'est pas au format attendu.
      */
     public byte demanderCoupP4(String nomJoueur) throws FormatReponseInvalide {
+        System.out.println("Dans quelle colonne voulez-vous jouer " + nomJoueur + " ?");
         if (scanner.hasNextByte()){
             return scanner.nextByte();
         }
