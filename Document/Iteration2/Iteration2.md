@@ -39,11 +39,11 @@ flowchart LR
 - 6.a L'utilisateur répond à la question avec une chaîne vide
     1. Retour au point 5 du scénario nominal
 
-- 9.a L'utilisateur choisit un numéro de colonne $n \notin \lbrace x \in \R, \text{ tq } 0 < x < 7 \rbrace$
+- 9.a L'utilisateur choisit un numéro de colonne $n \notin \lbrace x \in \N, \text{ tq } 1 \le x \le 7 \rbrace$
     1. Le systeme affiche un message d'erreur
     2. retour au point 8
 
-- 9.a L'utilisateur choisit un numéro de colonne valide, mais la colonne est pleine
+- 9.b L'utilisateur choisit un numéro de colonne valide, mais la colonne est pleine
     1. Le systeme affiche un message d'erreur
     2. retour au point 8
 
@@ -53,15 +53,15 @@ flowchart LR
 
 - 12.a l'utilisateur répond autre chose que 'y' ou 'n'
     1. le systeme affiche un message d'erreur
-    2. retour au point 12 du scénario nominal
+    2. retour au point 11 du scénario nominal
 
-- 12.a l'utilisateur répond 'n'
+- 12.b L'utilisateur répond 'n'
     1. le systeme affiche le gagnant et le nombre de victoire du gagnant
+        - Il n'y a pas de gagnant
+            1. le systeme affiche ex aequo et le nombre de victoire des joueurs (il est identique pour les deux)
+            2. Retour au point 2 de l'extension 12.b
     2. fin du programme
 
-- 12.a.1.a il n'y a pas de gagnant
-    1. le systeme affiche ex aequo et le nombre de victoire des joueurs (il est identique pour les deux)
-    2. fin du programme
 
 # Modèle de Conception
 
@@ -78,7 +78,7 @@ classDiagram
 
         + Ihm()
         + demanderNomJoueur(int numJoueur) String
-        + demanderCoupPuissance4(String nomJoueur) int[]
+        + demanderCoupP4(String nomJoueur) byte
         + demanderJouerEncore() bool
         + afficherPlateau(String plateauString) void
         + afficherVictoire(String nomJoueur, int nbVictoires, int nbParties) void
@@ -112,15 +112,15 @@ classDiagram
     }
 
     class Plateau {
-        - int dernierCoup
-        - int[][] plateau
+        - byte[][] plateau
+        - byte[] dernierCoup
                 
         + Plateau ()
         + reset() void
         + verifierFin() bool
         - estPlein() bool
-        + getPlateau() int[]
-        + placerJeton(int colonne, String couleur) void
+        + getPlateau() byte[][]
+        + placerJeton(byte colonne, byte joueur) void
         + toString() String
     }
 

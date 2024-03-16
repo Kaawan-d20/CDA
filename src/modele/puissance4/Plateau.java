@@ -1,13 +1,15 @@
 package modele.puissance4;
 
+import exception.ColonnePleine;
+
 import java.util.Arrays;
 
 /**
- * Classe représentant un plateau de jeu de Nim
+ * Classe représentant un plateau de jeu de puissance 4
  */
 public class Plateau {
     /**
-     * Le tableau représenant le plateau de puissance 4
+     * Le tableau représentant le plateau de puissance 4
      */
     private byte[][] plateau;
     /**
@@ -33,14 +35,16 @@ public class Plateau {
      * @return true si la partie est fini, sinon false
      */
     public boolean verifierFin() {
-        return true;
+        return false;
+        //avoir une string des 4 directions possibles
+        //pour chaque string, check avec une regex la présence de 4 nombre d'affilés
     }
 
     /**
      * Permet de vérifier si le plateau est plein
      * @return true si le plateau est plein, sinon false
      */
-    private boolean estPlein(){
+    public boolean estPlein(){
         for (byte[] ligne : plateau){
             for (int contenu : ligne){
                 if (contenu == 0){
@@ -62,23 +66,51 @@ public class Plateau {
         return plateau;
     }
 
-
-    public void placerJeton(int colonne, byte joueur){
-        for (int i = 7; i > 0; i++) {
+    /**
+     * Permet de placer un jeton dans une colonne
+     * Parcours la colonne à partir du bas et place le jeton dès qu'une case est vide (0)
+     * @param colonne L’indice de la colonne où le jeton doit être placé [0,...,6]
+     * @param joueur  Le numéro du joueur [1,2]
+     * @throws ColonnePleine Si la colonne dans laquelle le joueur veut placer le jeton est pleine
+     */
+    public void placerJeton(byte colonne, byte joueur) throws ColonnePleine {
+        boolean estPlein = true;
+        for (byte i = 6; i >= 0; i--) {
             if (plateau[i][colonne] == 0) {
                 plateau[i][colonne] = joueur;
+                dernierCoup[0] = i;
+                dernierCoup[1] = colonne;
+                estPlein = false;
+                break;
             }
+        }
+        if (estPlein){
+            throw new ColonnePleine("Le jeton ne peut pas être placer ");
         }
     }
 
-    
+    /**
+     * Renvoie une représentation sous forme de chaîne de caractères de l'objet.
+     * La chaîne est composée de la représentation de la matrice,
+     * disposée horizontalement avec un espacement approprié pour les centrer dans une ligne.
+     *
+     * @return une représentation sous forme de chaîne de caractères de l'objet.
+     */
     @Override
     public String toString() {
-        String to = "[\n";
+        String to = "1\uFE0F⃣ 2\uFE0F⃣ 3\uFE0F⃣ 4\uFE0F⃣ 5\uFE0F⃣ 6\uFE0F⃣ 7\uFE0F⃣\n";
         for (byte[] ligne : plateau){
-            to += Arrays.toString(ligne) + ", \n";
+            for (byte contenu : ligne){
+                if (contenu == 0){
+                    to+= "⚫ ";
+                } else if (contenu == 1) {
+                    to+= "🔴 ";
+                }else {
+                    to+= "🟡 " ;
+                }
+            }
+            to+="\n";
         }
-        to += "]";
         return to;
     }
 }

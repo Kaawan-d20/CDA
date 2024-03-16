@@ -146,4 +146,22 @@ public class Ihm {
     public void afficherErreur(String message) {
         System.out.println("\n\n⚠ " + message);
     }
+
+
+    /**
+     * Demande à un joueur de saisir un coup pour le jeu de puissance 4.
+     * Affiche un message d'invitation et attend une réponse de l'utilisateur.
+     * La réponse doit être un entier.
+     *
+     * @param nomJoueur Le nom du joueur pour lequel la demande est effectuée.
+     * @return Un byte contenant le numéro de colonne.
+     * @throws FormatReponseInvalide Si la réponse de l'utilisateur n'est pas au format attendu.
+     */
+    public byte demanderCoupP4(String nomJoueur) throws FormatReponseInvalide {
+        if (scanner.hasNextByte()){
+            return scanner.nextByte();
+        }
+        throw new FormatReponseInvalide("Veuillez entrer un entier compris entre 1 et 7");
+    }
+
 }
