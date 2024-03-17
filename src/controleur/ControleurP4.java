@@ -2,16 +2,14 @@ package controleur;
 
 import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
-import exception.NombreBatonnetsInvalide;
-import exception.NumeroTasInvalide;
 import modele.Joueur;
-import modele.puissance4.Plateau;
+import modele.p4.Plateau;
 import vue.Ihm;
 
 /**
  * Classe du contrôleur du jeu de puissance 4
  */
-public class ControleurPuissance4 {
+public class ControleurP4 {
     /** Numéro du joueur courant, x ∈ [0 ; 1]**/
     private int numeroJoueurCourant;
 
@@ -34,7 +32,7 @@ public class ControleurPuissance4 {
      *
      * @param ihm L'interface utilisateur associée au contrôleur.
      */
-    public ControleurPuissance4 (Ihm ihm) {
+    public ControleurP4(Ihm ihm) {
         this.ihm = ihm;
         this.lesJoueurs = new Joueur[2];
         this.plateau = new Plateau();

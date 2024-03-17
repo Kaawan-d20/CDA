@@ -1,4 +1,4 @@
-package modele.puissance4;
+package modele.p4;
 
 import exception.ColonnePleine;
 
