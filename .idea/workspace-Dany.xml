@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9b2378c1-4f4e-4e28-bf00-715115a2187e" name="Changes" comment="Creation du projet sur Intelij">
+      <change beforePath="$PROJECT_DIR$/src/vue/Ihm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vue/Ihm.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;danydudiot&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="6aeb52e4-8f81-4005-9656-ddb63a0ce92d" />
+        <option name="url" value="https://github.com/danydudiot/CDA.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2cOVK4Fhxh8lTr3Mlp7rtaudsFD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.Test.executor": "Run",
+    "Application.puissance4.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/danyd/OneDrive/Bureau/CDA",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "settings.sync",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="main" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.puissance4.Main">
+    <configuration name="puissance4.Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="main.p4.Main" />
+      <module name="CDA" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.nim.Main" />
+      <item itemvalue="Application.puissance4.Main" />
+    </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9b2378c1-4f4e-4e28-bf00-715115a2187e" name="Changes" comment="" />
+      <created>1707982548113</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1707982548113</updated>
+      <workItem from="1707982549289" duration="38000" />
+      <workItem from="1707982922574" duration="101000" />
+      <workItem from="1707983378399" duration="202000" />
+      <workItem from="1709138000734" duration="1141000" />
+      <workItem from="1709139207051" duration="1342000" />
+      <workItem from="1709188628234" duration="233000" />
+      <workItem from="1709188951594" duration="27000" />
+      <workItem from="1709400192926" duration="585000" />
+      <workItem from="1709400788053" duration="28000" />
+      <workItem from="1709401118041" duration="5362000" />
+      <workItem from="1709412251821" duration="630000" />
+      <workItem from="1709453489592" duration="599000" />
+      <workItem from="1709460422470" duration="1383000" />
+      <workItem from="1709480364686" duration="1454000" />
+      <workItem from="1710149846511" duration="147000" />
+      <workItem from="1710150214385" duration="512000" />
+      <workItem from="1710151517500" duration="198000" />
+      <workItem from="1710274163424" duration="49000" />
+      <workItem from="1710344326204" duration="167000" />
+      <workItem from="1710344978582" duration="214000" />
+      <workItem from="1710346297551" duration="4000" />
+      <workItem from="1710352032146" duration="375000" />
+      <workItem from="1710352436998" duration="6000" />
+      <workItem from="1710352574439" duration="2045000" />
+      <workItem from="1710425891961" duration="292000" />
+      <workItem from="1710426265963" duration="43000" />
+      <workItem from="1710426319148" duration="1349000" />
+      <workItem from="1710428278202" duration="6514000" />
+      <workItem from="1710435138100" duration="24000" />
+      <workItem from="1710487667583" duration="76000" />
+      <workItem from="1710512116055" duration="903000" />
+      <workItem from="1710530539474" duration="155000" />
+      <workItem from="1710583177668" duration="12611000" />
+      <workItem from="1710598957019" duration="350000" />
+      <workItem from="1710612457870" duration="445000" />
+      <workItem from="1710663566548" duration="737000" />
+      <workItem from="1710684045679" duration="3842000" />
+      <workItem from="1710705013987" duration="260000" />
+      <workItem from="1710705432658" duration="172000" />
+    </task>
+    <task id="LOCAL-00001" summary="Creation du projet sur Intelij">
+      <option name="closed" value="true" />
+      <created>1707983498761</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1707983498761</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Creation du projet sur Intelij" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creation du projet sur Intelij" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

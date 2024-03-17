@@ -162,6 +162,8 @@ public class Ihm {
         if (scanner.hasNextByte()){
             return scanner.nextByte();
         }
+        scanner.
+        scanner.nextLine(); //pour quand l'utilisateur met un caractère pour éviter une erreur infinie
         throw new FormatReponseInvalide("Veuillez entrer un entier compris entre 1 et 7");
     }
 
