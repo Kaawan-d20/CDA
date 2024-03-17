@@ -87,7 +87,7 @@ public class ControleurP4 {
      * En cas de réponse affirmative, démarre une nouvelle partie ; sinon, termine le programme.
      */
     private void toursDeJeu() {
-        while (!plateau.verifierFin()) {
+        while (plateau.verifierFin()) {
             tourSuivant();
             boolean estCoupCorrect = false;
             while (!estCoupCorrect) {

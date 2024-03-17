@@ -28,15 +28,72 @@ public class Plateau {
     }
 
     /**
-     * Permet de verifier si une partie est finie, c'est-à-dire si 4 pions sont alignés
+     * Permet de verifier si une partie est finie, c'est-à-dire si 4 pions sont alignés ou le plateau est plein
      *
      * @return true si la partie est fini, sinon false
      */
     public boolean verifierFin() {
-        return false;
-        //généré une string des 4 directions possibles (horizontal, vertical et les deux diagonales)
-        //pour chaque string, check avec une regex la présence de 4 nombre d'affilés
+        return verifierVictoire() || estPlein();
     }
+
+    /**
+     * Permet de vérifier si une partie est gagnée, c'est à dire si il y a une ligne de 4 pions ou plus consécutifs de même couleur
+     *
+     * @return true si la partie est gagnée, sinon false
+     */
+    public boolean verifierVictoire() {
+        byte[][] lignes = new byte[4][7];
+        byte color = plateau[dernierCoup[0]][dernierCoup[1]];
+
+        lignes[0] = plateau[dernierCoup[0]];
+        for (int i=0; i < 7; i++) {
+            lignes[1][i] = plateau[i][dernierCoup[1]];
+        }
+        int a = dernierCoup[0];
+        int b = dernierCoup[1];
+        while (a >= 0 && b >= 0) {
+            lignes[2][a] = plateau[a][b];
+            a--;
+            b--;
+        }
+        a = dernierCoup[0] + 1;
+        b = dernierCoup[1] + 1;
+        while (a < 7 && b < 7) {
+            lignes[2][a] = plateau[a][b];
+            a++;
+            b++;
+        }
+        a = dernierCoup[0];
+        b = dernierCoup[1];
+        while (a < 7 && b >= 0) {
+            lignes[3][a] = plateau[a][b] ;
+            a++;
+            b--;
+        }
+        a = dernierCoup[0] -1;
+        b = dernierCoup[1] +1;
+        while (a >= 0 && b < 7) {
+            lignes[3][a] = plateau[a][b];
+            a--;
+            b++;
+        }
+
+        for (int i=0; i < 4; i++) {
+            int c = 0;
+            for (int j=0; j < lignes[i].length; j++) {
+                if (lignes[i][j] == color) {
+                    c++;
+                } else {
+                    c = 0;
+                }
+                if (c == 4) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Permet de vérifier si le plateau est plein
