@@ -45,34 +45,38 @@ public class Plateau {
         byte[][] lignes = new byte[4][7];
         byte color = plateau[dernierCoup[0]][dernierCoup[1]];
 
+        if (color == 0){
+            return false;
+        }
+
         lignes[0] = plateau[dernierCoup[0]];
         for (int i=0; i < 7; i++) {
             lignes[1][i] = plateau[i][dernierCoup[1]];
         }
         int a = dernierCoup[0];
         int b = dernierCoup[1];
-        while (a >= 0 && b >= 0) {
+        while (a >= 0 && b >= 0) { // monte à gauche
             lignes[2][a] = plateau[a][b];
             a--;
             b--;
         }
         a = dernierCoup[0] + 1;
         b = dernierCoup[1] + 1;
-        while (a < 7 && b < 7) {
+        while (a < 7 && b < 7) { // descend à droite
             lignes[2][a] = plateau[a][b];
             a++;
             b++;
         }
         a = dernierCoup[0];
         b = dernierCoup[1];
-        while (a < 7 && b >= 0) {
+        while (a < 7 && b >= 0) { // descend à gauche
             lignes[3][a] = plateau[a][b] ;
             a++;
             b--;
         }
         a = dernierCoup[0] -1;
         b = dernierCoup[1] +1;
-        while (a >= 0 && b < 7) {
+        while (a >= 0 && b < 7) { // monte à droite
             lignes[3][a] = plateau[a][b];
             a--;
             b++;

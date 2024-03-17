@@ -87,7 +87,7 @@ public class ControleurP4 {
      * En cas de réponse affirmative, démarre une nouvelle partie ; sinon, termine le programme.
      */
     private void toursDeJeu() {
-        while (plateau.verifierFin()) {
+        while (!plateau.verifierFin()) {
             tourSuivant();
             boolean estCoupCorrect = false;
             while (!estCoupCorrect) {
@@ -105,9 +105,13 @@ public class ControleurP4 {
                 }
             }
         }
-        getJoueurCourant().incrementVictoires();
-        ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, false);
 
+        if (!plateau.verifierVictoire()){
+            ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, true);
+        }else {
+            getJoueurCourant().incrementVictoires();
+            ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, false);
+        }
         boolean reponseAcceptee = false;
         while (!reponseAcceptee) {
             try {
