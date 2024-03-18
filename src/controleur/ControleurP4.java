@@ -112,6 +112,7 @@ public class ControleurP4 {
             getJoueurCourant().incrementVictoires();
             ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, false);
         }
+        ihm.afficherPlateau(plateau.toString());
         boolean reponseAcceptee = false;
         while (!reponseAcceptee) {
             try {
