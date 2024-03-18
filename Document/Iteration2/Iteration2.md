@@ -155,9 +155,17 @@ Nathan : Diagramme de classe, Cas d'utilisation
 
 Dany : review du Diagramme
 
+Dany : Développement
+
+Agathe : Développement
+
+Dany : Review, documentation, fix
+
+Dany : mise en place de test avec JUnit
+
 # Utilisation de l'IA
 ## Itération 2
 
 - Nathan : Aucun Usage
-- Dany : Aucun Usage
+- Dany : Copilot (screen dans img)
 - Agathe : Aucun Usage
