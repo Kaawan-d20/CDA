@@ -23,6 +23,11 @@ public class Test {
             Result result = JUnitCore.runClasses(classe);
             etat = etat && result.wasSuccessful();
         }
+        if (etat){
+            System.out.println("C'est bon tout fonctionne");
+        }else {
+            System.out.println("Mince ya un problème");
+        }
         System.out.println(etat);
     }
 }
