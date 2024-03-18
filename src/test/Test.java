@@ -6,6 +6,7 @@ import org.junit.runner.notification.Failure;
 import test.modele.Nim.TestPlateauNim;
 import test.modele.Nim.TestTas;
 import test.modele.TestJoueur;
+import test.modele.p4.TestPlateauP4;
 import test.vue.TestIhm;
 
 public class Test {
@@ -13,22 +14,15 @@ public class Test {
         Class<?>[] classes = new Class<?>[]{
                 TestPlateauNim.class,
                 TestTas.class,
+                TestPlateauP4.class,
                 TestJoueur.class,
-                TestIhm.class
-        };
 
+        };
+        boolean etat = true;
         for (Class<?> classe : classes) {
             Result result = JUnitCore.runClasses(classe);
-
-            if (result.wasSuccessful()) {
-                System.out.println("GG tout fonctionne");
-            } else {
-                System.out.println("RIP CPT");
-            }
-
-            for (Failure failure : result.getFailures()) {
-                System.out.println(failure.toString());
-            }
+            etat = etat && result.wasSuccessful();
         }
+        System.out.println(etat);
     }
 }
