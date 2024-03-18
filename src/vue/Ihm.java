@@ -11,15 +11,22 @@ import java.util.regex.Pattern;
  * La classe Ihm (Interface Humain Machine) représente l'interface utilisateur du jeu.
  */
 public class Ihm {
-    /** Le scanner qui permet de récupérer les inputs de l'utilisateur */
+    /** Le scanner qui permet de récupérer les inputs de l'utilisateur
+     * ATTENTION : N'utilisez PAS celui avec hasNextLine et nextLine */
     private Scanner scanner;
+    /**
+     * Le scanner qui permet de récupérer les inputs LIGNES de l'utilisateur
+     * ATTENTION : utiliser celui UNIQUEMENT avec hasNextLine et nextLine
+     */
+    private Scanner scannerLine;
 
     /**
      * Constructeur de la classe Ihm.
-     * Initialise le scanner pour la lecture des entrées utilisateurs.
+     * Initialise les scanners pour la lecture des entrées utilisateurs.
      */
     public Ihm() {
         scanner = new Scanner(System.in);
+        scannerLine = new Scanner(System.in);
     }
 
     /**
@@ -33,7 +40,6 @@ public class Ihm {
         if (scanner.hasNextInt()) {
             return scanner.nextInt();
         }
-        scanner.next();
         throw new NombreTasInvalides("Format de réponse invalide.");
     }
 
@@ -47,8 +53,8 @@ public class Ihm {
         String candidate = "";
         System.out.println("Quel est le nom du joueur n°" + numJoueur + " ?");
         while (candidate.isEmpty()) {
-            if (scanner.hasNextLine()) {
-                candidate = scanner.nextLine();
+            if (scannerLine.hasNextLine()) {
+                candidate = scannerLine.nextLine();
             }
         }
         return candidate;
@@ -67,8 +73,8 @@ public class Ihm {
         int[] candidate = new int[2];
         System.out.println("Quel coup voulez-vous jouer " + nomJoueur + " ?\nVeuillez jouer un coup au format\n" +
                 "\t`m n`\nOù `m` est le numéro du tas, et `n` le nombre de bâtonnet à retirer");
-        if (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+        if (scannerLine.hasNextLine()) {
+            String line = scannerLine.nextLine();
             // Le pattern s'assure que la ligne est composée de deux nombres séparés par un espace.
             Pattern pattern = Pattern.compile("^[0-9]+ [0-9]+$"); //Permet de créer le regex.
             Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
@@ -97,8 +103,8 @@ public class Ihm {
      */
     public boolean demanderJouerEncore() throws FormatReponseInvalide {
         System.out.println("Voulez-vous rejouer une partie ? (y/n)");
-        if (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+        if (scannerLine.hasNextLine()) {
+            String line = scannerLine.nextLine();
             // Le pattern s'assure que la ligne contient uniquement "y" ou "n".
             Pattern pattern = Pattern.compile("^[y|n]$"); //Permet de créer le regex.
             Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
@@ -162,8 +168,6 @@ public class Ihm {
         if (scanner.hasNextByte()){
             return scanner.nextByte();
         }
-        scanner.
-        scanner.nextLine(); //pour quand l'utilisateur met un caractère pour éviter une erreur infinie
         throw new FormatReponseInvalide("Veuillez entrer un entier compris entre 1 et 7");
     }
 
