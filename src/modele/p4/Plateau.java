@@ -37,11 +37,17 @@ public class Plateau {
     }
 
     /**
-     * Permet de vérifier si une partie est gagnée, c'est à dire si il y a une ligne de 4 pions ou plus consécutifs de même couleur
+     * Permet de vérifier si une partie est gagnée, c'est-à-dire s'il y a une ligne de 4 pions ou plus consécutifs de même couleur
      *
      * @return true si la partie est gagnée, sinon false
      */
     public boolean verifierVictoire() {
+        /*Structure du tableau
+         *   0 : Ligne horizontale (-)
+         *   1 : Ligne verticale (|)
+         *   2 : Ligne diagonale partant de en haut à gauche jusqu'à en bas à droite (\)
+         *   3 : Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite (/)
+         */
         byte[][] lignes = new byte[4][7];
         byte color = plateau[dernierCoup[0]][dernierCoup[1]];
 
@@ -49,48 +55,51 @@ public class Plateau {
             return false;
         }
 
-        lignes[0] = plateau[dernierCoup[0]];
-        for (int i=0; i < 7; i++) {
+        lignes[0] = plateau[dernierCoup[0]]; // Remplissage du tableau pour la ligne horizontale
+
+        for (int i=0; i < 7; i++) { // Remplissage du tableau pour la ligne verticale
             lignes[1][i] = plateau[i][dernierCoup[1]];
         }
-        int a = dernierCoup[0];
-        int b = dernierCoup[1];
-        while (a >= 0 && b >= 0) { // monte à gauche
-            lignes[2][a] = plateau[a][b];
-            a--;
-            b--;
+        // Ligne diagonale partant de en haut à gauche jusqu'à en bas à droite
+        int lig = dernierCoup[0];
+        int col = dernierCoup[1];
+        while (lig >= 0 && col >= 0) { // Monte à gauche
+            lignes[2][lig] = plateau[lig][col];
+            lig--;
+            col--;
         }
-        a = dernierCoup[0] + 1;
-        b = dernierCoup[1] + 1;
-        while (a < 7 && b < 7) { // descend à droite
-            lignes[2][a] = plateau[a][b];
-            a++;
-            b++;
+        lig = dernierCoup[0] + 1;
+        col = dernierCoup[1] + 1;
+        while (lig < 7 && col < 7) { // Descend à droite
+            lignes[2][lig] = plateau[lig][col];
+            lig++;
+            col++;
         }
-        a = dernierCoup[0];
-        b = dernierCoup[1];
-        while (a < 7 && b >= 0) { // descend à gauche
-            lignes[3][a] = plateau[a][b] ;
-            a++;
-            b--;
+        // Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite
+        lig = dernierCoup[0];
+        col = dernierCoup[1];
+        while (lig < 7 && col >= 0) { // Descend à gauche
+            lignes[3][lig] = plateau[lig][col] ;
+            lig++;
+            col--;
         }
-        a = dernierCoup[0] -1;
-        b = dernierCoup[1] +1;
-        while (a >= 0 && b < 7) { // monte à droite
-            lignes[3][a] = plateau[a][b];
-            a--;
-            b++;
+        lig = dernierCoup[0] -1;
+        col = dernierCoup[1] +1;
+        while (lig >= 0 && col < 7) { // Monte à droite
+            lignes[3][lig] = plateau[lig][col];
+            lig--;
+            col++;
         }
-
-        for (int i=0; i < 4; i++) {
-            int c = 0;
-            for (int j=0; j < lignes[i].length; j++) {
-                if (lignes[i][j] == color) {
-                    c++;
+        //Vérification si 4 jetons sont alignés
+        for (byte[] direction : lignes) {
+            int compteur = 0;
+            for (byte jeton : direction) {
+                if (jeton == color) {
+                    compteur++;
                 } else {
-                    c = 0;
+                    compteur = 0;
                 }
-                if (c == 4) {
+                if (compteur == 4) {
                     return true;
                 }
             }
@@ -105,8 +114,8 @@ public class Plateau {
      */
     public boolean estPlein(){
         for (byte[] ligne : plateau){
-            for (int contenu : ligne){
-                if (contenu == 0){
+            for (int jeton : ligne){
+                if (jeton == 0){
                     return false;
                 }
             }
@@ -134,10 +143,10 @@ public class Plateau {
      */
     public void placerJeton(byte colonne, byte joueur) throws ColonnePleine {
         boolean estPlein = true;
-        for (byte i = 6; i >= 0; i--) {
-            if (plateau[i][colonne] == 0) {
-                plateau[i][colonne] = joueur;
-                dernierCoup[0] = i;
+        for (byte ligne = 6; ligne >= 0; ligne--) {
+            if (plateau[ligne][colonne] == 0) {
+                plateau[ligne][colonne] = joueur;
+                dernierCoup[0] = ligne;
                 dernierCoup[1] = colonne;
                 estPlein = false;
                 break;
@@ -157,19 +166,19 @@ public class Plateau {
      */
     @Override
     public String toString() {
-        String to = "1\uFE0F⃣ 2\uFE0F⃣ 3\uFE0F⃣ 4\uFE0F⃣ 5\uFE0F⃣ 6\uFE0F⃣ 7\uFE0F⃣\n";
+        String string = "1\uFE0F⃣ 2\uFE0F⃣ 3\uFE0F⃣ 4\uFE0F⃣ 5\uFE0F⃣ 6\uFE0F⃣ 7\uFE0F⃣\n";
         for (byte[] ligne : plateau){
             for (byte contenu : ligne){
                 if (contenu == 0){
-                    to+= "⚫ ";
+                    string+= "⚫ ";
                 } else if (contenu == 1) {
-                    to+= "🔴 ";
+                    string+= "🔴 ";
                 }else {
-                    to+= "🟡 " ;
+                    string+= "🟡 " ;
                 }
             }
-            to+="\n";
+            string+="\n";
         }
-        return to;
+        return string;
     }
 }

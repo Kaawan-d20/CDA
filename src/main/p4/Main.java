@@ -13,7 +13,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Ihm ihm = new Ihm();
-        ControleurP4 controleurPuissance4=new ControleurP4(ihm);
-        controleurPuissance4.jouer();
+        ControleurP4 controleurP4=new ControleurP4(ihm);
+        controleurP4.jouer();
     }
 }
