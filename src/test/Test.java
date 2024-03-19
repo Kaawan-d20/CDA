@@ -16,7 +16,7 @@ public class Test {
                 TestTas.class,
                 TestPlateauP4.class,
                 TestJoueur.class,
-
+                TestIhm.class
         };
         boolean etat = true;
         for (Class<?> classe : classes) {

@@ -32,5 +32,10 @@ public class TestJoueur {
         Joueur joueur2 = new Joueur("Test2");
         joueur1.incrementVictoires();
         assertTrue(joueur1.compareTo(joueur2) > 0);
+        joueur2.incrementVictoires();
+        assertTrue(joueur1.compareTo(joueur2) == 0);
+        joueur2.incrementVictoires();
+        assertTrue(joueur1.compareTo(joueur2) < 0);
+
     }
 }
