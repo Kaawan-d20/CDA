@@ -1,6 +1,5 @@
-package test.modele;
+package modele;
 
-import modele.Joueur;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -8,20 +7,20 @@ import static org.junit.Assert.*;
 public class TestJoueur {
     @Test
     public void testGetNom() {
-        String nom = "Test";
+        String nom = "main.Test";
         Joueur joueur = new Joueur(nom);
         assertEquals(nom, joueur.getNom());
     }
 
     @Test
     public void testGetNbVictoires() {
-        Joueur joueur = new Joueur("Test");
+        Joueur joueur = new Joueur("main.Test");
         assertEquals(0, joueur.getNbVictoires());
     }
 
     @Test
     public void testIncrementVictoires() {
-        Joueur joueur = new Joueur("Test");
+        Joueur joueur = new Joueur("main.Test");
         joueur.incrementVictoires();
         assertEquals(1, joueur.getNbVictoires());
     }

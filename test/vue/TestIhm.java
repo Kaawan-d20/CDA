@@ -1,7 +1,6 @@
-package test.vue;
+package vue;
 
 import org.junit.Test;
-import vue.Ihm;
 import exception.NombreTasInvalides;
 
 import java.io.*;

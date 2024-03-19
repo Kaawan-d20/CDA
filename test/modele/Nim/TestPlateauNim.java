@@ -1,8 +1,7 @@
-package test.modele.Nim;
+package modele.Nim;
 
 import exception.NombreBatonnetsInvalide;
 import exception.NumeroTasInvalide;
-import modele.Nim.Plateau;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

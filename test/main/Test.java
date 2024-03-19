@@ -1,13 +1,12 @@
-package test;
+package main;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
-import test.modele.Nim.TestPlateauNim;
-import test.modele.Nim.TestTas;
-import test.modele.TestJoueur;
-import test.modele.p4.TestPlateauP4;
-import test.vue.TestIhm;
+import modele.Nim.TestPlateauNim;
+import modele.Nim.TestTas;
+import modele.TestJoueur;
+import modele.p4.TestPlateauP4;
+import vue.TestIhm;
 
 public class Test {
     public static void main(String[] args) {

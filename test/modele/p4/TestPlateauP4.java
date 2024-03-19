@@ -1,7 +1,6 @@
-package test.modele.p4;
+package modele.p4;
 
 import exception.ColonnePleine;
-import modele.p4.Plateau;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
