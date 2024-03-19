@@ -8,7 +8,14 @@ import modele.TestJoueur;
 import modele.p4.TestPlateauP4;
 import vue.TestIhm;
 
+/**
+ * Classe Test qui permet de lancer tous les tests
+ */
 public class Test {
+    /**
+     * Méthode qui permet de lancer tous les tests
+     * @param args Rien
+     */
     public static void main(String[] args) {
         Class<?>[] classes = new Class<?>[]{
                 TestPlateauNim.class,
@@ -27,6 +34,5 @@ public class Test {
         }else {
             System.out.println("Mince ya un problème");
         }
-        System.out.println(etat);
     }
 }

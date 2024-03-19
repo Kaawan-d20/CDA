@@ -55,6 +55,7 @@ public class Plateau {
      * (sera probablement utilisée quand les IA seront implémenté)
      *
      * @return un tableau contenant le nombre de bâtonnets de chaque tas, au format [1, 3, 5]
+     * @
      */
     public int[] getPlateau() {
         int[] plateau = new int[nombreTas];

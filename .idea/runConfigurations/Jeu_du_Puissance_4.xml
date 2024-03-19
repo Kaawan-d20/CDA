@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="nim.Main" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="main.nim.Main" />
+  <configuration default="false" name="Jeu du Puissance 4" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="main.p4.Main" />
     <module name="CDA" />
     <method v="2">
       <option name="Make" enabled="true" />
