@@ -30,7 +30,7 @@ public class TestIhm {
      */
     @Test
     public void testDemanderNbTas() {
-        String input = "3\na";
+        String input = "3\na\n";
         //Stockage des valeurs initial
         InputStream originalIn = System.in;
         PrintStream originalOut = System.out;

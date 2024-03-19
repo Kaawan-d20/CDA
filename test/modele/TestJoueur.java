@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 /**
  * Classe contenant les tests de src/modele/Joueur.java
+ * @see modele.Joueur
  */
 public class TestJoueur {
     /**

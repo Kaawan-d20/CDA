@@ -40,6 +40,7 @@ public class Ihm {
         if (scanner.hasNextInt()) {
             return scanner.nextInt();
         }
+        scanner.next();
         throw new NombreTasInvalides("Format de réponse invalide.");
     }
 
