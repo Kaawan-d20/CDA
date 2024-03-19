@@ -5,7 +5,7 @@ import exception.NombreBatonnetsInvalide;
 import exception.NombreTasInvalides;
 import exception.NumeroTasInvalide;
 import modele.Joueur;
-import modele.Nim.Plateau;
+import modele.nim.Plateau;
 import vue.Ihm;
 
 /**

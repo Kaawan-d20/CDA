@@ -2,8 +2,8 @@ package main;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
-import modele.Nim.TestPlateauNim;
-import modele.Nim.TestTas;
+import modele.nim.TestPlateauNim;
+import modele.nim.TestTas;
 import modele.TestJoueur;
 import modele.p4.TestPlateauP4;
 import vue.TestIhm;

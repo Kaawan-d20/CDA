@@ -2,7 +2,7 @@ package vue;
 
 import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
-import modele.Nim.Plateau;
+import modele.nim.Plateau;
 import org.junit.Test;
 import exception.NombreTasInvalides;
 
@@ -15,6 +15,11 @@ import static org.junit.Assert.*;
  * @see Ihm
  */
 public class TestIhm {
+    /*
+     * Pour information, quand je fais un test sur la sortie je rajoute "\r\n" à la fin car c'est le scanner qui le rajoute
+     * (\r : retour chariot et \n : nouvelle ligne)
+     */
+
     /**
      * <p>Test :</p>
      * <ul>

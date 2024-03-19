@@ -1,4 +1,4 @@
-package modele.Nim;
+package modele.nim;
 
 import exception.NombreBatonnetsInvalide;
 import exception.NumeroTasInvalide;
@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 /**
  * Classe contenant les tests de src/modele/Nim/Plateau.java
- * @see modele.Nim.Plateau
+ * @see modele.nim.Plateau
  */
 public class TestPlateauNim {
     /**
