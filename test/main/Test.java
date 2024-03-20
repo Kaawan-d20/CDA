@@ -1,5 +1,6 @@
 package main;
 
+import controleur.TestControleurJeuNim;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import modele.nim.TestPlateauNim;
@@ -22,7 +23,8 @@ public class Test {
                 TestTas.class,
                 TestPlateauP4.class,
                 TestJoueur.class,
-                TestIhm.class
+                TestIhm.class,
+                TestControleurJeuNim.class
         };
         boolean etat = true;
         for (Class<?> classe : classes) {
