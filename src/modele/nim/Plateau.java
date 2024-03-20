@@ -27,8 +27,8 @@ public class Plateau {
     }
 
     /**
-     * Remplit le plateau en créant les tas
-     * Remplace les tas déjà existant
+     * <p>Remplit le plateau en créant les tas</p>
+     * <p>Remplace les tas déjà existant</p>
      */
     public void reset() {
         for (int i = 0; i < nombreTas; i++) {
@@ -50,12 +50,11 @@ public class Plateau {
     }
 
     /**
-     * Permet de retourner l'état du plateau sous la forme d'un tableau d'entier
-     * Inutilisé, pourra être supprimé si jamais utilisé
-     * (sera probablement utilisée quand les IA seront implémenté)
+     * <p>Permet de retourner l'état du plateau sous la forme d'un tableau d'entier</p>
+     * <p>Inutilisé, pourra être supprimé si jamais utilisé
+     * (sera probablement utilisée quand les IA seront implémenté)</p>
      *
      * @return un tableau contenant le nombre de bâtonnets de chaque tas, au format [1, 3, 5]
-     * @
      */
     public int[] getPlateau() {
         int[] plateau = new int[nombreTas];
@@ -81,9 +80,9 @@ public class Plateau {
     }
 
     /**
-     * Renvoie une représentation sous forme de chaîne de caractères de l'objet.
-     * La chaîne est composée de la représentation de chaque "Tas" dans la collection,
-     * disposée horizontalement avec un espacement approprié pour les centrer dans une ligne.
+     * <p>Renvoie une représentation sous forme de chaîne de caractères de l'objet.</p>
+     * <p>La chaîne est composée de la représentation de chaque "Tas" dans la collection,
+     * disposée horizontalement avec un espacement approprié pour les centrer dans une ligne.</p>
      *
      * @return une représentation sous forme de chaîne de caractères de l'objet,
      * avec les représentations des "Tas" centrées dans la ligne.

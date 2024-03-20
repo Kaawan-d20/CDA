@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Test" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="main.Test" />
+    <option name="MAIN_CLASS_NAME" value="test.main.Test" />
     <module name="CDA" />
     <extension name="coverage">
       <pattern>

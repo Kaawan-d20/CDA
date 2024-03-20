@@ -20,8 +20,8 @@ public class Plateau {
     public Plateau() {}
 
     /**
-     * Remplit le plateau en créant le plateau
-     * Remplace le plateau déjà existant
+     * <p>Remplit le plateau en créant le plateau</p>
+     * <p>Remplace le plateau déjà existant</p>
      */
     public void reset() {
         plateau = new byte[7][7];
@@ -124,9 +124,9 @@ public class Plateau {
     }
 
     /**
-     * Permet de retourner l'état du plateau sous la forme d'un tableau de byte
-     * Inutilisé, pourra être supprimé si jamais utilisé
-     * (sera probablement utilisée quand les IA seront implémenté)
+     * <p>Permet de retourner l'état du plateau sous la forme d'un tableau de byte</p>
+     * <p>Inutilisé, pourra être supprimé si jamais utilisé
+     * (sera probablement utilisée quand les IA seront implémenté)</p>
      *
      * @return un tableau représentant le plateau de puissance 4
      */
@@ -135,8 +135,8 @@ public class Plateau {
     }
 
     /**
-     * Permet de placer un jeton dans une colonne
-     * Parcours la colonne à partir du bas et place le jeton dès qu'une case est vide (0)
+     * <p>Permet de placer un jeton dans une colonne</p>
+     * <p>Parcours la colonne à partir du bas et place le jeton dès qu'une case est vide (0)</p>
      * @param colonne L’indice de la colonne où le jeton doit être placé [0,...,6]
      * @param joueur  Le numéro du joueur [1,2]
      * @throws ColonnePleine Si la colonne dans laquelle le joueur veut placer le jeton est pleine
@@ -158,9 +158,9 @@ public class Plateau {
     }
 
     /**
-     * Renvoie une représentation sous forme de chaîne de caractères de l'objet.
-     * La chaîne est composée de la représentation de la matrice,
-     * disposée horizontalement avec un espacement approprié pour les centrer dans une ligne.
+     * <p>Renvoie une représentation sous forme de chaîne de caractères de l'objet.</p>
+     * <p>La chaîne est composée de la représentation de la matrice,
+     * disposée horizontalement avec un espacement approprié pour les centrer dans une ligne.</p>
      *
      * @return une représentation sous forme de chaîne de caractères de l'objet.
      */

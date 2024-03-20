@@ -1,5 +1,8 @@
 controleur
 exception
-main
+main.nim
+main.p4
 modele
+modele.nim
+modele.p4
 vue

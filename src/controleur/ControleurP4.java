@@ -62,8 +62,8 @@ public class ControleurP4 {
     }
 
     /**
-     * Incrémente le nombre de parties, reset / crée le plateau,
-     * Puis lance la séquence de tours de jeu.
+     * <p>Incrémente le nombre de parties, reset / crée le plateau.</p>
+     * <p>Puis lance la séquence de tours de jeu.</p>
      */
     private void commencerPartie() {
         numeroJoueurCourant = 1;
@@ -80,11 +80,11 @@ public class ControleurP4 {
 
 
     /**
-     * Facilite le déroulement complet d'une série de tours de jeu jusqu'à la fin.
-     * À chaque tour, demande le coup au joueur courant, met à jour le plateau, et gère les erreurs.
-     * Après la fin du jeu, incrémente les victoires du joueur courant, affiche le résultat,
-     * puis demande si les joueurs veulent jouer encore.
-     * En cas de réponse affirmative, démarre une nouvelle partie ; sinon, termine le programme.
+     * <p>Facilite le déroulement complet d'une série de tours de jeu jusqu'à la fin.</p>
+     * <p>À chaque tour, demande le coup au joueur courant, met à jour le plateau, et gère les erreurs.</p>
+     * <p>Après la fin du jeu, incrémente les victoires du joueur courant, affiche le résultat,
+     * puis demande si les joueurs veulent jouer encore.</p>
+     * <p>En cas de réponse affirmative, démarre une nouvelle partie ; sinon, termine le programme.</p>
      */
     private void toursDeJeu() {
         while (!plateau.verifierFin()) {
@@ -131,8 +131,8 @@ public class ControleurP4 {
     }
 
     /**
-     * Passe au joueur suivant dans l'ordre des joueurs.
-     * Actualise le numéro du joueur courant en faisant une rotation circulaire entre les joueurs.
+     * <p>Passe au joueur suivant dans l'ordre des joueurs.</p>
+     * <p>Actualise le numéro du joueur courant en faisant une rotation circulaire entre les joueurs.</p>
      */
     private void tourSuivant() {
         this.numeroJoueurCourant = (numeroJoueurCourant + 1) % 2;
@@ -154,8 +154,8 @@ public class ControleurP4 {
     }
 
     /**
-     * Renvoie le numéro du joueur actuellement en cours.
-     * Pas utilisée pour l'instant, pourra être retirée si besoin
+     * <p>Renvoie le numéro du joueur actuellement en cours.</p>
+     * <p>Pas utilisée pour l'instant, pourra être retirée si besoin</p>
      *
      * @return Le numéro du joueur courant.
      */

@@ -55,9 +55,9 @@ public class Ihm {
     }
 
     /**
-     * Demande à un joueur de saisir un coup pour le jeu Nim.
-     * Affiche un message d'invitation et attend une réponse de l'utilisateur.
-     * La réponse doit être au format `m n`, où `m` est le numéro du tas et `n` est le nombre de bâtonnets à retirer.
+     * <p>Demande à un joueur de saisir un coup pour le jeu Nim.</p>
+     * <p>Affiche un message d'invitation et attend une réponse de l'utilisateur.</p>
+     * <p>La réponse doit être au format `m n`, où `m` est le numéro du tas et `n` est le nombre de bâtonnets à retirer.</p>
      *
      * @param nomJoueur Le nom du joueur pour lequel la demande est effectuée.
      * @return Un tableau d'entiers de taille 2, contenant le numéro du tas et le nombre de bâtonnets à retirer [m, n].
@@ -88,9 +88,9 @@ public class Ihm {
     }
 
     /**
-     * Demande à l'utilisateur s'il souhaite rejouer une partie.
-     * Affiche un message et attend une réponse de l'utilisateur.
-     * La réponse doit être une chaîne contenant uniquement "y" (pour oui) ou "n" (pour non).
+     * <p>Demande à l'utilisateur s'il souhaite rejouer une partie.</p>
+     * <p>Affiche un message et attend une réponse de l'utilisateur.</p>
+     * <p>La réponse doit être une chaîne contenant uniquement "y" (pour oui) ou "n" (pour non).</p>
      *
      * @return true si l'utilisateur souhaite rejouer, false sinon.
      * @throws FormatReponseInvalide  Si la réponse de l'utilisateur n'est pas valide.
@@ -149,9 +149,9 @@ public class Ihm {
 
 
     /**
-     * Demande à un joueur de saisir le numéro d'une colonne pour le jeu de puissance 4.
-     * Affiche un message d'invitation et attend une réponse de l'utilisateur.
-     * La réponse doit être un entier.
+     * <p>Demande à un joueur de saisir le numéro d'une colonne pour le jeu de puissance 4.</p>
+     * <p>Affiche un message d'invitation et attend une réponse de l'utilisateur.</p>
+     * <p>La réponse doit être un entier.</p>
      *
      * @param nomJoueur Le nom du joueur pour lequel la demande est effectuée.
      * @return Un byte contenant le numéro de colonne.
