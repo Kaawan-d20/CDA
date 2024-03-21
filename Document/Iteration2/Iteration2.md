@@ -78,11 +78,11 @@ classDiagram
 
         + Ihm()
         + demanderNomJoueur(int numJoueur) String
-        + demanderCoupP4(String nomJoueur) byte
         + demanderJouerEncore() bool
         + afficherPlateau(String plateauString) void
         + afficherVictoire(String nomJoueur, int nbVictoires, int nbParties) void
         + afficherErreur(String message) void
+        + demanderCoupP4(String nomJoueur) byte
     }
 
     class ControleurP4 {
@@ -118,7 +118,8 @@ classDiagram
         + Plateau ()
         + reset() void
         + verifierFin() bool
-        - estPlein() bool
+        + verifierVictoire() bool
+        + estPlein() bool
         + getPlateau() byte[][]
         + placerJeton(byte colonne, byte joueur) void
         + toString() String
