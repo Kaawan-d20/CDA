@@ -273,7 +273,7 @@ public class TestIhm {
         try{
             plateau.placerJeton((byte) 0, (byte) 1);
             plateau.placerJeton((byte) 1, (byte) 2);
-        } catch (ColonnePleine e) {
+        } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 

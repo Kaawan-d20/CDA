@@ -1,6 +1,7 @@
 package test.modele.p4;
 
 import exception.ColonnePleine;
+import exception.FormatReponseInvalide;
 import modele.p4.Plateau;
 import org.junit.Test;
 
@@ -57,7 +58,7 @@ public class TestPlateauP4 {
                 };
         try {
             plateau.placerJeton((byte) 3, (byte) 1);
-        } catch (ColonnePleine e){
+        } catch (ColonnePleine | FormatReponseInvalide e){
             fail("Erreur placerJeton");
         }
         assertEquals(resultatAttendu,plateau.getPlateau());
@@ -77,7 +78,7 @@ public class TestPlateauP4 {
             for (int i = 0; i < 6; i++) {
                 plateau.placerJeton((byte) 3, (byte) 1);
             }
-        } catch (ColonnePleine e){
+        } catch (ColonnePleine | FormatReponseInvalide e){
             fail("Erreur placerJeton");
         }
         assertEquals(resultatAttendu,plateau.getPlateau());
@@ -86,7 +87,7 @@ public class TestPlateauP4 {
         try {
             plateau.placerJeton((byte) 3, (byte) 1);
             fail("La colonne est sensé être pleine");
-        } catch (ColonnePleine ignored){}
+        } catch (ColonnePleine | FormatReponseInvalide ignored){}
     }
 
     /**
@@ -119,7 +120,7 @@ public class TestPlateauP4 {
                     plateau.placerJeton((byte) colonne, resultatAttendu[ligne][colonne]);
                 }
             }
-        }catch (ColonnePleine e){
+        }catch (ColonnePleine | FormatReponseInvalide e){
             fail("Erreur placerJeton");
         }
 
@@ -130,7 +131,7 @@ public class TestPlateauP4 {
         try {
             plateau.placerJeton((byte) 1, (byte) 1);
             plateau.placerJeton((byte) 4, (byte) 2);
-        } catch (ColonnePleine e) {
+        } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
@@ -152,7 +153,7 @@ public class TestPlateauP4 {
             plateau.placerJeton((byte) 1, (byte) 1);
             plateau.placerJeton((byte) 2, (byte) 1);
 
-        } catch (ColonnePleine e) {
+        } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
@@ -161,7 +162,7 @@ public class TestPlateauP4 {
 
         try {
             plateau.placerJeton((byte) 3, (byte) 1);
-        } catch (ColonnePleine e) {
+        } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
@@ -182,7 +183,7 @@ public class TestPlateauP4 {
             for (int i = 0; i < 3; i++) {
             plateau.placerJeton((byte) 0, (byte) 1);
             }
-        } catch (ColonnePleine e) {
+        } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
@@ -191,7 +192,7 @@ public class TestPlateauP4 {
 
         try {
             plateau.placerJeton((byte) 0, (byte) 1);
-        } catch (ColonnePleine e) {
+        } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
@@ -219,7 +220,7 @@ public class TestPlateauP4 {
             plateau.placerJeton((byte) 3, (byte) 2);
             plateau.placerJeton((byte) 4, (byte) 1);
             plateau.placerJeton((byte) 3, (byte) 2);
-        } catch (ColonnePleine e) {
+        } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
@@ -228,8 +229,7 @@ public class TestPlateauP4 {
 
         try {
             plateau.placerJeton((byte) 3, (byte) 1);
-
-        } catch (ColonnePleine e) {
+        } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
@@ -257,7 +257,7 @@ public class TestPlateauP4 {
             plateau.placerJeton((byte) 3, (byte) 2);
             plateau.placerJeton((byte) 2, (byte) 1);
             plateau.placerJeton((byte) 3, (byte) 2);
-        } catch (ColonnePleine e) {
+        } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
@@ -267,7 +267,7 @@ public class TestPlateauP4 {
         try {
             plateau.placerJeton((byte) 3, (byte) 1);
 
-        } catch (ColonnePleine e) {
+        } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
         //Test la victoire
@@ -286,7 +286,7 @@ public class TestPlateauP4 {
         try {
             plateau.placerJeton((byte) 0, (byte) 1);
             plateau.placerJeton((byte) 1, (byte) 2);
-        } catch (ColonnePleine e) {
+        } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 

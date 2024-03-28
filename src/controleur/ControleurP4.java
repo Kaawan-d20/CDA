@@ -95,9 +95,6 @@ public class ControleurP4 {
                     estCoupCorrect = true;
                     ihm.afficherPlateau(plateau.toString());
                     byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
-                    if (candidate<1 || candidate>7){
-                        throw new FormatReponseInvalide("Veuillez entrer un entier compris entre 1 et 7");
-                    }
                     plateau.placerJeton((byte) (candidate-1), (byte) (numeroJoueurCourant+1));
                 } catch (ColonnePleine | FormatReponseInvalide exception) {
                     estCoupCorrect = false;

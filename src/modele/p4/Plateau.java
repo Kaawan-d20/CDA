@@ -1,6 +1,7 @@
 package modele.p4;
 
 import exception.ColonnePleine;
+import exception.FormatReponseInvalide;
 
 /**
  * Classe représentant un plateau de jeu de puissance 4
@@ -140,8 +141,12 @@ public class Plateau {
      * @param colonne L’indice de la colonne où le jeton doit être placé [0,...,6]
      * @param joueur  Le numéro du joueur [1,2]
      * @throws ColonnePleine Si la colonne dans laquelle le joueur veut placer le jeton est pleine
+     * @throws FormatReponseInvalide Si le numéro de colonne demandé est inexistant
      */
-    public void placerJeton(byte colonne, byte joueur) throws ColonnePleine {
+    public void placerJeton(byte colonne, byte joueur) throws ColonnePleine, FormatReponseInvalide {
+        if (colonne<0 || colonne>6){
+            throw new FormatReponseInvalide("Veuillez entrer un entier compris entre 1 et 7");
+        }
         boolean estPlein = true;
         for (byte ligne = 6; ligne >= 0; ligne--) {
             if (plateau[ligne][colonne] == 0) {
