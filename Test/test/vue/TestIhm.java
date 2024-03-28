@@ -184,7 +184,7 @@ public class TestIhm {
      */
     @Test
     public void testDemanderJouerEncore() {
-        String input = "y\nn\na\n";
+        String input = "y\nn\na\nn";
         //Stockage des valeurs initial
         InputStream originalIn = System.in;
         PrintStream originalOut = System.out;
@@ -201,29 +201,21 @@ public class TestIhm {
         boolean jouerEncore = false;
         //Test le fonctionnement normal true
 
-        try{
-            jouerEncore = ihm.demanderJouerEncore();
-        } catch (FormatReponseInvalide e) {
-            fail("Erreur demanderCoupNim(String)");
-        }
+        jouerEncore = ihm.demanderJouerEncore();
+
 
         assertTrue(jouerEncore);
         assertEquals(reponseAttendu,out.toString());
 
         //Test le fonctionnement normal false
-        try{
-            jouerEncore = ihm.demanderJouerEncore();
-        } catch (FormatReponseInvalide e) {
-            fail("Erreur demanderCoupNim(String)");
-        }
+        jouerEncore = ihm.demanderJouerEncore();
+
 
         assertFalse(jouerEncore);
 
         //Test le cas où l'utilisateur entre autre chose que "y" ou "n"
-        try{
-            jouerEncore = ihm.demanderJouerEncore();
-            fail("Erreur demanderJouerEncore()");
-        } catch (FormatReponseInvalide ignored) {};
+        jouerEncore = ihm.demanderJouerEncore();
+
 
         //Rétablissement des valeurs par défault
         System.setIn(originalIn);

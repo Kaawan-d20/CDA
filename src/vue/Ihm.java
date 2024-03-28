@@ -93,22 +93,22 @@ public class Ihm {
      * <p>La réponse doit être une chaîne contenant uniquement "y" (pour oui) ou "n" (pour non).</p>
      *
      * @return true si l'utilisateur souhaite rejouer, false sinon.
-     * @throws FormatReponseInvalide  Si la réponse de l'utilisateur n'est pas valide.
      */
-    public boolean demanderJouerEncore() throws FormatReponseInvalide {
-        System.out.println("Voulez-vous rejouer une partie ? (y/n)");
-        if (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            // Le pattern s'assure que la ligne contient uniquement "y" ou "n".
-            Pattern pattern = Pattern.compile("^[y|n]$"); //Permet de créer le regex.
-            Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
-            // On vérifie la réponse et retourne true si c'est "y" et false si c'est "n".
-            if (matcher.find()) {
-                return line.equals("y");
+    public boolean demanderJouerEncore() {
+        // Le pattern s'assure que la ligne contient uniquement "y" ou "n".
+        Pattern pattern = Pattern.compile("^[y|n]$"); //Permet de créer le regex.
+        while (true){
+            System.out.println("Voulez-vous rejouer une partie ? (y/n)");
+            if (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
+                // On vérifie la réponse et retourne true si c'est "y" et false si c'est "n".
+                if (matcher.find()) {
+                    return line.equals("y");
+                }
             }
+            System.out.println("\n\n⚠ Vous avez répondu avec autre chose que `y` ou `n`.");
         }
-        // Si la réponse de l'utilisateur n'est pas valide, on lance une exception.
-        throw new FormatReponseInvalide("Vous avez répondu avec autre chose que `y` ou `n`.");
     }
 
     /**

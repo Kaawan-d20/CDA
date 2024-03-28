@@ -113,20 +113,12 @@ public class ControleurP4 {
             ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, false);
         }
         ihm.afficherPlateau(plateau.toString());
-        boolean reponseAcceptee = false;
-        while (!reponseAcceptee) {
-            try {
-                reponseAcceptee = true;
-                if (ihm.demanderJouerEncore()) {
-                    commencerPartie();
-                } else {
-                    finPartie();
-                    return;
-                }
-            } catch (FormatReponseInvalide exception){
-                reponseAcceptee = false;
-                ihm.afficherErreur(exception.getMessage());
-            }
+
+
+        if (ihm.demanderJouerEncore()) {
+            commencerPartie();
+        } else {
+            finPartie();
         }
     }
 

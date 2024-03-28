@@ -38,7 +38,7 @@ public class TestControleurP4 {
      * </ul>
      */
     @Test
-    public void testJeuNim(){
+    public void testJeuP4(){
         //Création de l'émulateur utilisateur
         String input = "Dany\nNathan\n"; //Test pour le nom du joueur
         input += "a\n0\n8\n"; //Test pour les coups
