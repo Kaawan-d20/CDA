@@ -198,38 +198,104 @@ graph LR
 
 ```mermaid
 classDiagram
-    class main {
-
+    class Main{ 
+        + main() void
     }
 
     class Controleur {
         <<abstract>>
-        - int numeroJoueurCourant
-        - int nbParties
+        # int numeroJoueurCourant = 0
+        # int nombrePartie = 0
 
+        # Joueur[]  lesjoueurs
+        # Plateau plateau
+        # Ihm ihm
+        
+        + Controleur(Ihm ihm)
+        - initJoueur() void
+        - tourDeJeu() void
         - tourSuivant() void
         - finPartie() void
-
-        + getNumeroJoueurCourant() int
-        + getJoueurCourant() Joueur
-        + getNomJoueurCourant() String
-    }  
-
-    class ControleurJeuNim {
-        + ControleurJeuNim(Ihm ihm)
-        + jouer () void
-        - recommencerPartie() void
-        - toursDeJeu() void
+        # getNumeroJoueurCourant() int
+        # getJoueurCourant() Joueur
+        # getNomJoueurCourant() String
     }
 
-    class ControleurP4 {
-        + ControleurP4(Ihm ihm)
-        + jouer () void
-        - recommencerPartie() void
-        - toursDeJeu() void
+    class ControleurNim{
+        + jouer() void
+        # getCoup() void
+        # victoire() void
     }
 
-    
+    class ControleurP4{
+        + jouer() void
+        # getCoup() void
+        # victoire() void
+    }
+
+    Controleur <|-- ControleurNim
+    Controleur <|-- ControleurP4
+
+    class Plateau {<<abstract>>}
+    class PlateauNim {
+        - int nombreTas
+        
+        - Tas[] lesTas
+
+        + PlateauNim(int nombreTas)
+        + reset() void
+        + setOption(String option) void
+        + retirerBatonnets(int m, int n) void
+        + verifierFin() bool
+        + getPlateau() int[]
+        + toString() String
+    }
+
+    class PlateauP4 {
+        - byte[][] plateau
+        - byte[] dernierCoup
+
+        + PlateauP4()
+        + reset() void
+        + setOption(String option) void
+        + rotation(bool sens) void
+        + verifierFin() bool
+        + verifierVictoire() bool
+        + estPlein() bool
+        + getPlateau() byte[][]
+        + placerJeton(byte colonne, byte joueur) void
+        + toString() String 
+
+    }
+
+    Plateau <|-- PlateauNim
+    Plateau <|-- PlateauP4
+
+
+    class Tas {
+        - int nombreBatonnet
+
+        + Tas (int nombreBatonnet)
+        + retirerBatonnet(int n) void
+        + getNombre() int
+        + estVide() bool
+        + toString() String
+    }
+
+    class Joueur {
+        - String nom
+        - int nbVictoires
+
+        + Joueur(String nom)
+        + getNom() String
+        + getNbVictoires() int
+        + incrementVictoires() void
+        + compareTo(Joueur autreJoueur) int
+    }
+
+
+
+
 
     class Ihm {
         <<abstract>>
@@ -246,81 +312,122 @@ classDiagram
     class IhmNim {
         + IhmNim()
         + demanderNbTas() int
-        + demanderCoupNim(String nomJoueur) int[]
         + demanderLimite() int
+        + demanderCoupNim(String nomJoueur) int[]
     }
 
     class IhmP4 {
         + IhmP4()
-        + demanderCoupP4(String nomJoueur) byte
         + demanderActivationRotation() bool
+        + demanderCoupOuRotation(String nomJoueur) bool
+        + demanderCoupP4(String nomJoueur) byte
+        + demanderRotation(String nomJoueur) bool
     }
 
+    Ihm <|-- IhmNim
+    Ihm <|-- IhmP4
 
 
-    class Plateau {<<abstract>>}  
-
-    class PlateauNim {
-        - int nombreTas
-
-        + Plateau (int nombreTas)
-        + reset() void
-        + verifierFin() bool
-        + getPlateau() int[]
-        + retirerBatonnets(int m, int n) void
-        + toString() String
-    }
-
-    class PlateauP4 {
-        - byte[][] plateau
-        - byte[] dernierCoup
-
-        + Plateau ()
-        + reset() void
-        + verifierFin() bool
-        + verifierVictoire() bool
-        + estPlein() bool
-        + getPlateau() byte[][]
-        + placerJeton(byte colonne, byte joueur) void
-        + toString() String 
-    }
-
-
-
-    class Joueur {
-        - String nom
-        - int nbVictoires
-
-        + Joueur(String nom)
-        + getNom() String
-        + getNbVictoires() int
-        + incrementVictoires() void
-        + compareTo(Joueur autreJoueur) int
-    }
-
-    class Tas {
-        - int nombreBatonnet
-
-        + Tas (int nombreBatonnet)
-        + retirerBatonnet(int n) void
-        + getNombre() int
-        + estVide() bool
-        + toString() String
-    }
-
-    Controleur --|> ControleurJeuNim
-    Controleur --|> ControleurP4
-    Controleur --> "1" Ihm
-    Ihm --|> IhmNim
-    Ihm --|> IhmP4
     Controleur --> "1" Plateau
-    Plateau --|> PlateauP4
-    Plateau --|> PlateauNim
+    Controleur --> "1" Ihm
     Tas "1..n" --* PlateauNim : lesTas
     Controleur --> "2" Joueur : lesJoueurs
 ```
 
 
+Et voici une idée de la structure (j'ai pas fait gaffe aux nom des méthodes, erreur)
+```java
+
+public class Controleur{
+    public void initJoueur() {
+        int nbJoueur = 2;
+        lesJoueurs = new Joueur[nbJoueur];
+        for (int i=0, i<nbJoueur, i++){
+            lesJoueurs[i] = new Joueur(ihm.demanderNom());
+        }
+    }
+    private void toursDeJeu() {
+        nombrePartie += 1;
+        numeroJoueurCourant = 1;
+        plateau.reset();
+        plateau.setOption(ihm.demanderOption());
+        while (!plateau.verifierFin()) {
+            tourSuivant();
+            boolean estCoupCorrect = false;
+            while (!estCoupCorrect) {
+                try {
+                    estCoupCorrect = true;
+                    ihm.afficherPlateau(plateau.toString());
+                    getCoup();
+                } catch (CoupImpossible | FormatReponseInvalide exception) {
+                    estCoupCorrect = false;
+                    ihm.afficherErreur(exception.getMessage());
+                }
+            }
+        }
+
+        victoire();
+
+        if (ihm.demanderJouerEncore()) {
+            toursDeJeu();
+        } else {
+            finPartie();
+        }
+    }
+
+}
+
+
+public class ControleurNim{
+    public void jouer() {
+        initJoueur();
+        plateau = new PlateauNim(ihm.demanderNbTas);
+        tourDeJeu();
+    }
+
+    protected void getCoup(){
+        int[] candidate = ihm.demanderCoupNim(getNomJoueurCourant());
+        plateau.retirerBatonnets(candidate[0], candidate[1]);        
+    }
+
+    protected void victoire(){
+        if (!plateau.verifierVictoire()){
+            ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, true);
+        } else {
+            getJoueurCourant().incrementVictoires();
+            ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, false);
+        }
+        ihm.afficherPlateau(plateau.toString());
+    }
+}
+
+
+
+public class ControleurP4{
+    public void jouer() {
+        initJoueur();
+        plateau = new PlateauP4();
+        tourDeJeu();
+    }
+
+    protected void getCoup(){
+        if (ihm.demanderCoupOuRotation()){
+            byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
+            plateau.placerJeton((byte) (candidate-1), (byte) (numeroJoueurCourant+1));       
+        }
+        else{
+            boolean candidate = ihm.demanderRotation(getNomJoueurCourant()); //à définir que signifie true gauche ou droite
+            plateau.rotation(candidate);
+        }
+    }
+    protected void victoire(){
+        getJoueurCourant().incrementVictoires();
+        ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, false);
+
+    }
+}
+
+```
 
 # Répartition des tâches
 ## Itération 3
