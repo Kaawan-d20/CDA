@@ -212,10 +212,10 @@ classDiagram
         # Ihm ihm
         
         + Controleur(Ihm ihm)
-        - initJoueur() void
-        - tourDeJeu() void
-        - tourSuivant() void
-        - finPartie() void
+        # initJoueur() void
+        # tourDeJeu() void
+        # tourSuivant() void
+        # finPartie() void
         # getNumeroJoueurCourant() int
         # getJoueurCourant() Joueur
         # getNomJoueurCourant() String
@@ -299,7 +299,7 @@ classDiagram
 
     class Ihm {
         <<abstract>>
-        - Scanner scanner
+        # Scanner scanner
 
         + Ihm()
         + demanderNomJoueur(int numJoueur) String
