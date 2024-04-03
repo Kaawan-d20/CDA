@@ -302,30 +302,20 @@ classDiagram
         # Scanner scanner
 
         + Ihm()
+        + demanderJeu() bool
         + demanderNomJoueur(int numJoueur) String
         + demanderJouerEncore() bool
         + afficherPlateau(String plateauString) void
         + afficherVictoire(String nomJoueur, int nbVictoires, int nbParties) void
         + afficherErreur(String message) void
-    }  
-
-    class IhmNim {
-        + IhmNim()
         + demanderNbTas() int
         + demanderLimite() int
         + demanderCoupNim(String nomJoueur) int[]
-    }
-
-    class IhmP4 {
-        + IhmP4()
         + demanderActivationRotation() bool
         + demanderCoupOuRotation(String nomJoueur) bool
         + demanderCoupP4(String nomJoueur) byte
         + demanderRotation(String nomJoueur) bool
     }
-
-    Ihm <|-- IhmNim
-    Ihm <|-- IhmP4
 
 
     Controleur --> "1" Plateau
