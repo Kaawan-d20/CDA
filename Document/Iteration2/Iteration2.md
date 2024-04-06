@@ -23,7 +23,7 @@ flowchart LR
 5.  Le système demande au joueur 2
 6.  Le joueur 2 répond
 7.  Le système enregistre le nom du joueur 2
-8.  Le système affiche le plateau ainsi que le nom du joueur qui doit jouer
+8.  Le système affiche le plateauNim ainsi que le nom du joueur qui doit jouer
 9.  Le joueur choisi dans quelle colonne il souhaite mettre un jeton 
 10. Le système vérifie si la partie est gagné
 11. Le système affiche le vainqueur et demande si l'utilisateur souhaite refaire une partie ("y" or "n")
@@ -112,7 +112,7 @@ classDiagram
     }
 
     class Plateau {
-        - byte[][] plateau
+        - byte[][] plateauNim
         - byte[] dernierCoup
                 
         + Plateau ()

@@ -1,12 +1,14 @@
-package modele.p4;
+package modele;
 
 import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
+import exception.NombreBatonnetsInvalide;
+import exception.NumeroTasInvalide;
 
 /**
  * Classe représentant un plateau de jeu de puissance 4
  */
-public class Plateau {
+public class PlateauP4 extends Plateau {
     /**
      * Le tableau représentant le plateau de puissance 4
      */
@@ -16,9 +18,9 @@ public class Plateau {
      */
     private byte[] dernierCoup = new byte[2];
     /**
-     * Permet de construire un nouveau Plateau.
+     * Permet de construire un nouveau PlateauNim.
      */
-    public Plateau() {}
+    public PlateauP4() {}
 
     /**
      * <p>Remplit le plateau en créant le plateau</p>
@@ -108,7 +110,6 @@ public class Plateau {
         return false;
     }
 
-
     /**
      * Permet de vérifier si le plateau est plein
      * @return true si le plateau est plein, sinon false
@@ -140,10 +141,9 @@ public class Plateau {
      * <p>Parcours la colonne à partir du bas et place le jeton dès qu'une case est vide (0)</p>
      * @param colonne L’indice de la colonne où le jeton doit être placé [0,...,6]
      * @param joueur  Le numéro du joueur [1,2]
-     * @throws ColonnePleine Si la colonne dans laquelle le joueur veut placer le jeton est pleine
      * @throws FormatReponseInvalide Si le numéro de colonne demandé est inexistant
      */
-    public void placerJeton(byte colonne, byte joueur) throws ColonnePleine, FormatReponseInvalide {
+    public void placerJeton(byte colonne, byte joueur) throws FormatReponseInvalide, ColonnePleine {
         if (colonne<0 || colonne>6){
             throw new FormatReponseInvalide("Veuillez entrer un entier compris entre 1 et 7");
         }
@@ -185,5 +185,9 @@ public class Plateau {
             string+="\n";
         }
         return string;
+    }
+
+    public void retirerBatonnets(int m, int n) throws NombreBatonnetsInvalide, NumeroTasInvalide {
+        throw new UnsupportedOperationException("Méthode non implémentée");
     }
 }

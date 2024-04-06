@@ -86,13 +86,13 @@ loadScripts(document, 'script');</script>
 <h1 title="Class Plateau" class="title">Class Plateau</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">modele.nim.Plateau</div>
+<div class="inheritance">modele.PlateauNim</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Plateau</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Classe représentant un plateau de jeu de Nim</div>
+<div class="block">Classe représentant un plateauNim de jeu de Nim</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -147,21 +147,21 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int[]</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPlateau()" class="member-name-link">getPlateau</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Permet de retourner l'état du plateau sous la forme d'un tableau d'entier
+<div class="block">Permet de retourner l'état du plateauNim sous la forme d'un tableau d'entier
  Inutilisé, pourra être supprimé si jamais utilisé
  (sera probablement utilisée quand les IA seront implémenté)</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Remplit le plateau en créant les tas
+<div class="block">Remplit le plateauNim en créant les tas
  Remplace les tas déjà existant</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#retirerBatonnets(int,int)" class="member-name-link">retirerBatonnets</a><wbr>(int&nbsp;m,
  int&nbsp;n)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Retire un nombre spécifié de bâtonnets d'un tas spécifié sur le plateau.</div>
+<div class="block">Retire un nombre spécifié de bâtonnets d'un tas spécifié sur le plateauNim.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -219,7 +219,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Permet de construire un nouveau Plateau, en fonction d'un nombre de tas.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>nombreTas</code> - : nombre de tas à créer dans le plateau</dd>
+<dd><code>nombreTas</code> - : nombre de tas à créer dans le plateauNim</dd>
 </dl>
 </section>
 </li>
@@ -235,7 +235,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="reset()">
 <h3>reset</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reset</span>()</div>
-<div class="block">Remplit le plateau en créant les tas
+<div class="block">Remplit le plateauNim en créant les tas
  Remplace les tas déjà existant</div>
 </section>
 </li>
@@ -254,7 +254,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getPlateau()">
 <h3>getPlateau</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name">getPlateau</span>()</div>
-<div class="block">Permet de retourner l'état du plateau sous la forme d'un tableau d'entier
+<div class="block">Permet de retourner l'état du plateauNim sous la forme d'un tableau d'entier
  Inutilisé, pourra être supprimé si jamais utilisé
  (sera probablement utilisée quand les IA seront implémenté)</div>
 <dl class="notes">
@@ -270,7 +270,7 @@ loadScripts(document, 'script');</script>
  int&nbsp;n)</span>
                       throws <span class="exceptions"><a href="../exception/NombreBatonnetsInvalide.html" title="class in exception">NombreBatonnetsInvalide</a>,
 <a href="../exception/NumeroTasInvalide.html" title="class in exception">NumeroTasInvalide</a></span></div>
-<div class="block">Retire un nombre spécifié de bâtonnets d'un tas spécifié sur le plateau.</div>
+<div class="block">Retire un nombre spécifié de bâtonnets d'un tas spécifié sur le plateauNim.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>m</code> - Le numéro du tas à partir duquel retirer les bâtonnets.</dd>

@@ -126,7 +126,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Numéro du joueur courant, x ∈ [0 ; 1]</div>
 </div>
 <div class="col-first even-row-color"><code>private <a href="../modele/p4/Plateau.html" title="class in modele.p4">Plateau</a></code></div>
-<div class="col-second even-row-color"><code><a href="#plateau" class="member-name-link">plateau</a></code></div>
+<div class="col-second even-row-color"><code><a href="#plateauNim" class="member-name-link">plateauNim</a></code></div>
 <div class="col-last even-row-color">
 <div class="block">Objet Plateau représentant la grille de puissance 4</div>
 </div>
@@ -162,7 +162,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#commencerPartie()" class="member-name-link">commencerPartie</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Incrémente le nombre de parties, reset / crée le plateau.</div>
+<div class="block">Incrémente le nombre de parties, reset / crée le plateauNim.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#finPartie()" class="member-name-link">finPartie</a>()</code></div>
@@ -188,7 +188,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#jouer()" class="member-name-link">jouer</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Initialise une nouvelle partie en demandant les noms des joueurs,
- et en créant le plateau de jeu.</div>
+ et en créant le plateauNim de jeu.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toursDeJeu()" class="member-name-link">toursDeJeu</a>()</code></div>
@@ -239,9 +239,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="plateau">
-<h3>plateau</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../modele/p4/Plateau.html" title="class in modele.p4">Plateau</a></span>&nbsp;<span class="element-name">plateau</span></div>
+<section class="detail" id="plateauNim">
+<h3>plateauNim</h3>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../modele/p4/Plateau.html" title="class in modele.p4">Plateau</a></span>&nbsp;<span class="element-name">plateauNim</span></div>
 <div class="block">Objet Plateau représentant la grille de puissance 4</div>
 </section>
 </li>
@@ -284,14 +284,14 @@ loadScripts(document, 'script');</script>
 <h3>jouer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">jouer</span>()</div>
 <div class="block">Initialise une nouvelle partie en demandant les noms des joueurs,
- et en créant le plateau de jeu.</div>
+ et en créant le plateauNim de jeu.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="commencerPartie()">
 <h3>commencerPartie</h3>
 <div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">commencerPartie</span>()</div>
-<div class="block"><p>Incrémente le nombre de parties, reset / crée le plateau.</p>
+<div class="block"><p>Incrémente le nombre de parties, reset / crée le plateauNim.</p>
  <p>Puis lance la séquence de tours de jeu.</p></div>
 </section>
 </li>
@@ -300,7 +300,7 @@ loadScripts(document, 'script');</script>
 <h3>toursDeJeu</h3>
 <div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">toursDeJeu</span>()</div>
 <div class="block"><p>Facilite le déroulement complet d'une série de tours de jeu jusqu'à la fin.</p>
- <p>À chaque tour, demande le coup au joueur courant, met à jour le plateau, et gère les erreurs.</p>
+ <p>À chaque tour, demande le coup au joueur courant, met à jour le plateauNim, et gère les erreurs.</p>
  <p>Après la fin du jeu, incrémente les victoires du joueur courant, affiche le résultat,
  puis demande si les joueurs veulent jouer encore.</p>
  <p>En cas de réponse affirmative, démarre une nouvelle partie ; sinon, termine le programme.</p></div>

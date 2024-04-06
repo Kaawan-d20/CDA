@@ -2,7 +2,8 @@ package test.vue;
 
 import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
-import modele.nim.Plateau;
+import modele.PlateauNim;
+import modele.PlateauP4;
 import org.junit.Test;
 import exception.NombreTasInvalides;
 import vue.Ihm;
@@ -236,11 +237,11 @@ public class TestIhm {
         System.setOut(printStream); //redéfinition de out
 
         String reponseAttendu = "  |  \n ||| \n|||||\n\r\n";
-        Plateau plateau = new Plateau(3);
-        plateau.reset();
+        PlateauNim plateauNim = new PlateauNim(3);
+        plateauNim.reset();
         Ihm ihm = new Ihm();
         //Test le fonctionnement normal
-        ihm.afficherPlateau(plateau.toString());
+        ihm.afficherPlateau(plateauNim.toString());
         assertEquals(reponseAttendu,out.toString());
 
         //Rétablissement des valeurs par défault
@@ -268,18 +269,18 @@ public class TestIhm {
                 "⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ \n" +
                 "⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ \n" +
                 "\uD83D\uDD34 \uD83D\uDFE1 ⚫ ⚫ ⚫ ⚫ ⚫ \n\r\n";
-        modele.p4.Plateau plateau = new modele.p4.Plateau();
-        plateau.reset();
+        PlateauP4 plateauP4 = new PlateauP4();
+        plateauP4.reset();
         try{
-            plateau.placerJeton((byte) 0, (byte) 1);
-            plateau.placerJeton((byte) 1, (byte) 2);
+            plateauP4.placerJeton((byte) 0, (byte) 1);
+            plateauP4.placerJeton((byte) 1, (byte) 2);
         } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
         Ihm ihm = new Ihm();
         //Test le fonctionnement normal
-        ihm.afficherPlateau(plateau.toString());
+        ihm.afficherPlateau(plateauP4.toString());
         assertEquals(reponseAttendu,out.toString());
 
         //Rétablissement des valeurs par défault

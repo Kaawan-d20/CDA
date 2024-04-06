@@ -2,24 +2,24 @@ package test.modele.p4;
 
 import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
-import modele.p4.Plateau;
+import modele.PlateauP4;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 /**
- * Classe contenant les tests de src/modele/p4/Plateau.java
- * @see modele.p4.Plateau
+ * Classe contenant les tests de src/modele/p4/PlateauNim.java
+ * @see PlateauP4
  */
 public class TestPlateauP4 {
     /**
-     * Test la Création d'un Plateau et getPlateau()
-     * @see Plateau#getPlateau()
+     * Test la Création d'un PlateauNim et getPlateau()
+     * @see PlateauP4#getPlateau()
      */
     @Test
     public void testInit(){
-        Plateau plateau = new Plateau();
-        plateau.reset();
+        PlateauP4 plateauP4 = new PlateauP4();
+        plateauP4.reset();
         byte[][] resultatAttendu =
                 {
                         {0,0,0,0,0,0,0},
@@ -30,7 +30,7 @@ public class TestPlateauP4 {
                         {0,0,0,0,0,0,0},
                         {0,0,0,0,0,0,0},
                 };
-        assertEquals(resultatAttendu, plateau.getPlateau());
+        assertEquals(resultatAttendu, plateauP4.getPlateau());
     }
 
     /**
@@ -39,12 +39,12 @@ public class TestPlateauP4 {
      *     <li>Le fonctionnement normal</li>
      *     <li>Le cas où la colonne choisie est pleine</li>
      * </ul>
-     * @see Plateau#placerJeton(byte, byte)
+     * @see PlateauP4#placerJeton(byte, byte)
      */
     @Test
     public void testPlacerJeton() {
-        Plateau plateau = new Plateau();
-        plateau.reset();
+        PlateauP4 plateauP4 = new PlateauP4();
+        plateauP4.reset();
         //Test le fonctionnement normal
         byte[][] resultatAttendu =
                 {
@@ -57,11 +57,11 @@ public class TestPlateauP4 {
                         {0,0,0,1,0,0,0},
                 };
         try {
-            plateau.placerJeton((byte) 3, (byte) 1);
+            plateauP4.placerJeton((byte) 3, (byte) 1);
         } catch (ColonnePleine | FormatReponseInvalide e){
             fail("Erreur placerJeton");
         }
-        assertEquals(resultatAttendu,plateau.getPlateau());
+        assertEquals(resultatAttendu, plateauP4.getPlateau());
 
         //Remplissage de la colonne
         resultatAttendu =
@@ -76,16 +76,16 @@ public class TestPlateauP4 {
                 };
         try {
             for (int i = 0; i < 6; i++) {
-                plateau.placerJeton((byte) 3, (byte) 1);
+                plateauP4.placerJeton((byte) 3, (byte) 1);
             }
         } catch (ColonnePleine | FormatReponseInvalide e){
             fail("Erreur placerJeton");
         }
-        assertEquals(resultatAttendu,plateau.getPlateau());
+        assertEquals(resultatAttendu, plateauP4.getPlateau());
 
         //Test le cas où la colonne choisie est pleine
         try {
-            plateau.placerJeton((byte) 3, (byte) 1);
+            plateauP4.placerJeton((byte) 3, (byte) 1);
             fail("La colonne est sensé être pleine");
         } catch (ColonnePleine | FormatReponseInvalide ignored){}
     }
@@ -96,12 +96,12 @@ public class TestPlateauP4 {
      *     <li>Le cas où le plateau n'est pas plein</li>
      *     <li>Le cas où le plateau est plein</li>
      * </ul>
-     * @see Plateau#estPlein()
+     * @see PlateauP4#estPlein()
      */
     @Test
     public void testEstPlein(){
-        Plateau plateau = new Plateau();
-        plateau.reset();
+        PlateauP4 plateauP4 = new PlateauP4();
+        plateauP4.reset();
         byte[][] resultatAttendu =
                 {
                         {2,0,2,1,0,1,2},
@@ -113,179 +113,179 @@ public class TestPlateauP4 {
                         {1,1,2,1,2,1,2},
                 };
 
-        //Remplissage partiel du plateau
+        //Remplissage partiel du plateauP4
         try {
             for (int ligne = 0; ligne < resultatAttendu.length; ligne++) {
                 for (int colonne = 0; colonne < resultatAttendu[0].length; colonne++) {
-                    plateau.placerJeton((byte) colonne, resultatAttendu[ligne][colonne]);
+                    plateauP4.placerJeton((byte) colonne, resultatAttendu[ligne][colonne]);
                 }
             }
         }catch (ColonnePleine | FormatReponseInvalide e){
             fail("Erreur placerJeton");
         }
 
-        //Test le cas où le plateau n'est pas plein
-        assertFalse(plateau.estPlein());
+        //Test le cas où le plateauP4 n'est pas plein
+        assertFalse(plateauP4.estPlein());
 
-        //Remplissage total du plateau
+        //Remplissage total du plateauP4
         try {
-            plateau.placerJeton((byte) 1, (byte) 1);
-            plateau.placerJeton((byte) 4, (byte) 2);
+            plateauP4.placerJeton((byte) 1, (byte) 1);
+            plateauP4.placerJeton((byte) 4, (byte) 2);
         } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
-        //Test le cas où le plateau est plein
-        assertTrue(plateau.estPlein());
+        //Test le cas où le plateauP4 est plein
+        assertTrue(plateauP4.estPlein());
     }
 
     /**
      * Test verifierVictoire en cas de victoire sur la ligne horizontale (-)
-     * @see Plateau#verifierVictoire()
+     * @see PlateauP4#verifierVictoire()
      */
     @Test
     public void testVerifierVictoireHorizontal(){
-        Plateau plateau = new Plateau();
-        plateau.reset();
+        PlateauP4 plateauP4 = new PlateauP4();
+        plateauP4.reset();
 
         try {
-            plateau.placerJeton((byte) 0, (byte) 1);
-            plateau.placerJeton((byte) 1, (byte) 1);
-            plateau.placerJeton((byte) 2, (byte) 1);
+            plateauP4.placerJeton((byte) 0, (byte) 1);
+            plateauP4.placerJeton((byte) 1, (byte) 1);
+            plateauP4.placerJeton((byte) 2, (byte) 1);
 
         } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
         //Test la non victoire
-        assertFalse(plateau.verifierVictoire());
+        assertFalse(plateauP4.verifierVictoire());
 
         try {
-            plateau.placerJeton((byte) 3, (byte) 1);
+            plateauP4.placerJeton((byte) 3, (byte) 1);
         } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
         //Test la victoire
-        assertTrue(plateau.verifierVictoire());
+        assertTrue(plateauP4.verifierVictoire());
     }
 
     /**
      * Test verifierVictoire en cas de victoire sur la ligne verticale (|)
-     * @see Plateau#verifierVictoire()
+     * @see PlateauP4#verifierVictoire()
      */
     @Test
     public void testVerifierVictoireVertical(){
-        Plateau plateau = new Plateau();
-        plateau.reset();
+        PlateauP4 plateauP4 = new PlateauP4();
+        plateauP4.reset();
 
         try {
             for (int i = 0; i < 3; i++) {
-            plateau.placerJeton((byte) 0, (byte) 1);
+            plateauP4.placerJeton((byte) 0, (byte) 1);
             }
         } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
         //Test la non victoire
-        assertFalse(plateau.verifierVictoire());
+        assertFalse(plateauP4.verifierVictoire());
 
         try {
-            plateau.placerJeton((byte) 0, (byte) 1);
+            plateauP4.placerJeton((byte) 0, (byte) 1);
         } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
         //Test la victoire
-        assertTrue(plateau.verifierVictoire());
+        assertTrue(plateauP4.verifierVictoire());
     }
 
     /**
      * Test verifierVictoire en cas de victoire sur la ligne diagonale partant de en haut à gauche jusqu'à en bas à droite (\)
-     * @see Plateau#verifierVictoire()
+     * @see PlateauP4#verifierVictoire()
      */
     @Test
     public void testVerifierVictoireDiagonal1(){
-        Plateau plateau = new Plateau();
-        plateau.reset();
+        PlateauP4 plateauP4 = new PlateauP4();
+        plateauP4.reset();
 
         try {
-            plateau.placerJeton((byte) 0, (byte) 1);
-            plateau.placerJeton((byte) 1, (byte) 2);
-            plateau.placerJeton((byte) 1, (byte) 1);
-            plateau.placerJeton((byte) 2, (byte) 2);
-            plateau.placerJeton((byte) 2, (byte) 1);
-            plateau.placerJeton((byte) 3, (byte) 2);
-            plateau.placerJeton((byte) 2, (byte) 1);
-            plateau.placerJeton((byte) 3, (byte) 2);
-            plateau.placerJeton((byte) 4, (byte) 1);
-            plateau.placerJeton((byte) 3, (byte) 2);
+            plateauP4.placerJeton((byte) 0, (byte) 1);
+            plateauP4.placerJeton((byte) 1, (byte) 2);
+            plateauP4.placerJeton((byte) 1, (byte) 1);
+            plateauP4.placerJeton((byte) 2, (byte) 2);
+            plateauP4.placerJeton((byte) 2, (byte) 1);
+            plateauP4.placerJeton((byte) 3, (byte) 2);
+            plateauP4.placerJeton((byte) 2, (byte) 1);
+            plateauP4.placerJeton((byte) 3, (byte) 2);
+            plateauP4.placerJeton((byte) 4, (byte) 1);
+            plateauP4.placerJeton((byte) 3, (byte) 2);
         } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
         //Test la non victoire
-        assertFalse(plateau.verifierVictoire());
+        assertFalse(plateauP4.verifierVictoire());
 
         try {
-            plateau.placerJeton((byte) 3, (byte) 1);
+            plateauP4.placerJeton((byte) 3, (byte) 1);
         } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
         //Test la victoire
-        assertTrue(plateau.verifierVictoire());
+        assertTrue(plateauP4.verifierVictoire());
     }
 
     /**
      * Test verifierVictoire en cas de victoire sur ligne diagonale partant de en bas à gauche jusqu'à en haut à droite (/)
-     * @see Plateau#verifierVictoire()
+     * @see PlateauP4#verifierVictoire()
      */
     @Test
     public void testVerifierVictoireDiagonal2(){
-        Plateau plateau = new Plateau();
-        plateau.reset();
+        PlateauP4 plateauP4 = new PlateauP4();
+        plateauP4.reset();
 
         try {
-            plateau.placerJeton((byte) 6, (byte) 1);
-            plateau.placerJeton((byte) 5, (byte) 2);
-            plateau.placerJeton((byte) 5, (byte) 1);
-            plateau.placerJeton((byte) 4, (byte) 2);
-            plateau.placerJeton((byte) 4, (byte) 1);
-            plateau.placerJeton((byte) 3, (byte) 2);
-            plateau.placerJeton((byte) 4, (byte) 1);
-            plateau.placerJeton((byte) 3, (byte) 2);
-            plateau.placerJeton((byte) 2, (byte) 1);
-            plateau.placerJeton((byte) 3, (byte) 2);
+            plateauP4.placerJeton((byte) 6, (byte) 1);
+            plateauP4.placerJeton((byte) 5, (byte) 2);
+            plateauP4.placerJeton((byte) 5, (byte) 1);
+            plateauP4.placerJeton((byte) 4, (byte) 2);
+            plateauP4.placerJeton((byte) 4, (byte) 1);
+            plateauP4.placerJeton((byte) 3, (byte) 2);
+            plateauP4.placerJeton((byte) 4, (byte) 1);
+            plateauP4.placerJeton((byte) 3, (byte) 2);
+            plateauP4.placerJeton((byte) 2, (byte) 1);
+            plateauP4.placerJeton((byte) 3, (byte) 2);
         } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
 
         //Test la non victoire
-        assertFalse(plateau.verifierVictoire());
+        assertFalse(plateauP4.verifierVictoire());
 
         try {
-            plateau.placerJeton((byte) 3, (byte) 1);
+            plateauP4.placerJeton((byte) 3, (byte) 1);
 
         } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
         //Test la victoire
-        assertTrue(plateau.verifierVictoire());
+        assertTrue(plateauP4.verifierVictoire());
     }
 
     /**
      * Test de résultat de toString
-     * @see Plateau#toString()
+     * @see PlateauP4#toString()
      */
     @Test
     public void testToString(){
-        Plateau plateau = new Plateau();
-        plateau.reset();
+        PlateauP4 plateauP4 = new PlateauP4();
+        plateauP4.reset();
 
         try {
-            plateau.placerJeton((byte) 0, (byte) 1);
-            plateau.placerJeton((byte) 1, (byte) 2);
+            plateauP4.placerJeton((byte) 0, (byte) 1);
+            plateauP4.placerJeton((byte) 1, (byte) 2);
         } catch (ColonnePleine | FormatReponseInvalide e) {
             fail("Erreur placerJeton");
         }
@@ -299,6 +299,6 @@ public class TestPlateauP4 {
                 "⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ \n" +
                 "\uD83D\uDD34 \uD83D\uDFE1 ⚫ ⚫ ⚫ ⚫ ⚫ \n";
 
-        assertEquals(reponseAttendu, plateau.toString());
+        assertEquals(reponseAttendu, plateauP4.toString());
     }
 }

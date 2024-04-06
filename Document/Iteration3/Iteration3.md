@@ -140,7 +140,7 @@ graph LR
 8.  Le système demande aux joueurs s'ils veulent activer la rotation 
 9.  Le joueur répond
 10.  Le système enregistre la réponse du joueur
-11.  Le système affiche le plateau ainsi que le nom du joueur qui doit jouer
+11.  Le système affiche le plateauNim ainsi que le nom du joueur qui doit jouer
 12.  Le joueur choisi dans quelle colonne il souhaite mettre un jeton 
 13. Le système vérifie si la partie est gagné
 14. Le système affiche le vainqueur et demande si l'utilisateur souhaite refaire une partie ("y" or "n")
@@ -169,7 +169,7 @@ graph LR
     1. Le système affiche un message d'erreur
     2. retour au point 11 du scénario nominal
 
-- 13.c L'utilisateur choisit de faire tourner le plateau
+- 13.c L'utilisateur choisit de faire tourner le plateauNim
     1. Le système vérifie que l'option est activée
         1. Le système affiche un message d'erreur
         2. retour au point 11 du scénario nominal
@@ -208,7 +208,7 @@ classDiagram
         # int nombrePartie = 0
 
         # Joueur[]  lesjoueurs
-        # Plateau plateau
+        # Plateau plateauNim
         # Ihm ihm
         
         + Controleur(Ihm ihm)
@@ -252,7 +252,7 @@ classDiagram
     }
 
     class PlateauP4 {
-        - byte[][] plateau
+        - byte[][] plateauNim
         - byte[] dernierCoup
 
         + PlateauP4()
@@ -339,15 +339,15 @@ public class Controleur{
     private void toursDeJeu() {
         nombrePartie += 1;
         numeroJoueurCourant = 1;
-        plateau.reset();
-        plateau.setOption(ihm.demanderOption());
-        while (!plateau.verifierFin()) {
+        plateauNim.reset();
+        plateauNim.setOption(ihm.demanderOption());
+        while (!plateauNim.verifierFin()) {
             tourSuivant();
             boolean estCoupCorrect = false;
             while (!estCoupCorrect) {
                 try {
                     estCoupCorrect = true;
-                    ihm.afficherPlateau(plateau.toString());
+                    ihm.afficherPlateau(plateauNim.toString());
                     getCoup();
                 } catch (CoupImpossible | FormatReponseInvalide exception) {
                     estCoupCorrect = false;
@@ -371,23 +371,23 @@ public class Controleur{
 public class ControleurNim{
     public void jouer() {
         initJoueur();
-        plateau = new PlateauNim(ihm.demanderNbTas);
+        plateauNim = new PlateauNim(ihm.demanderNbTas);
         tourDeJeu();
     }
 
     protected void getCoup(){
         int[] candidate = ihm.demanderCoupNim(getNomJoueurCourant());
-        plateau.retirerBatonnets(candidate[0], candidate[1]);        
+        plateauNim.retirerBatonnets(candidate[0], candidate[1]);        
     }
 
     protected void victoire(){
-        if (!plateau.verifierVictoire()){
+        if (!plateauNim.verifierVictoire()){
             ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, true);
         } else {
             getJoueurCourant().incrementVictoires();
             ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, false);
         }
-        ihm.afficherPlateau(plateau.toString());
+        ihm.afficherPlateau(plateauNim.toString());
     }
 }
 
@@ -396,18 +396,18 @@ public class ControleurNim{
 public class ControleurP4{
     public void jouer() {
         initJoueur();
-        plateau = new PlateauP4();
+        plateauNim = new PlateauP4();
         tourDeJeu();
     }
 
     protected void getCoup(){
         if (ihm.demanderCoupOuRotation()){
             byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
-            plateau.placerJeton((byte) (candidate-1), (byte) (numeroJoueurCourant+1));       
+            plateauNim.placerJeton((byte) (candidate-1), (byte) (numeroJoueurCourant+1));       
         }
         else{
             boolean candidate = ihm.demanderRotation(getNomJoueurCourant()); //à définir que signifie true gauche ou droite
-            plateau.rotation(candidate);
+            plateauNim.rotation(candidate);
         }
     }
     protected void victoire(){
