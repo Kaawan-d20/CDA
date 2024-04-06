@@ -1,15 +1,13 @@
 package controleur;
 
-import exception.FormatReponseInvalide;
-import exception.NombreBatonnetsInvalide;
-import exception.NombreTasInvalides;
-import exception.NumeroTasInvalide;
-import modele.Joueur;
+import exception.*;
 import modele.PlateauNim;
 import vue.Ihm;
 
 /**
  * Classe du contrôleur du jeu de Nim
+ * hérite de Controleur
+ * @see Controleur
  */
 public class ControleurJeuNim extends Controleur{
 
@@ -20,12 +18,11 @@ public class ControleurJeuNim extends Controleur{
      */
     public ControleurJeuNim (Ihm ihm) {
         this.ihm = ihm;
-        this.lesJoueurs = new Joueur[2];
     }
 
     /**
-     * <p>Initialise une nouvelle partie en demandant le nombre de tas.</p>
-     * <p>Les noms des joueurs, et en créant le plateauNim de jeu.</p>
+     * Initialise une nouvelle partie en demandant le nombre de tas,
+     * les noms des joueurs, crée le PlateauNim de jeu et lance la partie.
      */
     public void jouer() {
         boolean isNbTasValide = false;
@@ -33,13 +30,12 @@ public class ControleurJeuNim extends Controleur{
         int nombreTas = 0;
         while (!isNbTasValide) {
             try {
-                isNbTasValide = true;
                 nombreTas = ihm.demanderNbTas();
                 if (nombreTas <1){
                     throw new NombreTasInvalides("Le nombre de tas ne peut pas être inférieur à 1");
                 }
+                isNbTasValide = true;
             } catch (NombreTasInvalides exception) {
-                isNbTasValide = false;
                 ihm.afficherErreur(exception.getMessage());
             }
         }
@@ -49,15 +45,31 @@ public class ControleurJeuNim extends Controleur{
         initJoueur();
         toursDeJeu();
     }
-
+    /**
+     * Demande le coup à l'ihm et demander au plateau de réaliser le coup.
+     * @throws FormatReponseInvalide Si la réponse n'est pas au format `m n`.
+     * @throws NombreBatonnetsInvalide Si le nombre de bâtonnets dans le tas à inférieur au retrait demandé ou que la limite de bâtonnets par coup a été atteinte.
+     * @throws NumeroTasInvalide Si le tas demandé est inconnue.
+     */
     protected void getCoup() throws FormatReponseInvalide, NombreBatonnetsInvalide, NumeroTasInvalide {
         int[] candidate = ihm.demanderCoupNim(getNomJoueurCourant());
         plateau.retirerBatonnets(candidate[0], candidate[1]);
     }
 
+    /**
+     * Incrément le nombre de victoires du joueur courant
+     * et gére l'affiche du vainqueur.
+     */
     protected void victoire(){
         getJoueurCourant().incrementVictoires();
         ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nombrePartie, false);
     }
 
+    /**
+     * Demande à l'ihm si l'utilisateur veut activer ou non la limite de bâtonnets par coup,
+     * puis demande au plateau de l'activer.
+     */
+    protected void setOption(){
+        //appel de l'ihm et transfère dans le plateau
+    }
 }

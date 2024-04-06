@@ -5,6 +5,9 @@ import exception.FormatReponseInvalide;
 import exception.NombreBatonnetsInvalide;
 import exception.NumeroTasInvalide;
 
+/**
+ * Classe abstraite du plateau, n'est pas une interface pour que dans le controleur
+ */
 public abstract class Plateau {
     public abstract void reset();
     public abstract boolean verifierFin();
