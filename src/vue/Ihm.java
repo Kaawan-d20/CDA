@@ -78,8 +78,8 @@ public class Ihm {
         // Le pattern s'assure que la ligne est composée de deux nombres séparés par un espace.
         Pattern pattern = Pattern.compile("^[0-9]+ [0-9]+$"); //Permet de créer le regex.
         while (true){
-            System.out.println("Quel coup voulez-vous jouer " + nomJoueur + " ?\nVeuillez jouer un coup au format\n" +
-                    "\t`m n`\nOù `m` est le numéro du tas, et `n` le nombre de bâtonnet à retirer");
+            System.out.println("Quel coup voulez-vous jouer " + nomJoueur + " ?\nVeuillez jouer un coup au format" +
+                    " `m n`\nOù `m` est le numéro du tas, et `n` le nombre de bâtonnet à retirer");
             if (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
@@ -96,6 +96,26 @@ public class Ihm {
             }
             // Si la réponse de l'utilisateur ne correspond pas au format attendu, on affiche une erreur
             afficherErreur("Format de réponse invalide.");
+        }
+    }
+
+    /**
+     * <p>Demande au joueur le nombre maximum de batonnets à retirer en un seul coup</p>
+     * @return un entier strictement positif
+     */
+    public int setOptionNim() {
+        Pattern pattern = Pattern.compile("^[0-9]+$");
+        while (true) {
+            System.out.println("Veuillez entrer le nombre maximum de batonnet retirable d'un seul coup.");
+            if (scanner.hasNextLine()) {
+                String candidate = scanner.nextLine();
+                Matcher matcher = pattern.matcher(candidate);
+                if (matcher.find()) {
+                    return Integer.parseInt(candidate);
+                } else {
+                    System.out.println("Merci d'entrer un entier positif");
+                }
+            }
         }
     }
 

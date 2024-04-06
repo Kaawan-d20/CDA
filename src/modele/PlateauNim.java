@@ -19,6 +19,11 @@ public class PlateauNim extends Plateau {
     private int nombreTas;
 
     /**
+     * Le nombre Maximum de batonnets a retirable par coups
+     */
+    private int maxBatonnets;
+
+    /**
      * Permet de construire un nouveau PlateauNim, en fonction d'un nombre de tas.
      *
      * @param nombreTas : nombre de tas à créer dans le plateau
@@ -78,6 +83,9 @@ public class PlateauNim extends Plateau {
         if ( m > nombreTas || m <= 0 ) {
             throw new NumeroTasInvalide("Vous avez sélectionné un tas inconnu.");
         }
+        if ( n > maxBatonnets ) {
+            throw new NombreBatonnetsInvalide("Vous avez selectionner trop de batonnets (max " + maxBatonnets + " batonnets par coup)");
+        }
         lesTas[m-1].retirerBatonnet(n);
     }
 
@@ -99,9 +107,17 @@ public class PlateauNim extends Plateau {
             int tailleMarge = (largeur - batonnets.length()) / 2;
             String marge = " ".repeat(tailleMarge);
 //            s += Integer.toString(i + 1) + " : " + marge + batonnets + marge + "\n";
-            s += marge + batonnets + marge + "\n";
+            s += (i+1) + ": " + marge + batonnets + marge + "\n";
         }
         return s;
+    }
+
+    /**
+     * Setter pour le nombre Maximum de batonnets retirable en un coup
+     * @param maxBatonnets
+     */
+    public void setOption(int maxBatonnets) {
+        this.maxBatonnets = maxBatonnets;
     }
 
     public void placerJeton(byte colonne, byte joueur) throws ColonnePleine, FormatReponseInvalide{

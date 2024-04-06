@@ -71,5 +71,11 @@ public class ControleurJeuNim extends Controleur{
      */
     protected void setOption(){
         //appel de l'ihm et transfère dans le plateau
+        int batonnetMax = ihm.setOptionNim();
+        if (batonnetMax > 0) {
+            plateau.setOption(batonnetMax);
+        } else {
+            ihm.afficherErreur("Merci d'entrer un entier Positif");
+        }
     }
 }

@@ -60,7 +60,7 @@ public abstract class Controleur {
         nombrePartie+=1;
         numeroJoueurCourant=1;
         plateau.reset();
-        //setOption();
+        setOption();
         while (!plateau.verifierFin()){
             tourSuivant();
             boolean estCoupCorrect = false;

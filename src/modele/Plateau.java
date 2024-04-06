@@ -14,4 +14,5 @@ public abstract class Plateau {
     public abstract void placerJeton(byte colonne, byte joueur) throws ColonnePleine, FormatReponseInvalide;
     public abstract boolean verifierVictoire();
     public abstract void retirerBatonnets(int m, int n) throws NombreBatonnetsInvalide, NumeroTasInvalide;
+    public abstract void setOption(int opt);
 }
