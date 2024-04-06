@@ -11,7 +11,9 @@ import java.util.regex.Pattern;
  * La classe Ihm (Interface Humain Machine) représente l'interface utilisateur du jeu.
  */
 public class Ihm {
-    /** Le scanner qui permet de récupérer les inputs de l'utilisateur*/
+    /**
+     * Le scanner qui permet de récupérer les inputs de l'utilisateur
+     */
     private Scanner scanner;
 
     /**
@@ -97,7 +99,7 @@ public class Ihm {
     public boolean demanderJouerEncore() {
         // Le pattern s'assure que la ligne contient uniquement "y" ou "n".
         Pattern pattern = Pattern.compile("^[y|n]$"); //Permet de créer le regex.
-        while (true){
+        while (true) {
             System.out.println("Voulez-vous rejouer une partie ? (y/n)");
             if (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -159,9 +161,9 @@ public class Ihm {
      */
     public byte demanderCoupP4(String nomJoueur) throws FormatReponseInvalide {
         System.out.println("Dans quelle colonne voulez-vous jouer " + nomJoueur + " ?");
-        if (scanner.hasNextByte()){
+        if (scanner.hasNextByte()) {
             byte candidate = scanner.nextByte();
-            if (scanner.hasNextLine()){
+            if (scanner.hasNextLine()) {
                 scanner.nextLine();
             }
             return candidate;
@@ -170,4 +172,20 @@ public class Ihm {
         throw new FormatReponseInvalide("Veuillez entrer un entier compris entre 1 et 7");
     }
 
+    public boolean demanderJeu() {
+        // Le pattern s'assure que la ligne contient uniquement "y" ou "n".
+        Pattern pattern = Pattern.compile("^(p4|nim)$"); //Permet de créer le regex.
+        while (true) {
+            System.out.println("Quel jeu voulez vous jouer ? Puissance 4 (p4) ou Nim (nim)");
+            if (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
+                // On vérifie la réponse et retourne true si c'est "y" et false si c'est "n".
+                if (matcher.find()) {
+                    return line.equals("nim");
+                }
+            }
+            System.out.println("\n\n⚠ Vous avez répondu avec autre chose que `y` ou `n`.");
+        }
+    }
 }

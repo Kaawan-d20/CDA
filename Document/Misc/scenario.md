@@ -136,7 +136,7 @@ graph LR
 4. Le système demande au joueur 2
 5. Le joueur 2 répond
 6. Le système enregistre le nom du joueur 2
-7. Le système affiche le plateau ainsi que le nom du joueur qui doit jouer
+7. Le système affiche le plateauNim ainsi que le nom du joueur qui doit jouer
 8. Le joueur choisi dans quel colonne il souhaite jouer
 9. Le système vérifie si la partie est gagné
 10. Le système affiche le vainqueur et demande si l'utilisateur souhaite refaire une partie (y or n)

@@ -1,13 +1,13 @@
 package test.modele.nim;
 
 import exception.NombreBatonnetsInvalide;
-import modele.nim.Tas;
+import modele.Tas;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 /**
  * Classe contenant les tests de src/modele/Nim/Tas.java
- * @see modele.nim.Tas
+ * @see Tas
  */
 public class TestTas {
     /**

@@ -1,12 +1,14 @@
-package modele.nim;
+package modele;
 
+import exception.ColonnePleine;
+import exception.FormatReponseInvalide;
 import exception.NombreBatonnetsInvalide;
 import exception.NumeroTasInvalide;
 
 /**
  * Classe représentant un plateau de jeu de Nim
  */
-public class Plateau {
+public class PlateauNim extends Plateau {
     /**
      * Le tableau contenant les tas
      */
@@ -17,11 +19,11 @@ public class Plateau {
     private int nombreTas;
 
     /**
-     * Permet de construire un nouveau Plateau, en fonction d'un nombre de tas.
+     * Permet de construire un nouveau PlateauNim, en fonction d'un nombre de tas.
      *
      * @param nombreTas : nombre de tas à créer dans le plateau
      */
-    public Plateau(int nombreTas) {
+    public PlateauNim(int nombreTas) {
         this.lesTas = new Tas[nombreTas];
         this.nombreTas = nombreTas;
     }
@@ -100,5 +102,13 @@ public class Plateau {
             s += marge + batonnets + marge + "\n";
         }
         return s;
+    }
+
+    public void placerJeton(byte colonne, byte joueur) throws ColonnePleine, FormatReponseInvalide{
+        throw new UnsupportedOperationException("Méthode non implémentée");
+    }
+
+    public boolean verifierVictoire(){
+        throw new UnsupportedOperationException("Méthode non implémentée");
     }
 }

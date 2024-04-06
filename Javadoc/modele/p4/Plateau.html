@@ -86,13 +86,13 @@ loadScripts(document, 'script');</script>
 <h1 title="Class Plateau" class="title">Class Plateau</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">modele.p4.Plateau</div>
+<div class="inheritance">modele.PlateauP4</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Plateau</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Classe représentant un plateau de jeu de puissance 4</div>
+<div class="block">Classe représentant un plateauNim de jeu de puissance 4</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -111,9 +111,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Stock la position où le dernier jeton a été posé</div>
 </div>
 <div class="col-first odd-row-color"><code>private byte[][]</code></div>
-<div class="col-second odd-row-color"><code><a href="#plateau" class="member-name-link">plateau</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#plateauNim" class="member-name-link">plateauNim</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">Le tableau représentant le plateau de puissance 4</div>
+<div class="block">Le tableau représentant le plateauNim de puissance 4</div>
 </div>
 </div>
 </section>
@@ -147,12 +147,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#estPlein()" class="member-name-link">estPlein</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Permet de vérifier si le plateau est plein</div>
+<div class="block">Permet de vérifier si le plateauNim est plein</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>byte[][]</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPlateau()" class="member-name-link">getPlateau</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Permet de retourner l'état du plateau sous la forme d'un tableau de byte</div>
+<div class="block">Permet de retourner l'état du plateauNim sous la forme d'un tableau de byte</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#placerJeton(byte,byte)" class="member-name-link">placerJeton</a><wbr>(byte&nbsp;colonne,
@@ -163,7 +163,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Remplit le plateau en créant le plateau</div>
+<div class="block">Remplit le plateauNim en créant le plateauNim</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -173,7 +173,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#verifierFin()" class="member-name-link">verifierFin</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Permet de verifier si une partie est finie, c'est-à-dire si 4 pions sont alignés ou le plateau est plein</div>
+<div class="block">Permet de verifier si une partie est finie, c'est-à-dire si 4 pions sont alignés ou le plateauNim est plein</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#verifierVictoire()" class="member-name-link">verifierVictoire</a>()</code></div>
@@ -198,10 +198,10 @@ loadScripts(document, 'script');</script>
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="plateau">
-<h3>plateau</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">byte[][]</span>&nbsp;<span class="element-name">plateau</span></div>
-<div class="block">Le tableau représentant le plateau de puissance 4</div>
+<section class="detail" id="plateauNim">
+<h3>plateauNim</h3>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">byte[][]</span>&nbsp;<span class="element-name">plateauNim</span></div>
+<div class="block">Le tableau représentant le plateauNim de puissance 4</div>
 </section>
 </li>
 <li>
@@ -238,15 +238,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="reset()">
 <h3>reset</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reset</span>()</div>
-<div class="block"><p>Remplit le plateau en créant le plateau</p>
- <p>Remplace le plateau déjà existant</p></div>
+<div class="block"><p>Remplit le plateauNim en créant le plateauNim</p>
+ <p>Remplace le plateauNim déjà existant</p></div>
 </section>
 </li>
 <li>
 <section class="detail" id="verifierFin()">
 <h3>verifierFin</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">verifierFin</span>()</div>
-<div class="block">Permet de verifier si une partie est finie, c'est-à-dire si 4 pions sont alignés ou le plateau est plein</div>
+<div class="block">Permet de verifier si une partie est finie, c'est-à-dire si 4 pions sont alignés ou le plateauNim est plein</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true si la partie est fini, sinon false</dd>
@@ -268,10 +268,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="estPlein()">
 <h3>estPlein</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">estPlein</span>()</div>
-<div class="block">Permet de vérifier si le plateau est plein</div>
+<div class="block">Permet de vérifier si le plateauNim est plein</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true si le plateau est plein, sinon false</dd>
+<dd>true si le plateauNim est plein, sinon false</dd>
 </dl>
 </section>
 </li>
@@ -279,12 +279,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getPlateau()">
 <h3>getPlateau</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">byte[][]</span>&nbsp;<span class="element-name">getPlateau</span>()</div>
-<div class="block"><p>Permet de retourner l'état du plateau sous la forme d'un tableau de byte</p>
+<div class="block"><p>Permet de retourner l'état du plateauNim sous la forme d'un tableau de byte</p>
  <p>Inutilisé, pourra être supprimé si jamais utilisé
  (sera probablement utilisée quand les IA seront implémenté)</p></div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>un tableau représentant le plateau de puissance 4</dd>
+<dd>un tableau représentant le plateauNim de puissance 4</dd>
 </dl>
 </section>
 </li>

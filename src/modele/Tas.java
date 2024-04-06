@@ -1,4 +1,4 @@
-package modele.nim;
+package modele;
 
 import exception.NombreBatonnetsInvalide;
 
