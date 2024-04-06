@@ -25,18 +25,23 @@ public class Ihm {
     }
 
     /**
-     * Demande à l'utilisateur le nombre de tas pour jouer.
+     * Demande à l'utilisateur le nombre de tas pour jouer, boucle tant que l'utilisateur n'entre pas un entier.
      *
      * @return Le nombre de tas saisi par l'utilisateur.
-     * @throws NombreTasInvalides Si l'utilisateur entre autre chose qu'un int
      */
-    public int demanderNbTas() throws NombreTasInvalides {
-        System.out.println("Avec combien de tas voulez-vous jouer ?\nEntrez un entier >= 1 : ");
-        if (scanner.hasNextInt()) {
-            return scanner.nextInt();
+    public int demanderNbTas() {
+        int candidate;
+        while (true){
+            System.out.println("Avec combien de tas voulez-vous jouer ?\nEntrez un entier >= 1 : ");
+            if (scanner.hasNextInt()) {
+                candidate = scanner.nextInt();
+                scanner.nextLine();
+                return candidate;
+            }
+            scanner.nextLine();
+
+            afficherErreur("Format de réponse invalide.");
         }
-        scanner.next();
-        throw new NombreTasInvalides("Format de réponse invalide.");
     }
 
     /**
@@ -46,47 +51,52 @@ public class Ihm {
      * @return Le nom saisi par l'utilisateur.
      */
     public String demanderNomJoueur(int numJoueur) {
-        String candidate = "";
-        System.out.println("Quel est le nom du joueur n°" + numJoueur + " ?");
-        while (candidate.isEmpty()) {
+        String candidate;
+        while (true) {
+            System.out.println("Quel est le nom du joueur n°" + numJoueur + " ?");
             if (scanner.hasNextLine()) {
                 candidate = scanner.nextLine();
+                if (!candidate.isBlank()){
+                    return candidate;
+                }
+                afficherErreur("Le nom du joueur ne doit pas est uniquement composée de caractère invisible");
             }
         }
-        return candidate;
     }
 
     /**
      * <p>Demande à un joueur de saisir un coup pour le jeu Nim.</p>
      * <p>Affiche un message d'invitation et attend une réponse de l'utilisateur.</p>
      * <p>La réponse doit être au format `m n`, où `m` est le numéro du tas et `n` est le nombre de bâtonnets à retirer.</p>
+     * <p>Boucle tant que la réponse n'est pas au format `m n`</p>
      *
      * @param nomJoueur Le nom du joueur pour lequel la demande est effectuée.
      * @return Un tableau d'entiers de taille 2, contenant le numéro du tas et le nombre de bâtonnets à retirer [m, n].
-     * @throws FormatReponseInvalide Si la réponse de l'utilisateur n'est pas au format attendu.
      */
-    public int[] demanderCoupNim(String nomJoueur) throws FormatReponseInvalide {
+    public int[] demanderCoupNim(String nomJoueur) {
         int[] candidate = new int[2];
-        System.out.println("Quel coup voulez-vous jouer " + nomJoueur + " ?\nVeuillez jouer un coup au format\n" +
-                "\t`m n`\nOù `m` est le numéro du tas, et `n` le nombre de bâtonnet à retirer");
-        if (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            // Le pattern s'assure que la ligne est composée de deux nombres séparés par un espace.
-            Pattern pattern = Pattern.compile("^[0-9]+ [0-9]+$"); //Permet de créer le regex.
-            Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
-            // On utilise un autre scanner pour extraire les deux nombres de la ligne.
-            if (matcher.find()) {
-                Scanner sc2 = new Scanner(line);
-                // On parcourt le tableau candidate pour stocker les deux nombres.
-                for (int i = 0; i < 2; i++) {
-                    candidate[i] = sc2.nextInt();
+        // Le pattern s'assure que la ligne est composée de deux nombres séparés par un espace.
+        Pattern pattern = Pattern.compile("^[0-9]+ [0-9]+$"); //Permet de créer le regex.
+        while (true){
+            System.out.println("Quel coup voulez-vous jouer " + nomJoueur + " ?\nVeuillez jouer un coup au format\n" +
+                    "\t`m n`\nOù `m` est le numéro du tas, et `n` le nombre de bâtonnet à retirer");
+            if (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
+                // On utilise un autre scanner pour extraire les deux nombres de la ligne.
+                if (matcher.find()) {
+                    Scanner sc2 = new Scanner(line);
+                    // On parcourt le tableau candidate pour stocker les deux nombres.
+                    for (int i = 0; i < 2; i++) {
+                        candidate[i] = sc2.nextInt();
+                    }
+                    sc2.close();
+                    return candidate;
                 }
-                sc2.close();
-                return candidate;
             }
+            // Si la réponse de l'utilisateur ne correspond pas au format attendu, on affiche une erreur
+            afficherErreur("Format de réponse invalide.");
         }
-        // Si la réponse de l'utilisateur ne correspond pas au format attendu, on lance une exception.
-        throw new FormatReponseInvalide("Format de réponse invalide.");
     }
 
     /**
@@ -153,30 +163,35 @@ public class Ihm {
     /**
      * <p>Demande à un joueur de saisir le numéro d'une colonne pour le jeu de puissance 4.</p>
      * <p>Affiche un message d'invitation et attend une réponse de l'utilisateur.</p>
-     * <p>La réponse doit être un entier.</p>
+     * <p>La réponse doit être un entier sinon boucle</p>
      *
      * @param nomJoueur Le nom du joueur pour lequel la demande est effectuée.
      * @return Un byte contenant le numéro de colonne.
-     * @throws FormatReponseInvalide Si la réponse de l'utilisateur n'est pas au format attendu.
      */
-    public byte demanderCoupP4(String nomJoueur) throws FormatReponseInvalide {
-        System.out.println("Dans quelle colonne voulez-vous jouer " + nomJoueur + " ?");
-        if (scanner.hasNextByte()) {
-            byte candidate = scanner.nextByte();
-            if (scanner.hasNextLine()) {
-                scanner.nextLine();
+    public byte demanderCoupP4(String nomJoueur) {
+        while(true){
+            System.out.println("Dans quelle colonne voulez-vous jouer " + nomJoueur + " ?");
+            if (scanner.hasNextByte()) {
+                byte candidate = scanner.nextByte();
+                if (scanner.hasNextLine()) {
+                    scanner.nextLine();
+                }
+                return candidate;
             }
-            return candidate;
+            scanner.nextLine();
+            System.out.println("\n\n⚠ Veuillez entrer un entier compris entre 1 et 7");
         }
-        scanner.nextLine();
-        throw new FormatReponseInvalide("Veuillez entrer un entier compris entre 1 et 7");
     }
 
+    /**
+     * Demande à l'utilisateur à quel jeu il veut jouer ("nim" ou "p4")
+     * @return true pour Nim et false pour Puissance 4
+     */
     public boolean demanderJeu() {
         // Le pattern s'assure que la ligne contient uniquement "y" ou "n".
-        Pattern pattern = Pattern.compile("^(p4|nim)$"); //Permet de créer le regex.
+        Pattern pattern = Pattern.compile("^(nim|p4)$"); //Permet de créer le regex.
         while (true) {
-            System.out.println("Quel jeu voulez vous jouer ? Puissance 4 (p4) ou Nim (nim)");
+            System.out.println("Quel jeu voulez vous jouer ? Nim (nim) ou Puissance 4 (p4)");
             if (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
@@ -185,7 +200,7 @@ public class Ihm {
                     return line.equals("nim");
                 }
             }
-            System.out.println("\n\n⚠ Vous avez répondu avec autre chose que `y` ou `n`.");
+            System.out.println("\n\n⚠ Vous avez répondu avec autre chose que `p4` ou `nim`.");
         }
     }
 }
