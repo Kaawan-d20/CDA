@@ -142,6 +142,7 @@ public class PlateauP4 extends Plateau {
      * @param colonne L’indice de la colonne où le jeton doit être placé [0,...,6]
      * @param joueur  Le numéro du joueur [1,2]
      * @throws FormatReponseInvalide Si le numéro de colonne demandé est inexistant
+     * @throws ColonnePleine Si la colonne demander est pleine
      */
     public void placerJeton(byte colonne, byte joueur) throws FormatReponseInvalide, ColonnePleine {
         if (colonne<0 || colonne>6){
