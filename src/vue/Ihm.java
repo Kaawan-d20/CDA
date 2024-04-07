@@ -223,4 +223,64 @@ public class Ihm {
             System.out.println("\n\n⚠ Vous avez répondu avec autre chose que `p4` ou `nim`.");
         }
     }
+
+    /**
+     * Demande à l'utilisateur s'il souhaite activer les rotations
+     * @return true pour oui et false pour non
+     */
+    public boolean demanderActivationRotation() {
+        Pattern pattern = Pattern.compile("^[y|n]$"); //Permet de créer le regex.
+        while (true) {
+            System.out.println("Voulez vous activer la rotation ? (y/n)");
+            if (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
+                // On vérifie la réponse et retourne true si c'est "y" et false si c'est "n".
+                if (matcher.find()) {
+                    return line.equals("y");
+                }
+            }
+            System.out.println("\n\n⚠ Vous avez répondu avec autre chose que `y` ou `n`.");
+        }
+    }
+
+    /**
+     * Demande à l'utilisateur s'il souhaite jouer un coup ou faire une rotation
+     * @return true pour coup et false pour rotation
+     */
+    public boolean demanderCoupOuRotation(String nomJoueur) {
+        Pattern pattern = Pattern.compile("^[c|r]$"); //Permet de créer le regex.
+        while (true) {
+            System.out.println(nomJoueur + ", voulez-vous jouer un coup (c) ou effectuer une rotation (r) ?");
+            if (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
+                // On vérifie la réponse et retourne true si c'est "c" et false si c'est "r".
+                if (matcher.find()) {
+                    return line.equals("c");
+                }
+            }
+            System.out.println("\n\n⚠ Vous avez répondu avec autre chose que 'c' ou 'r'.");
+        }
+    }
+
+    /**
+     * Demande à l'utilisateur dans quel sens effectuer la rotation
+     * @return true pour horaire et false pour anti-horaire
+     */
+    public boolean demanderRotation(String nomJoueur) {
+        Pattern pattern = Pattern.compile("^[h|a]$"); //Permet de créer le regex.
+        while (true) {
+            System.out.println(nomJoueur + ", voulez vous effectuer la rotation dans le sens horaire (h) ou anti-horaire (a) ?");
+            if (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
+                // On vérifie la réponse et retourne true si c'est "h" et false si c'est "a".
+                if (matcher.find()) {
+                    return line.equals("h");
+                }
+            }
+            System.out.println("\n\n⚠ Vous avez répondu avec autre chose que 'h' ou 'a'.");
+        }
+    }
 }
