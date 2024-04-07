@@ -100,20 +100,20 @@ public class Ihm {
     }
 
     /**
-     * <p>Demande au joueur le nombre maximum de batonnets à retirer en un seul coup</p>
+     * <p>Demande au joueur le nombre maximum de bâtonnets à retirer en un seul coup</p>
      * @return un entier strictement positif
      */
     public int setOptionNim() {
         Pattern pattern = Pattern.compile("^[0-9]+$");
         while (true) {
-            System.out.println("Veuillez entrer le nombre maximum de batonnet retirable d'un seul coup.");
+            System.out.println("Veuillez entrer le nombre maximum de bâtonnet retirable d'un seul coup (0 pour ne pas mettre de limite).");
             if (scanner.hasNextLine()) {
                 String candidate = scanner.nextLine();
                 Matcher matcher = pattern.matcher(candidate);
                 if (matcher.find()) {
                     return Integer.parseInt(candidate);
                 } else {
-                    System.out.println("Merci d'entrer un entier positif");
+                    afficherErreur("Merci d'entrer un entier positif");
                 }
             }
         }
@@ -139,7 +139,8 @@ public class Ihm {
                     return line.equals("y");
                 }
             }
-            System.out.println("\n\n⚠ Vous avez répondu avec autre chose que `y` ou `n`.");
+
+            afficherErreur("Vous avez répondu avec autre chose que `y` ou `n`.");
         }
     }
 
@@ -199,7 +200,7 @@ public class Ihm {
                 return candidate;
             }
             scanner.nextLine();
-            System.out.println("\n\n⚠ Veuillez entrer un entier compris entre 1 et 7");
+            afficherErreur("Veuillez entrer un entier compris entre 1 et 7");
         }
     }
 
@@ -220,7 +221,7 @@ public class Ihm {
                     return line.equals("nim");
                 }
             }
-            System.out.println("\n\n⚠ Vous avez répondu avec autre chose que `p4` ou `nim`.");
+            afficherErreur("Vous avez répondu avec autre chose que `p4` ou `nim`.");
         }
     }
 
@@ -240,7 +241,7 @@ public class Ihm {
                     return line.equals("y");
                 }
             }
-            System.out.println("\n\n⚠ Vous avez répondu avec autre chose que `y` ou `n`.");
+            afficherErreur("Vous avez répondu avec autre chose que `y` ou `n`.");
         }
     }
 
@@ -260,7 +261,7 @@ public class Ihm {
                     return line.equals("c");
                 }
             }
-            System.out.println("\n\n⚠ Vous avez répondu avec autre chose que 'c' ou 'r'.");
+            afficherErreur("Vous avez répondu avec autre chose que 'c' ou 'r'.");
         }
     }
 
@@ -280,7 +281,7 @@ public class Ihm {
                     return line.equals("h");
                 }
             }
-            System.out.println("\n\n⚠ Vous avez répondu avec autre chose que 'h' ou 'a'.");
+            afficherErreur("Vous avez répondu avec autre chose que 'h' ou 'a'.");
         }
     }
 }

@@ -46,18 +46,17 @@ public class ControleurJeuNim extends Controleur{
         toursDeJeu();
     }
     /**
-     * Demande le coup à l'ihm et demander au plateau de réaliser le coup.
-     * @throws FormatReponseInvalide Si la réponse n'est pas au format `m n`.
+     * Demande le coup à l'ihm et demande au plateau de réaliser le coup.
      * @throws NombreBatonnetsInvalide Si le nombre de bâtonnets dans le tas à inférieur au retrait demandé ou que la limite de bâtonnets par coup a été atteinte.
      * @throws NumeroTasInvalide Si le tas demandé est inconnue.
      */
-    protected void getCoup() throws FormatReponseInvalide, NombreBatonnetsInvalide, NumeroTasInvalide {
+    protected void getCoup() throws NombreBatonnetsInvalide, NumeroTasInvalide {
         int[] candidate = ihm.demanderCoupNim(getNomJoueurCourant());
         plateau.retirerBatonnets(candidate[0], candidate[1]);
     }
 
     /**
-     * Incrément le nombre de victoires du joueur courant
+     * Incrémente le nombre de victoires du joueur courant
      * et gére l'affiche du vainqueur.
      */
     protected void victoire(){
@@ -72,10 +71,6 @@ public class ControleurJeuNim extends Controleur{
     protected void setOption(){
         //appel de l'ihm et transfère dans le plateau
         int batonnetMax = ihm.setOptionNim();
-        if (batonnetMax > 0) {
-            plateau.setOption(batonnetMax);
-        } else {
-            ihm.afficherErreur("Merci d'entrer un entier Positif");
-        }
+        plateau.setOption(batonnetMax);
     }
 }
