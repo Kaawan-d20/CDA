@@ -2,6 +2,7 @@ package controleur;
 
 import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
+import exception.PlusDeRotations;
 import modele.PlateauP4;
 import vue.Ihm;
 
@@ -36,9 +37,19 @@ public class ControleurP4 extends Controleur{
      * @throws FormatReponseInvalide Si la réponse n'est pas compris entre 1 et 7.
      * @throws ColonnePleine Si la colonne est pleine.
      */
-    protected void getCoup() throws FormatReponseInvalide, ColonnePleine {
-        byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
-        plateau.placerJeton((byte) (candidate-1), (byte) (numeroJoueurCourant+1));
+    protected void getCoup() throws FormatReponseInvalide, ColonnePleine, PlusDeRotations {
+        if (plateau.isRotations()) {
+            if (ihm.demanderCoupOuRotation(getNomJoueurCourant())) {
+                byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
+                plateau.placerJeton((byte) (candidate - 1), (byte) (numeroJoueurCourant + 1));
+            } else {
+                boolean candidate = ihm.demanderRotation(getNomJoueurCourant());
+                plateau.rotation(candidate,getNumeroJoueurCourant());
+            }
+        } else {
+            byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
+            plateau.placerJeton((byte) (candidate - 1), (byte) (numeroJoueurCourant + 1));
+        }
     }
 
     /**
@@ -61,5 +72,11 @@ public class ControleurP4 extends Controleur{
      */
     protected void setOption(){
         //appel de l'ihm et transfère dans le plateau
+        boolean option = ihm.demanderActivationRotation();
+        if (option) {
+            plateau.setRotations(1);
+        } else {
+            plateau.setRotations(0);
+        }
     }
 }

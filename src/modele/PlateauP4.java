@@ -4,6 +4,7 @@ import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
 import exception.NombreBatonnetsInvalide;
 import exception.NumeroTasInvalide;
+import exception.PlusDeRotations;
 
 /**
  * Classe représentant un plateau de jeu de puissance 4
@@ -17,6 +18,14 @@ public class PlateauP4 extends Plateau {
      * Stock la position où le dernier jeton a été posé
      */
     private byte[] dernierCoup = new byte[2];
+    /**
+     * Toggle des rotations
+     */
+    private boolean rotations;
+    /**
+     * Compte le nombre de rotations effectuées par les joueurs
+     */
+    private byte[] nbRotations = {4,4};
     /**
      * Permet de construire un nouveau PlateauNim.
      */
@@ -159,7 +168,7 @@ public class PlateauP4 extends Plateau {
             }
         }
         if (estPlein){
-            throw new ColonnePleine("Le jeton ne peut pas être placer ");
+            throw new ColonnePleine("Le jeton ne peut pas être placé ");
         }
     }
 
@@ -198,7 +207,60 @@ public class PlateauP4 extends Plateau {
     }
 
 
-    public void setOption(int i) {
+    public void setRotations(int i){
+        if (i == 0) {
+            rotations = false;
+        } else if (i == 1) {
+            rotations = true;
+        }
+    }
+
+    public void setOption(int m) {
         throw new UnsupportedOperationException("Méthode non implémentée");
+    }
+
+    public boolean isRotations() {
+        return rotations;
+    }
+
+    public void rotation(boolean sens, int joueur)  throws PlusDeRotations {
+        if (nbRotations[joueur] > 0) {
+            nbRotations[joueur]--;
+            if (sens) {
+                rotationHoraire();
+            } else {
+                rotationAntiHoraire();
+            }
+        } else {
+            throw new PlusDeRotations("Plus de rotations autorisées");
+        }
+    }
+
+    private void rotationHoraire() {
+        byte[][] nouveau = new byte[7][7];
+        for (int i = 0; i < 7; i++) { // la ligne à transformer en colone
+            int k = 6; // la profondeur à laquelle placer le prochain jeton
+            for (int j = 6; j >= 0; j--) { // le parcours de la ligne
+                if (plateau[i][j] != 0) {
+                    nouveau[k][6-i] = plateau[i][j];
+                    k--;
+                }
+            }
+        }
+        plateau = nouveau;
+    }
+
+    private void rotationAntiHoraire() {
+        byte[][] nouveau = new byte[7][7];
+        for (int i = 0; i < 7; i++) { //la ligne à transformer en colone
+            int k = 6; // la profondeur à laquelle placer le prochain jeton
+            for (int j = 0; j < 7; j++) { // le parcours de la ligne
+                if (plateau[i][j] != 0) {
+                    nouveau[k][i] = plateau[i][j];
+                    k--;
+                }
+            }
+        }
+        plateau = nouveau;
     }
 }

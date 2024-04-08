@@ -1,9 +1,6 @@
 package controleur;
 
-import exception.ColonnePleine;
-import exception.FormatReponseInvalide;
-import exception.NombreBatonnetsInvalide;
-import exception.NumeroTasInvalide;
+import exception.*;
 import modele.Joueur;
 import modele.Plateau;
 import vue.Ihm;
@@ -69,7 +66,8 @@ public abstract class Controleur {
                     ihm.afficherPlateau(plateau.toString());
                     getCoup();
                     estCoupCorrect = true;
-                } catch (NombreBatonnetsInvalide | NumeroTasInvalide | ColonnePleine | FormatReponseInvalide exception){
+                } catch (NombreBatonnetsInvalide | NumeroTasInvalide | ColonnePleine | FormatReponseInvalide |
+                         PlusDeRotations exception){
                     ihm.afficherErreur(exception.getMessage());
                 }
             }
@@ -112,7 +110,7 @@ public abstract class Controleur {
      *
      * @return Le numéro du joueur courant.
      */
-    protected int getNumeroJoueurCourant() {
+    public int getNumeroJoueurCourant() {
         return numeroJoueurCourant;
     }
 
@@ -121,7 +119,7 @@ public abstract class Controleur {
      *
      * @return Le joueur courant.
      */
-    protected Joueur getJoueurCourant() {
+    public Joueur getJoueurCourant() {
         return lesJoueurs[numeroJoueurCourant];
     }
 
@@ -139,7 +137,7 @@ public abstract class Controleur {
      * <p>Méthode abstraite</p>
      * <p>Doit demander le coup à l'ihm et demander au plateau de réaliser le coup</p>
      */
-    protected abstract void getCoup() throws FormatReponseInvalide, NombreBatonnetsInvalide, NumeroTasInvalide, ColonnePleine;
+    protected abstract void getCoup() throws FormatReponseInvalide, NombreBatonnetsInvalide, NumeroTasInvalide, ColonnePleine, PlusDeRotations;
 
     /**
      * <p>Méthode abstraite</p>

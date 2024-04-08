@@ -140,4 +140,16 @@ public class PlateauNim extends Plateau {
     public boolean verifierVictoire(){
         throw new UnsupportedOperationException("Méthode non implémentée");
     }
+    public void rotation(boolean sens, int joueur){
+        throw new UnsupportedOperationException("Méthode non implémentée");
+    }
+
+    public void setRotations(int i){
+        throw new UnsupportedOperationException("Méthode non implémentée");
+    }
+
+    public boolean isRotations(){
+        throw new UnsupportedOperationException("Méthode non implémentée");
+
+    }
 }
