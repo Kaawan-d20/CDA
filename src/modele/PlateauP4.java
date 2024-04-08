@@ -197,9 +197,15 @@ public class PlateauP4 extends Plateau {
         return string;
     }
 
+
+    /**
+     * Méthode non utilisable
+     * @deprecated
+     */
     public void retirerBatonnets(int m, int n) throws NombreBatonnetsInvalide, NumeroTasInvalide {
         throw new UnsupportedOperationException("Méthode non implémentée");
     }
+
 
     public void setRotations(int i){
         if (i == 0) {

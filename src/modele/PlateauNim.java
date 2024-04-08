@@ -7,6 +7,8 @@ import exception.NumeroTasInvalide;
 
 /**
  * Classe représentant un plateau de jeu de Nim
+ * hérite de Plateau
+ * @see modele.Plateau
  */
 public class PlateauNim extends Plateau {
     /**
@@ -19,7 +21,7 @@ public class PlateauNim extends Plateau {
     private int nombreTas;
 
     /**
-     * Le nombre Maximum de batonnets a retirable par coups
+     * Le nombre Maximum de bâtonnets retirable par coups
      */
     private int maxBatonnets;
 
@@ -77,14 +79,14 @@ public class PlateauNim extends Plateau {
      * @param m Le numéro du tas à partir duquel retirer les bâtonnets.
      * @param n Le nombre de bâtonnets à retirer.
      * @throws NumeroTasInvalide Si le numéro du tas est invalide (hors des limites ou égal à zéro).
-     * @throws NombreBatonnetsInvalide Si le nombre de bâtonnets à retirer est invalide (négatif ou supérieur au nombre actuel de bâtonnets dans le tas).
+     * @throws NombreBatonnetsInvalide Si le nombre de bâtonnets à retirer est invalide (négatif ou supérieur au nombre actuel de bâtonnets dans le tas) ou que la limite est atteinte.
      */
     public void retirerBatonnets(int m, int n) throws NombreBatonnetsInvalide, NumeroTasInvalide {
         if ( m > nombreTas || m <= 0 ) {
             throw new NumeroTasInvalide("Vous avez sélectionné un tas inconnu.");
         }
         if ( n > maxBatonnets ) {
-            throw new NombreBatonnetsInvalide("Vous avez selectionner trop de batonnets (max " + maxBatonnets + " batonnets par coup)");
+            throw new NombreBatonnetsInvalide("Vous avez sélectionner trop de bâtonnets (max " + maxBatonnets + " bâtonnets par coup)");
         }
         lesTas[m-1].retirerBatonnet(n);
     }
@@ -106,24 +108,35 @@ public class PlateauNim extends Plateau {
             String batonnets = t.toString();
             int tailleMarge = (largeur - batonnets.length()) / 2;
             String marge = " ".repeat(tailleMarge);
-//            s += Integer.toString(i + 1) + " : " + marge + batonnets + marge + "\n";
             s += (i+1) + ": " + marge + batonnets + marge + "\n";
         }
         return s;
     }
 
     /**
-     * Setter pour le nombre Maximum de batonnets retirable en un coup
-     * @param maxBatonnets
+     * Setter pour le nombre Maximum de bâtonnets retirable en un coup
+     * @param maxBatonnets le nombre maximum de bâtonnets (pour ne pas avoir de limite 0)
      */
     public void setOption(int maxBatonnets) {
-        this.maxBatonnets = maxBatonnets;
+        if (maxBatonnets == 0) {
+            this.maxBatonnets= Integer.MAX_VALUE;
+        } else {
+            this.maxBatonnets = maxBatonnets;
+        }
     }
 
+    /**
+     * Méthode non utilisable
+     * @deprecated
+     */
     public void placerJeton(byte colonne, byte joueur) throws ColonnePleine, FormatReponseInvalide{
         throw new UnsupportedOperationException("Méthode non implémentée");
     }
 
+    /**
+     * Méthode non utilisable
+     * @deprecated
+     */
     public boolean verifierVictoire(){
         throw new UnsupportedOperationException("Méthode non implémentée");
     }

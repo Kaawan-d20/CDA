@@ -36,7 +36,7 @@ public abstract class Controleur {
      * Méthode permettant d'initialiser un certain nombre de joueurs (pour l'instant, fixé à 2)
      */
     protected void initJoueur() {
-        int nbJoueur = 2; //Possiblité de demander à l'ihm un nombre de joueurs ou par le biais d'un futur paramètre
+        int nbJoueur = 2; //Possibilité de demander à l'ihm un nombre de joueurs ou par le biais d'un futur paramètre
         lesJoueurs = new Joueur[nbJoueur];
         for (int i = 0; i < nbJoueur; i++) {
             lesJoueurs[i] = new Joueur(ihm.demanderNomJoueur(i+1));

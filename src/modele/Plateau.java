@@ -11,12 +11,12 @@ import exception.*;
 public abstract class Plateau {
 
     /**
-     * Remplit et/ou réinitialise le plateau
+     * Réinitialise le plateau
      */
     public abstract void reset();
 
     /**
-     * Permet de verifier si une partie est finie
+     * Permet de vérifier si une partie est finie
      * @return true si la partie est fini, sinon false
      */
     public abstract boolean verifierFin();
@@ -45,6 +45,11 @@ public abstract class Plateau {
      * @throws NombreBatonnetsInvalide Si le nombre de bâtonnets à retirer est invalide (négatif ou supérieur au nombre actuel de bâtonnets dans le tas).
      */
     public abstract void retirerBatonnets(int m, int n) throws NombreBatonnetsInvalide, NumeroTasInvalide;
+
+    /**
+     * Permet de régler les options d'un jeu
+     * @param opt le paramètre de l'option
+     */
     public abstract void setOption(int opt);
     public abstract void rotation(boolean sens, int joueur)  throws PlusDeRotations;
     public abstract void setRotations(int i);
