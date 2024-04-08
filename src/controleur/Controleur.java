@@ -66,7 +66,8 @@ public abstract class Controleur {
                     ihm.afficherPlateau(plateau.toString());
                     getCoup();
                     estCoupCorrect = true;
-                } catch (NombreBatonnetsInvalide | NumeroTasInvalide | ColonnePleine | FormatReponseInvalide exception){
+                } catch (NombreBatonnetsInvalide | NumeroTasInvalide | ColonnePleine | FormatReponseInvalide |
+                         PlusDeRotations exception){
                     ihm.afficherErreur(exception.getMessage());
                 }
             }
@@ -109,7 +110,7 @@ public abstract class Controleur {
      *
      * @return Le numéro du joueur courant.
      */
-    public static int getNumeroJoueurCourant() {
+    public int getNumeroJoueurCourant() {
         return numeroJoueurCourant;
     }
 

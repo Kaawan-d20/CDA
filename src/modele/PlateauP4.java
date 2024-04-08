@@ -21,11 +21,11 @@ public class PlateauP4 extends Plateau {
     /**
      * Toggle des rotations
      */
-    private static boolean rotations;
+    private boolean rotations;
     /**
      * Compte le nombre de rotations effectuées par les joueurs
      */
-    private byte[] nbRotations;
+    private byte[] nbRotations = {4,4};
     /**
      * Permet de construire un nouveau PlateauNim.
      */
@@ -201,7 +201,7 @@ public class PlateauP4 extends Plateau {
         throw new UnsupportedOperationException("Méthode non implémentée");
     }
 
-    public static void setRotations(int i){
+    public void setRotations(int i){
         if (i == 0) {
             rotations = false;
         } else if (i == 1) {
@@ -213,13 +213,13 @@ public class PlateauP4 extends Plateau {
         throw new UnsupportedOperationException("Méthode non implémentée");
     }
 
-    public static boolean isRotations() {
+    public boolean isRotations() {
         return rotations;
     }
 
-    public static void rotation(boolean sens, int joueur)  throws PlusDeRotations {
-        if (nbRotations[joueur] <= 4) {
-            nbRotations[joueur]++;
+    public void rotation(boolean sens, int joueur)  throws PlusDeRotations {
+        if (nbRotations[joueur] > 0) {
+            nbRotations[joueur]--;
             if (sens) {
                 rotationHoraire();
             } else {

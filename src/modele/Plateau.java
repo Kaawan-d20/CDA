@@ -1,9 +1,6 @@
 package modele;
 
-import exception.ColonnePleine;
-import exception.FormatReponseInvalide;
-import exception.NombreBatonnetsInvalide;
-import exception.NumeroTasInvalide;
+import exception.*;
 
 /**
  * Classe abstraite du plateau, n'est pas une interface pour que dans
@@ -49,4 +46,7 @@ public abstract class Plateau {
      */
     public abstract void retirerBatonnets(int m, int n) throws NombreBatonnetsInvalide, NumeroTasInvalide;
     public abstract void setOption(int opt);
+    public abstract void rotation(boolean sens, int joueur)  throws PlusDeRotations;
+    public abstract void setRotations(int i);
+    public abstract boolean isRotations();
 }

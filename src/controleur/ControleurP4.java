@@ -38,13 +38,13 @@ public class ControleurP4 extends Controleur{
      * @throws ColonnePleine Si la colonne est pleine.
      */
     protected void getCoup() throws FormatReponseInvalide, ColonnePleine, PlusDeRotations {
-        if (PlateauP4.isRotations()) {
+        if (plateau.isRotations()) {
             if (ihm.demanderCoupOuRotation(getNomJoueurCourant())) {
                 byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
                 plateau.placerJeton((byte) (candidate - 1), (byte) (numeroJoueurCourant + 1));
             } else {
                 boolean candidate = ihm.demanderRotation(getNomJoueurCourant());
-                PlateauP4.rotation(candidate,Controleur.getNumeroJoueurCourant());
+                plateau.rotation(candidate,getNumeroJoueurCourant());
             }
         } else {
             byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
@@ -74,9 +74,9 @@ public class ControleurP4 extends Controleur{
         //appel de l'ihm et transfère dans le plateau
         boolean option = ihm.demanderActivationRotation();
         if (option) {
-            PlateauP4.setRotations(1);
+            plateau.setRotations(1);
         } else {
-            PlateauP4.setRotations(0);
+            plateau.setRotations(0);
         }
     }
 }
