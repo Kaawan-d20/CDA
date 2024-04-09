@@ -197,32 +197,28 @@ public class PlateauP4 extends Plateau {
         return string;
     }
 
+    /**
+     * Méthode qui permet d'activer ou désactiver la rotation
+     * @param i true ou false pour activer
+     */
+    public void setRotations(boolean i){
+        this.rotations= i;
+    }
 
     /**
-     * Méthode non utilisable
-     * @deprecated
+     * Getter pour savoir si la rotation est activé
+     * @return l'état d'activation de la rotation
      */
-    public void retirerBatonnets(int m, int n) throws NombreBatonnetsInvalide, NumeroTasInvalide {
-        throw new UnsupportedOperationException("Méthode non implémentée");
-    }
-
-
-    public void setRotations(int i){
-        if (i == 0) {
-            rotations = false;
-        } else if (i == 1) {
-            rotations = true;
-        }
-    }
-
-    public void setOption(int m) {
-        throw new UnsupportedOperationException("Méthode non implémentée");
-    }
-
     public boolean isRotations() {
         return rotations;
     }
 
+    /**
+     * Fonction qui permet de faire tourner le plateau dans un sens
+     * @param sens Le sens de la rotation true pour horaire et false pour antihoraire
+     * @param joueur Le numéro du joueur
+     * @throws PlusDeRotations Si le joueur n'a plus de rotation disponible
+     */
     public void rotation(boolean sens, int joueur)  throws PlusDeRotations {
         if (nbRotations[joueur] > 0) {
             nbRotations[joueur]--;
@@ -236,9 +232,12 @@ public class PlateauP4 extends Plateau {
         }
     }
 
+    /**
+     * Fonction qui permet de faire tourner le plateau dans le sens horaire
+     */
     private void rotationHoraire() {
         byte[][] nouveau = new byte[7][7];
-        for (int i = 0; i < 7; i++) { // la ligne à transformer en colone
+        for (int i = 0; i < 7; i++) { // la ligne à transformer en colonne
             int k = 6; // la profondeur à laquelle placer le prochain jeton
             for (int j = 6; j >= 0; j--) { // le parcours de la ligne
                 if (plateau[i][j] != 0) {
@@ -250,9 +249,12 @@ public class PlateauP4 extends Plateau {
         plateau = nouveau;
     }
 
+    /**
+     * Fonction qui permet de faire tourner le plateau dans le sens horaire
+     */
     private void rotationAntiHoraire() {
         byte[][] nouveau = new byte[7][7];
-        for (int i = 0; i < 7; i++) { //la ligne à transformer en colone
+        for (int i = 0; i < 7; i++) { //la ligne à transformer en colonne
             int k = 6; // la profondeur à laquelle placer le prochain jeton
             for (int j = 0; j < 7; j++) { // le parcours de la ligne
                 if (plateau[i][j] != 0) {
@@ -263,4 +265,21 @@ public class PlateauP4 extends Plateau {
         }
         plateau = nouveau;
     }
+
+    /**
+     * Méthode non utilisable
+     * @deprecated
+     */
+    public void retirerBatonnets(int m, int n) throws NombreBatonnetsInvalide, NumeroTasInvalide {
+        throw new UnsupportedOperationException("Méthode non implémentée");
+    }
+
+    /**
+     * Méthode non utilisable
+     * @deprecated
+     */
+    public void setOption(int m) {
+        throw new UnsupportedOperationException("Méthode non implémentée");
+    }
+
 }

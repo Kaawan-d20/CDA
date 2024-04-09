@@ -73,10 +73,6 @@ public class ControleurP4 extends Controleur{
     protected void setOption(){
         //appel de l'ihm et transfère dans le plateau
         boolean option = ihm.demanderActivationRotation();
-        if (option) {
-            plateau.setRotations(1);
-        } else {
-            plateau.setRotations(0);
-        }
+        plateau.setRotations(option);
     }
 }

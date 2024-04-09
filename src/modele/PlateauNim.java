@@ -129,9 +129,7 @@ public class PlateauNim extends Plateau {
      * Méthode non utilisable
      * @deprecated
      */
-    public void placerJeton(byte colonne, byte joueur) throws ColonnePleine, FormatReponseInvalide{
-        throw new UnsupportedOperationException("Méthode non implémentée");
-    }
+    public void placerJeton(byte colonne, byte joueur) throws ColonnePleine, FormatReponseInvalide{throw new UnsupportedOperationException("Méthode non implémentée");}
 
     /**
      * Méthode non utilisable
@@ -140,16 +138,24 @@ public class PlateauNim extends Plateau {
     public boolean verifierVictoire(){
         throw new UnsupportedOperationException("Méthode non implémentée");
     }
-    public void rotation(boolean sens, int joueur){
+
+    /**
+     * Méthode non utilisable
+     * @deprecated
+     */
+    public void rotation(boolean sens, int joueur){throw new UnsupportedOperationException("Méthode non implémentée");}
+
+    /**
+     * Méthode non utilisable
+     * @deprecated
+     */
+    public void setRotations(boolean i){
         throw new UnsupportedOperationException("Méthode non implémentée");
     }
 
-    public void setRotations(int i){
-        throw new UnsupportedOperationException("Méthode non implémentée");
-    }
-
-    public boolean isRotations(){
-        throw new UnsupportedOperationException("Méthode non implémentée");
-
-    }
+    /**
+     * Méthode non utilisable
+     * @deprecated
+     */
+    public boolean isRotations(){throw new UnsupportedOperationException("Méthode non implémentée");}
 }
