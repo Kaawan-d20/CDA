@@ -110,7 +110,7 @@ public abstract class Controleur {
      *
      * @return Le numéro du joueur courant.
      */
-    public int getNumeroJoueurCourant() {
+    protected int getNumeroJoueurCourant() {
         return numeroJoueurCourant;
     }
 
@@ -119,7 +119,7 @@ public abstract class Controleur {
      *
      * @return Le joueur courant.
      */
-    public Joueur getJoueurCourant() {
+    protected Joueur getJoueurCourant() {
         return lesJoueurs[numeroJoueurCourant];
     }
 

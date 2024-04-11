@@ -53,5 +53,5 @@ public abstract class Plateau {
     public abstract void setOption(int opt);
     public abstract void rotation(boolean sens, int joueur)  throws PlusDeRotations;
     public abstract void setRotations(boolean i);
-    public abstract boolean isRotations();
+    public abstract boolean isRotations(int numJoueur);
 }

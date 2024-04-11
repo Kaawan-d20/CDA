@@ -140,7 +140,7 @@ graph LR
 8.  Le système demande aux joueurs s'ils veulent activer la rotation 
 9.  Le joueur répond
 10.  Le système enregistre la réponse du joueur
-11.  Le système affiche le plateauNim ainsi que le nom du joueur qui doit jouer
+11.  Le système affiche le plateau ainsi que le nom du joueur qui doit jouer
 12.  Le joueur choisi dans quelle colonne il souhaite mettre un jeton 
 13. Le système vérifie si la partie est gagné
 14. Le système affiche le vainqueur et demande si l'utilisateur souhaite refaire une partie ("y" or "n")
@@ -204,14 +204,9 @@ classDiagram
 
     class Controleur {
         <<abstract>>
-        # int numeroJoueurCourant = 0
-        # int nombrePartie = 0
-
-        # Joueur[]  lesjoueurs
-        # Plateau plateauNim
-        # Ihm ihm
-        
-        + Controleur(Ihm ihm)
+        # int numeroJoueurCourant
+        # int nombrePartie
+                
         # initJoueur() void
         # tourDeJeu() void
         # tourSuivant() void
@@ -221,50 +216,60 @@ classDiagram
         # getNomJoueurCourant() String
     }
 
-    class ControleurNim{
+    class ControleurJeuNim{
+        + ControleurJeuNim(Ihm ihm)
         + jouer() void
         # getCoup() void
         # victoire() void
+        # setOption() void
     }
 
     class ControleurP4{
+        + ControleurP4(Ihm ihm)
         + jouer() void
         # getCoup() void
         # victoire() void
+        # setOption() void
     }
 
-    Controleur <|-- ControleurNim
+    Controleur <|-- ControleurJeuNim
     Controleur <|-- ControleurP4
 
     class Plateau {<<abstract>>}
     class PlateauNim {
         - int nombreTas
-        
-        - Tas[] lesTas
+        - int maxBatonnets
+        - bool isLimite
 
         + PlateauNim(int nombreTas)
         + reset() void
-        + setOption(String option) void
-        + retirerBatonnets(int m, int n) void
         + verifierFin() bool
         + getPlateau() int[]
+        + retirerBatonnets(int m, int n) void
         + toString() String
+        + setOption(int maxBatonnets) void
     }
 
     class PlateauP4 {
         - byte[][] plateauNim
         - byte[] dernierCoup
+        - bool rotation
+        - byte[] nbRotation
 
         + PlateauP4()
         + reset() void
-        + setOption(String option) void
-        + rotation(bool sens) void
         + verifierFin() bool
         + verifierVictoire() bool
         + estPlein() bool
         + getPlateau() byte[][]
         + placerJeton(byte colonne, byte joueur) void
         + toString() String 
+        + setRotation(boolean i) void
+        + isRotations(int numJoueur)
+        + rotation(bool sens, int joueur) void
+        - rotationHoraire() void
+        - rotationAntiHoraire() void
+
 
     }
 
@@ -298,22 +303,21 @@ classDiagram
 
 
     class Ihm {
-        <<abstract>>
         # Scanner scanner
 
         + Ihm()
-        + demanderJeu() bool
-        + demanderNomJoueur(int numJoueur) String
-        + demanderJouerEncore() bool
-        + afficherPlateau(String plateauString) void
-        + afficherVictoire(String nomJoueur, int nbVictoires, int nbParties) void
-        + afficherErreur(String message) void
         + demanderNbTas() int
-        + demanderLimite() int
+        + demanderNomJoueur(int numJoueur) String
         + demanderCoupNim(String nomJoueur) int[]
+        + setOptionNim() int
+        + demanderJouerEncore() bool
+        + afficherPlateau(String plateau) void
+        + afficherVictoire(String nomJoueur, int nbVictoires, int nbParties, bool isExAequo) void
+        + afficherErreur(String message) void
+        + demanderCoupP4(String nomJoueur) byte
+        + demanderJeu() bool
         + demanderActivationRotation() bool
         + demanderCoupOuRotation(String nomJoueur) bool
-        + demanderCoupP4(String nomJoueur) byte
         + demanderRotation(String nomJoueur) bool
     }
 
@@ -325,114 +329,23 @@ classDiagram
 ```
 
 
-Et voici une idée de la structure (j'ai pas fait gaffe aux nom des méthodes, erreur)
-```java
-
-public class Controleur{
-    public void initJoueur() {
-        int nbJoueur = 2;
-        lesJoueurs = new Joueur[nbJoueur];
-        for (int i=0, i<nbJoueur, i++){
-            lesJoueurs[i] = new Joueur(ihm.demanderNom());
-        }
-    }
-    private void toursDeJeu() {
-        nombrePartie += 1;
-        numeroJoueurCourant = 1;
-        plateauNim.reset();
-        plateauNim.setOption(ihm.demanderOption());
-        while (!plateauNim.verifierFin()) {
-            tourSuivant();
-            boolean estCoupCorrect = false;
-            while (!estCoupCorrect) {
-                try {
-                    estCoupCorrect = true;
-                    ihm.afficherPlateau(plateauNim.toString());
-                    getCoup();
-                } catch (CoupImpossible | FormatReponseInvalide exception) {
-                    estCoupCorrect = false;
-                    ihm.afficherErreur(exception.getMessage());
-                }
-            }
-        }
-
-        victoire();
-
-        if (ihm.demanderJouerEncore()) {
-            toursDeJeu();
-        } else {
-            finPartie();
-        }
-    }
-
-}
-
-
-public class ControleurNim{
-    public void jouer() {
-        initJoueur();
-        plateauNim = new PlateauNim(ihm.demanderNbTas);
-        tourDeJeu();
-    }
-
-    protected void getCoup(){
-        int[] candidate = ihm.demanderCoupNim(getNomJoueurCourant());
-        plateauNim.retirerBatonnets(candidate[0], candidate[1]);        
-    }
-
-    protected void victoire(){
-        if (!plateauNim.verifierVictoire()){
-            ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, true);
-        } else {
-            getJoueurCourant().incrementVictoires();
-            ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, false);
-        }
-        ihm.afficherPlateau(plateauNim.toString());
-    }
-}
-
-
-
-public class ControleurP4{
-    public void jouer() {
-        initJoueur();
-        plateauNim = new PlateauP4();
-        tourDeJeu();
-    }
-
-    protected void getCoup(){
-        if (ihm.demanderCoupOuRotation()){
-            byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
-            plateauNim.placerJeton((byte) (candidate-1), (byte) (numeroJoueurCourant+1));       
-        }
-        else{
-            boolean candidate = ihm.demanderRotation(getNomJoueurCourant()); //à définir que signifie true gauche ou droite
-            plateauNim.rotation(candidate);
-        }
-    }
-    protected void victoire(){
-        getJoueurCourant().incrementVictoires();
-        ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nbParties, false);
-
-    }
-}
-
-```
-
 # Répartition des tâches
 ## Itération 3
 
 ### 21/03/2024 (Publication du sujet)
 
-Dany : Diagramme de classe, Cas d'utilisation
+Dany : Diagramme de classe, Cas d'utilisation, Fusion, Review
 
-Nathan : Contrainte Nim et mise en commun
+Nathan : Contrainte Nim, Fusion, Review
 
-Agathe Contrainte Puissance 4
+Agathe : Contrainte Puissance 4, Review
 
 # Utilisation de l'IA
 ## Itération 3
 
 - Nathan : Aucun Usage
-- Dany : Aucun Usage
 - Agathe : Aucun Usage
+- Dany : 
+
+![NonImplémentationMéthodeAbstraite](ScreenIA/NonImplémentationMéthodeAbstraite.png)
+![Regex](ScreenIA/Regex.png)

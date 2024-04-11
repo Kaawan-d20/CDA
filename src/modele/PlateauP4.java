@@ -209,8 +209,11 @@ public class PlateauP4 extends Plateau {
      * Getter pour savoir si la rotation est activé
      * @return l'état d'activation de la rotation
      */
-    public boolean isRotations() {
-        return rotations;
+    public boolean isRotations(int numJoueur) {
+        if (!rotations) {
+            return false;
+        }
+        return nbRotations[numJoueur] > 0;
     }
 
     /**

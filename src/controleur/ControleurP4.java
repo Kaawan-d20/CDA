@@ -38,7 +38,7 @@ public class ControleurP4 extends Controleur{
      * @throws ColonnePleine Si la colonne est pleine.
      */
     protected void getCoup() throws FormatReponseInvalide, ColonnePleine, PlusDeRotations {
-        if (plateau.isRotations()) {
+        if (plateau.isRotations(numeroJoueurCourant)) {
             if (ihm.demanderCoupOuRotation(getNomJoueurCourant())) {
                 byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
                 plateau.placerJeton((byte) (candidate - 1), (byte) (numeroJoueurCourant + 1));

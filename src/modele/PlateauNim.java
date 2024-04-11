@@ -24,6 +24,10 @@ public class PlateauNim extends Plateau {
      * Le nombre Maximum de bâtonnets retirable par coups
      */
     private int maxBatonnets;
+    /**
+     * L'état d'activation de la limite
+     */
+    private boolean isLimite;
 
     /**
      * Permet de construire un nouveau PlateauNim, en fonction d'un nombre de tas.
@@ -85,7 +89,7 @@ public class PlateauNim extends Plateau {
         if ( m > nombreTas || m <= 0 ) {
             throw new NumeroTasInvalide("Vous avez sélectionné un tas inconnu.");
         }
-        if ( n > maxBatonnets ) {
+        if (isLimite && n > maxBatonnets ) {
             throw new NombreBatonnetsInvalide("Vous avez sélectionner trop de bâtonnets (max " + maxBatonnets + " bâtonnets par coup)");
         }
         lesTas[m-1].retirerBatonnet(n);
@@ -119,8 +123,10 @@ public class PlateauNim extends Plateau {
      */
     public void setOption(int maxBatonnets) {
         if (maxBatonnets == 0) {
+            this.isLimite = false;
             this.maxBatonnets= Integer.MAX_VALUE;
         } else {
+            this.isLimite = true;
             this.maxBatonnets = maxBatonnets;
         }
     }
@@ -157,5 +163,5 @@ public class PlateauNim extends Plateau {
      * Méthode non utilisable
      * @deprecated
      */
-    public boolean isRotations(){throw new UnsupportedOperationException("Méthode non implémentée");}
+    public boolean isRotations(int numJoueur){throw new UnsupportedOperationException("Méthode non implémentée");}
 }
