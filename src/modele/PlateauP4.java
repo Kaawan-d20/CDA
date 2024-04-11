@@ -18,6 +18,9 @@ public class PlateauP4 extends Plateau {
      * Stock la position où le dernier jeton a été posé
      */
     private byte[] dernierCoup = new byte[2];
+    /**
+     * Stocker si la derniere action etait une rotation
+     */
     private boolean wasRotation = false;
     /**
      * Toggle des rotations
