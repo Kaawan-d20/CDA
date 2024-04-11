@@ -272,7 +272,7 @@ public class Ihm {
     public boolean demanderRotation(String nomJoueur) {
         Pattern pattern = Pattern.compile("^[h|a]$"); //Permet de créer le regex.
         while (true) {
-            System.out.println(nomJoueur + ", voulez vous effectuer la rotation dans le sens horaire (h) ou anti-horaire (a) ?");
+            System.out.println(nomJoueur + ", voulez vous effectuer la rotation dans le sens horaire ↻ (h) ou anti-horaire ↺ (a) ?");
             if (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
