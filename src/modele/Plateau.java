@@ -34,9 +34,9 @@ public abstract class Plateau {
     /**
      * Méthode du jeu de puissance 4
      * (si elle n'est pas utile dans la classe mettre : throw new UnsupportedOperationException("Méthode non implémentée");)
-     * @return un booléen s'il y a une victoire
+     * @return le numéro du joueur gagnant s'il y a une victoire, 0 sinon
      */
-    public abstract boolean verifierVictoire();
+    public abstract byte verifierVictoire();
 
     /**
      * Méthode du jeu de Nim

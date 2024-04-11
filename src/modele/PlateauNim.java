@@ -141,7 +141,7 @@ public class PlateauNim extends Plateau {
      * Méthode non utilisable
      * @deprecated
      */
-    public boolean verifierVictoire(){
+    public byte verifierVictoire(){
         throw new UnsupportedOperationException("Méthode non implémentée");
     }
 

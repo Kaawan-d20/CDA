@@ -3,6 +3,7 @@ package controleur;
 import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
 import exception.PlusDeRotations;
+import modele.Joueur;
 import modele.PlateauP4;
 import vue.Ihm;
 
@@ -57,11 +58,13 @@ public class ControleurP4 extends Controleur{
      * et gére l'affiche du vainqueur prendre aussi en compte la possibilité d'un ex aequo
      */
     protected void victoire(){
-        if (!plateau.verifierVictoire()){
+        byte idVainqueur = plateau.verifierVictoire();
+        if (idVainqueur == 0) {
             ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nombrePartie, true);
         } else {
-            getJoueurCourant().incrementVictoires();
-            ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nombrePartie, false);
+            Joueur vainqueur = lesJoueurs[idVainqueur -1];
+            vainqueur.incrementVictoires();
+            ihm.afficherVictoire(vainqueur.getNom(), vainqueur.getNbVictoires(), nombrePartie, false);
         }
         ihm.afficherPlateau(plateau.toString());
     }

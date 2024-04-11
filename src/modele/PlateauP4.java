@@ -18,6 +18,7 @@ public class PlateauP4 extends Plateau {
      * Stock la position où le dernier jeton a été posé
      */
     private byte[] dernierCoup = new byte[2];
+    private boolean wasRotation = false;
     /**
      * Toggle des rotations
      */
@@ -45,15 +46,43 @@ public class PlateauP4 extends Plateau {
      * @return true si la partie est fini, sinon false
      */
     public boolean verifierFin() {
-        return verifierVictoire() || estPlein();
+        return (verifierVictoire() !=0) || estPlein();
     }
 
     /**
      * Permet de vérifier si une partie est gagnée, c'est-à-dire s'il y a une ligne de 4 pions ou plus consécutifs de même couleur
+     * a partir du dernier coup joué si la derniere action etait de placer un jeton, ou de n'importe ou si la derniere
+     * action etait une rotation.
      *
-     * @return true si la partie est gagnée, sinon false
+     * @return le numéro du gagnant si la partie est gagnée, sinon 0
      */
-    public boolean verifierVictoire() {
+    public byte verifierVictoire() {
+        if (wasRotation) {
+            for (byte i = 0; i < 7; i++) {
+                for (byte j = 0; j < 7; j++) {
+                    if (plateau[i][j] != 0) {
+                        byte candidate = verifierVictoireCase(i,j);
+                        if (candidate != 0) {
+                            return candidate;
+                        }
+                    }
+                }
+            }
+            return 0;
+        } else {
+            return verifierVictoireCase(dernierCoup[0], dernierCoup[1]);
+        }
+    }
+
+    /**
+     * Permet de verifier si un jeton placé aux coordonnées x,y est gagnant c'est-à-dire s'il appartient a
+     * une ligne de 4 pions ou plus consécutifs de même couleur
+     *
+     * @param x coordonnée verticale
+     * @param y coordonnée horizontale
+     * @return le numéro du gagnant si le jeton est gagnant, 0 sinon
+     */
+    public byte verifierVictoireCase(byte x, byte y) {
         /*Structure du tableau
          *   0 : Ligne horizontale (-)
          *   1 : Ligne verticale (|)
@@ -61,42 +90,42 @@ public class PlateauP4 extends Plateau {
          *   3 : Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite (/)
          */
         byte[][] lignes = new byte[4][7];
-        byte color = plateau[dernierCoup[0]][dernierCoup[1]];
+        byte color = plateau[x][y];
 
         if (color == 0){
-            return false;
+            return 0;
         }
 
-        lignes[0] = plateau[dernierCoup[0]]; // Remplissage du tableau pour la ligne horizontale
+        lignes[0] = plateau[x]; // Remplissage du tableau pour la ligne horizontale
 
         for (int i=0; i < 7; i++) { // Remplissage du tableau pour la ligne verticale
-            lignes[1][i] = plateau[i][dernierCoup[1]];
+            lignes[1][i] = plateau[i][y];
         }
         // Ligne diagonale partant de en haut à gauche jusqu'à en bas à droite
-        int lig = dernierCoup[0];
-        int col = dernierCoup[1];
+        int lig = x;
+        int col = y;
         while (lig >= 0 && col >= 0) { // Monte à gauche
             lignes[2][lig] = plateau[lig][col];
             lig--;
             col--;
         }
-        lig = dernierCoup[0] + 1;
-        col = dernierCoup[1] + 1;
+        lig = x + 1;
+        col = y + 1;
         while (lig < 7 && col < 7) { // Descend à droite
             lignes[2][lig] = plateau[lig][col];
             lig++;
             col++;
         }
         // Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite
-        lig = dernierCoup[0];
-        col = dernierCoup[1];
+        lig = x;
+        col = y;
         while (lig < 7 && col >= 0) { // Descend à gauche
             lignes[3][lig] = plateau[lig][col] ;
             lig++;
             col--;
         }
-        lig = dernierCoup[0] -1;
-        col = dernierCoup[1] +1;
+        lig = x -1;
+        col = y +1;
         while (lig >= 0 && col < 7) { // Monte à droite
             lignes[3][lig] = plateau[lig][col];
             lig--;
@@ -112,11 +141,11 @@ public class PlateauP4 extends Plateau {
                     compteur = 0;
                 }
                 if (compteur == 4) {
-                    return true;
+                    return plateau[x][y];
                 }
             }
         }
-        return false;
+        return 0;
     }
 
     /**
@@ -163,6 +192,7 @@ public class PlateauP4 extends Plateau {
                 plateau[ligne][colonne] = joueur;
                 dernierCoup[0] = ligne;
                 dernierCoup[1] = colonne;
+                wasRotation = false;
                 estPlein = false;
                 break;
             }
@@ -225,6 +255,7 @@ public class PlateauP4 extends Plateau {
     public void rotation(boolean sens, int joueur)  throws PlusDeRotations {
         if (nbRotations[joueur] > 0) {
             nbRotations[joueur]--;
+            wasRotation = true;
             if (sens) {
                 rotationHoraire();
             } else {
