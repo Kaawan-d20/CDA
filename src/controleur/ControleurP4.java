@@ -4,6 +4,7 @@ import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
 import exception.PlusDeRotations;
 import modele.Joueur;
+import modele.p4.CoupP4;
 import modele.p4.PlateauP4;
 import vue.Ihm;
 
@@ -40,15 +41,17 @@ public class ControleurP4 extends Controleur{
     protected void getCoup() throws FormatReponseInvalide, ColonnePleine, PlusDeRotations {
         if (((PlateauP4)plateau).isRotations(numeroJoueurCourant)) {
             if (ihm.demanderCoupOuRotation(getNomJoueurCourant())) {
-                byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
-                ((PlateauP4)plateau).placerJeton((byte) (candidate - 1), (byte) (numeroJoueurCourant + 1));
+                CoupP4 coupP4 = ihm.demanderCoupP4(getNomJoueurCourant());
+                coupP4.setJoueur(numeroJoueurCourant);
+                ((PlateauP4)plateau).placerJeton(coupP4);
             } else {
                 boolean candidate = ihm.demanderRotation(getNomJoueurCourant());
                 ((PlateauP4)plateau).rotation(candidate,getNumeroJoueurCourant());
             }
         } else {
-            byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
-            ((PlateauP4)plateau).placerJeton((byte) (candidate - 1), (byte) (numeroJoueurCourant + 1));
+            CoupP4 coupP4 = ihm.demanderCoupP4(getNomJoueurCourant());
+            coupP4.setJoueur(numeroJoueurCourant);
+            ((PlateauP4)plateau).placerJeton(coupP4);
         }
     }
 

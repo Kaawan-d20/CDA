@@ -1,6 +1,7 @@
 package controleur;
 
 import exception.*;
+import modele.nim.CoupNim;
 import modele.nim.PlateauNim;
 import vue.Ihm;
 
@@ -51,8 +52,8 @@ public class ControleurJeuNim extends Controleur{
      * @throws NumeroTasInvalide Si le tas demandé est inconnue.
      */
     protected void getCoup() throws NombreBatonnetsInvalide, NumeroTasInvalide {
-        int[] candidate = ihm.demanderCoupNim(getNomJoueurCourant());
-        ((PlateauNim)plateau).retirerBatonnets(candidate[0], candidate[1]);
+        CoupNim candidate = ihm.demanderCoupNim(getNomJoueurCourant());
+        ((PlateauNim)plateau).retirerBatonnets(candidate);
     }
 
     /**

@@ -81,19 +81,18 @@ public class PlateauNim extends Plateau {
     /**
      * Retire un nombre spécifié de bâtonnets d'un tas spécifié sur le plateau.
      *
-     * @param m Le numéro du tas à partir duquel retirer les bâtonnets.
-     * @param n Le nombre de bâtonnets à retirer.
+     * @param coup Objet représentant le coup
      * @throws NumeroTasInvalide Si le numéro du tas est invalide (hors des limites ou égal à zéro).
      * @throws NombreBatonnetsInvalide Si le nombre de bâtonnets à retirer est invalide (négatif ou supérieur au nombre actuel de bâtonnets dans le tas) ou que la limite est atteinte.
      */
-    public void retirerBatonnets(int m, int n) throws NombreBatonnetsInvalide, NumeroTasInvalide {
-        if ( m > nombreTas || m <= 0 ) {
+    public void retirerBatonnets(CoupNim coup) throws NombreBatonnetsInvalide, NumeroTasInvalide {
+        if ( coup.getTas() > nombreTas || coup.getTas() <= 0 ) {
             throw new NumeroTasInvalide("Vous avez sélectionné un tas inconnu.");
         }
-        if (isLimite && n > maxBatonnets ) {
+        if (isLimite && coup.getNbBatonnets() > maxBatonnets ) {
             throw new NombreBatonnetsInvalide("Vous avez sélectionner trop de bâtonnets (max " + maxBatonnets + " bâtonnets par coup)");
         }
-        lesTas[m-1].retirerBatonnet(n);
+        lesTas[coup.getTas()-1].retirerBatonnet(coup.getNbBatonnets());
     }
 
     /**

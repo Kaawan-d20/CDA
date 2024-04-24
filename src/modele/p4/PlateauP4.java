@@ -181,21 +181,20 @@ public class PlateauP4 extends Plateau {
     /**
      * <p>Permet de placer un jeton dans une colonne</p>
      * <p>Parcours la colonne à partir du bas et place le jeton dès qu'une case est vide (0)</p>
-     * @param colonne L’indice de la colonne où le jeton doit être placé [0,...,6]
-     * @param joueur  Le numéro du joueur [1,2]
+     * @param coup Objet représentant le coup
      * @throws FormatReponseInvalide Si le numéro de colonne demandé est inexistant
      * @throws ColonnePleine Si la colonne demander est pleine
      */
-    public void placerJeton(byte colonne, byte joueur) throws FormatReponseInvalide, ColonnePleine {
-        if (colonne<0 || colonne>6){
+    public void placerJeton(CoupP4 coup) throws FormatReponseInvalide, ColonnePleine {
+        if (coup.getColonne()<0 || coup.getColonne()>6){
             throw new FormatReponseInvalide("Veuillez entrer un entier compris entre 1 et 7");
         }
         boolean estPlein = true;
         for (byte ligne = 6; ligne >= 0; ligne--) {
-            if (plateau[ligne][colonne] == 0) {
-                plateau[ligne][colonne] = joueur;
+            if (plateau[ligne][coup.getColonne()] == 0) {
+                plateau[ligne][coup.getColonne()] = coup.getJoueur();
                 dernierCoup[0] = ligne;
-                dernierCoup[1] = colonne;
+                dernierCoup[1] = coup.getColonne();
                 wasRotation = false;
                 estPlein = false;
                 break;
