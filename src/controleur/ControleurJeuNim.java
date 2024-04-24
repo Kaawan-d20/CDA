@@ -23,7 +23,7 @@ public class ControleurJeuNim extends Controleur{
 
     /**
      * Initialise une nouvelle partie en demandant le nombre de tas,
-     * les noms des joueurs, crée le PlateauNim de jeu et lance la partie.
+     * puis appel son implémentation dans la super classe.
      */
     public void jouer() {
         boolean isNbTasValide = false;
@@ -44,7 +44,6 @@ public class ControleurJeuNim extends Controleur{
         this.plateau = new PlateauNim(nombreTas);
 
         super.jouer();
-
     }
     /**
      * Demande le coup à l'ihm et demande au plateau de réaliser le coup.
@@ -53,7 +52,7 @@ public class ControleurJeuNim extends Controleur{
      */
     protected void getCoup() throws NombreBatonnetsInvalide, NumeroTasInvalide {
         CoupNim candidate = ihm.demanderCoupNim(getNomJoueurCourant());
-        ((PlateauNim)plateau).retirerBatonnets(candidate);
+        ((PlateauNim) plateau).retirerBatonnets(candidate);
     }
 
     /**

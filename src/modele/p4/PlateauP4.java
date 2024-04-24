@@ -18,7 +18,7 @@ public class PlateauP4 extends Plateau {
      */
     private CoupP4Coup dernierCoup = new CoupP4Coup((byte) 0, (byte) 0);
     /**
-     * Stocker si la derniere action etait une rotation
+     * Stocker si la dernière action était une rotation
      */
     private boolean wasRotation = false;
     /**
@@ -249,19 +249,14 @@ public class PlateauP4 extends Plateau {
     /**
      * Fonction qui permet de faire tourner le plateau dans un sens
      * @param coup Objet représentant le coup
-     * @throws PlusDeRotations Si le joueur n'a plus de rotation disponible
      */
-    public void rotation(CoupP4Rotation coup)  throws PlusDeRotations {
-        if (nbRotations[coup.getJoueur()-1] > 0) {
-            nbRotations[coup.getJoueur()-1]--;
-            wasRotation = true;
-            if (coup.getSens()) {
-                rotationHoraire();
-            } else {
-                rotationAntiHoraire();
-            }
+    public void rotation(CoupP4Rotation coup) {
+        nbRotations[coup.getJoueur()-1]--;
+        wasRotation = true;
+        if (coup.getSens()) {
+            rotationHoraire();
         } else {
-            throw new PlusDeRotations("Plus de rotations autorisées");
+            rotationAntiHoraire();
         }
     }
 

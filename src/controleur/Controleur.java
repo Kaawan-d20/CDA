@@ -35,6 +35,14 @@ public abstract class Controleur {
     protected Ihm ihm;
 
     /**
+     * Méthode initialisant les joueurs et lance la partie
+     */
+    public void jouer(){
+        initJoueur();
+        toursDeJeu();
+    }
+
+    /**
      * Méthode permettant d'initialiser un certain nombre de joueurs (pour l'instant, fixé à 2)
      */
     protected void initJoueur() {
@@ -44,13 +52,6 @@ public abstract class Controleur {
             lesJoueurs[i] = new Joueur(ihm.demanderNomJoueur(i+1));
         }
     }
-
-
-    public void jouer(){
-        initJoueur();
-        toursDeJeu();
-    }
-
 
     /**
      * <p>Squelette du déroulement d'une partie appel des méthodes de ses sous-classes</p>

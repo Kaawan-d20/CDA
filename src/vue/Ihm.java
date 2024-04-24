@@ -229,20 +229,6 @@ public class Ihm {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Demande à l'utilisateur s'il souhaite jouer un coup ou faire une rotation
      * @return true pour coup et false pour rotation

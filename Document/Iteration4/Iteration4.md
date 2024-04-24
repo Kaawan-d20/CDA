@@ -215,10 +215,15 @@ classDiagram
         # getNumeroJoueurCourant() int
         # getJoueurCourant() Joueur
         # getNomJoueurCourant() String
+
+        # abstract getCoup() void
+        # abstract victoire() void
+        # abstract setOption
     }
 
     class ControleurJeuNim{
         + ControleurJeuNim(Ihm ihm)
+
         + jouer() void
         # getCoup() void
         # victoire() void
@@ -236,7 +241,11 @@ classDiagram
     Controleur <|-- ControleurJeuNim
     Controleur <|-- ControleurP4
 
-    class Plateau {<<abstract>>}
+    class Plateau {
+        <<abstract>>
+        + abstract reset() void
+        + abstract verifierFin() void
+    }
     class PlateauNim {
         - int nombreTas
         - int maxBatonnets
@@ -246,28 +255,30 @@ classDiagram
         + reset() void
         + verifierFin() bool
         + getPlateau() int[]
-        + retirerBatonnets(int m, int n) void
+        + retirerBatonnets(CoupNim coup) void
         + toString() String
         + setOption(int maxBatonnets) void
     }
 
     class PlateauP4 {
-        - byte[][] plateauNim
-        - byte[] dernierCoup
+        - byte[][] plateau
+        - CoupP4 dernierCoup
+        - bool wasRotation
         - bool rotation
         - byte[] nbRotation
 
         + PlateauP4()
         + reset() void
         + verifierFin() bool
-        + verifierVictoire() bool
+        + verifierVictoire() byte
+        + verifierVictoireCase(CoupP4Coup coup) byte
         + estPlein() bool
         + getPlateau() byte[][]
-        + placerJeton(byte colonne, byte joueur) void
+        + placerJeton(CoupP4Coup coup) void
         + toString() String 
         + setRotation(boolean i) void
-        + isRotations(int numJoueur)
-        + rotation(bool sens, int joueur) void
+        + isRotations(int numJoueur) bool
+        + rotation(CoupP4Rotation coup) void
         - rotationHoraire() void
         - rotationAntiHoraire() void
 
@@ -317,13 +328,58 @@ classDiagram
 
         + setOptionNim() int
         + demanderNbTas() int
-        + demanderCoupNim(String nomJoueur) int[]
+        + demanderCoupNim(String nomJoueur) CoupNim
         
         + demanderActivationRotation() bool
         + demanderCoupOuRotation(String nomJoueur) bool
-        + demanderCoupP4(String nomJoueur) byte
-        + demanderRotation(String nomJoueur) bool
+        + demanderCoupP4(String nomJoueur) CoupP4Coup
+        + demanderRotation(String nomJoueur) CoupP4Rotation
     }
+
+
+    class Coup {<<abstract>>}
+    class CoupNim {
+        - int tas
+        - int nbBatonnets
+
+        + CoupNim(int tab, int nbBatonnets)
+        + CoupNim(int[])
+
+        + getCoup() int[]
+        + getNbBatonnets() int
+        + getTas() int
+    }
+    class CoupP4 {
+        <<abstract>>
+        # byte joueur
+        
+        + getJoueur() byte
+        + setJoueur(int joueurCourant) void
+    }
+
+    class CoupP4Coup {
+        - byte colonne
+        - byte ligne
+
+        + CoupP4Coup(byte colonne)
+        + CoupP4Coup(byte colonne, byte ligne)
+
+        + getColonne() byte
+        + getLigne() byte
+        + setLigne(byte ligne) void
+    }
+
+    class CoupP4Rotation {
+        - bool sens
+
+        + CoupP4Rotation(bool sens)
+
+        + getSens() bool
+    }
+
+
+
+
 
 
     Controleur --> "1" Plateau

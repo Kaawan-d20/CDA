@@ -39,17 +39,11 @@ public class ControleurP4 extends Controleur{
      * @throws FormatReponseInvalide Si la réponse n'est pas compris entre 1 et 7.
      * @throws ColonnePleine Si la colonne est pleine.
      */
-    protected void getCoup() throws FormatReponseInvalide, ColonnePleine, PlusDeRotations {
-        if (((PlateauP4)plateau).isRotations(numeroJoueurCourant)) {
-            if (ihm.demanderCoupOuRotation(getNomJoueurCourant())) {
-                CoupP4Coup coup = ihm.demanderCoupP4(getNomJoueurCourant());
-                coup.setJoueur(numeroJoueurCourant);
-                ((PlateauP4)plateau).placerJeton(coup);
-            } else {
-                CoupP4Rotation coup = ihm.demanderRotation(getNomJoueurCourant());
-                coup.setJoueur(numeroJoueurCourant);
-                ((PlateauP4)plateau).rotation(coup);
-            }
+    protected void getCoup() throws FormatReponseInvalide, ColonnePleine {
+        if ( ((PlateauP4)plateau).isRotations(numeroJoueurCourant) && !ihm.demanderCoupOuRotation(getNomJoueurCourant()) ) {
+            CoupP4Rotation coup = ihm.demanderRotation(getNomJoueurCourant());
+            coup.setJoueur(numeroJoueurCourant);
+            ((PlateauP4)plateau).rotation(coup);
         } else {
             CoupP4Coup coupP4Coup = ihm.demanderCoupP4(getNomJoueurCourant());
             coupP4Coup.setJoueur(numeroJoueurCourant);
