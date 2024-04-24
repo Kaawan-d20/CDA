@@ -18,7 +18,7 @@ public class PlateauP4 extends Plateau {
     /**
      * Stock la position où le dernier jeton a été posé
      */
-    private byte[] dernierCoup = new byte[2];
+    private CoupP4 dernierCoup = new CoupP4((byte) 0, (byte) 0);
     /**
      * Stocker si la derniere action etait une rotation
      */
@@ -55,7 +55,7 @@ public class PlateauP4 extends Plateau {
 
     /**
      * Permet de vérifier si une partie est gagnée, c'est-à-dire s'il y a une ligne de 4 pions ou plus consécutifs de même couleur
-     * a partir du dernier coup joué si la derniere action etait de placer un jeton, ou de n'importe ou si la derniere
+     * à partir du dernier coup joué si la derniere action etait de placer un jeton, ou de n'importe ou si la derniere
      * action etait une rotation.
      *
      * @return le numéro du gagnant si la partie est gagnée, sinon 0
@@ -65,7 +65,7 @@ public class PlateauP4 extends Plateau {
             for (byte i = 0; i < 7; i++) {
                 for (byte j = 0; j < 7; j++) {
                     if (plateau[i][j] != 0) {
-                        byte candidate = verifierVictoireCase(i,j);
+                        byte candidate = verifierVictoireCase(new CoupP4(i,j));
                         if (candidate != 0) {
                             return candidate;
                         }
@@ -74,7 +74,7 @@ public class PlateauP4 extends Plateau {
             }
             return 0;
         } else {
-            return verifierVictoireCase(dernierCoup[0], dernierCoup[1]);
+            return verifierVictoireCase(dernierCoup);
         }
     }
 
@@ -82,11 +82,10 @@ public class PlateauP4 extends Plateau {
      * Permet de verifier si un jeton placé aux coordonnées x,y est gagnant c'est-à-dire s'il appartient a
      * une ligne de 4 pions ou plus consécutifs de même couleur
      *
-     * @param x coordonnée verticale
-     * @param y coordonnée horizontale
+     * @param coup Objet représentant le coup
      * @return le numéro du gagnant si le jeton est gagnant, 0 sinon
      */
-    public byte verifierVictoireCase(byte x, byte y) {
+    public byte verifierVictoireCase(CoupP4 coup) {
         /*Structure du tableau
          *   0 : Ligne horizontale (-)
          *   1 : Ligne verticale (|)
@@ -94,42 +93,42 @@ public class PlateauP4 extends Plateau {
          *   3 : Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite (/)
          */
         byte[][] lignes = new byte[4][7];
-        byte color = plateau[x][y];
+        byte color = plateau[coup.getLigne()][coup.getColonne()];
 
         if (color == 0){
             return 0;
         }
 
-        lignes[0] = plateau[x]; // Remplissage du tableau pour la ligne horizontale
+        lignes[0] = plateau[coup.getLigne()]; // Remplissage du tableau pour la ligne horizontale
 
         for (int i=0; i < 7; i++) { // Remplissage du tableau pour la ligne verticale
-            lignes[1][i] = plateau[i][y];
+            lignes[1][i] = plateau[i][coup.getColonne()];
         }
         // Ligne diagonale partant de en haut à gauche jusqu'à en bas à droite
-        int lig = x;
-        int col = y;
+        int lig = coup.getLigne();
+        int col = coup.getColonne();
         while (lig >= 0 && col >= 0) { // Monte à gauche
             lignes[2][lig] = plateau[lig][col];
             lig--;
             col--;
         }
-        lig = x + 1;
-        col = y + 1;
+        lig = coup.getLigne() + 1;
+        col = coup.getColonne() + 1;
         while (lig < 7 && col < 7) { // Descend à droite
             lignes[2][lig] = plateau[lig][col];
             lig++;
             col++;
         }
         // Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite
-        lig = x;
-        col = y;
+        lig = coup.getLigne();
+        col = coup.getColonne();
         while (lig < 7 && col >= 0) { // Descend à gauche
             lignes[3][lig] = plateau[lig][col] ;
             lig++;
             col--;
         }
-        lig = x -1;
-        col = y +1;
+        lig = coup.getLigne() -1;
+        col = coup.getColonne() +1;
         while (lig >= 0 && col < 7) { // Monte à droite
             lignes[3][lig] = plateau[lig][col];
             lig--;
@@ -145,7 +144,7 @@ public class PlateauP4 extends Plateau {
                     compteur = 0;
                 }
                 if (compteur == 4) {
-                    return plateau[x][y];
+                    return plateau[coup.getLigne()][coup.getColonne()];
                 }
             }
         }
@@ -193,8 +192,8 @@ public class PlateauP4 extends Plateau {
         for (byte ligne = 6; ligne >= 0; ligne--) {
             if (plateau[ligne][coup.getColonne()] == 0) {
                 plateau[ligne][coup.getColonne()] = coup.getJoueur();
-                dernierCoup[0] = ligne;
-                dernierCoup[1] = coup.getColonne();
+                coup.setLigne(ligne);
+                dernierCoup = coup;
                 wasRotation = false;
                 estPlein = false;
                 break;
