@@ -1,10 +1,11 @@
-package modele;
+package modele.p4;
 
 import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
 import exception.NombreBatonnetsInvalide;
 import exception.NumeroTasInvalide;
 import exception.PlusDeRotations;
+import modele.abstrait.Plateau;
 
 /**
  * Classe représentant un plateau de jeu de puissance 4
@@ -302,21 +303,4 @@ public class PlateauP4 extends Plateau {
         }
         plateau = nouveau;
     }
-
-    /**
-     * Méthode non utilisable
-     * @deprecated
-     */
-    public void retirerBatonnets(int m, int n) throws NombreBatonnetsInvalide, NumeroTasInvalide {
-        throw new UnsupportedOperationException("Méthode non implémentée");
-    }
-
-    /**
-     * Méthode non utilisable
-     * @deprecated
-     */
-    public void setOption(int m) {
-        throw new UnsupportedOperationException("Méthode non implémentée");
-    }
-
 }

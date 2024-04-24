@@ -1,7 +1,7 @@
 package controleur;
 
 import exception.*;
-import modele.PlateauNim;
+import modele.nim.PlateauNim;
 import vue.Ihm;
 
 /**
@@ -42,8 +42,8 @@ public class ControleurJeuNim extends Controleur{
 
         this.plateau = new PlateauNim(nombreTas);
 
-        initJoueur();
-        toursDeJeu();
+        super.jouer();
+
     }
     /**
      * Demande le coup à l'ihm et demande au plateau de réaliser le coup.
@@ -52,7 +52,7 @@ public class ControleurJeuNim extends Controleur{
      */
     protected void getCoup() throws NombreBatonnetsInvalide, NumeroTasInvalide {
         int[] candidate = ihm.demanderCoupNim(getNomJoueurCourant());
-        plateau.retirerBatonnets(candidate[0], candidate[1]);
+        ((PlateauNim)plateau).retirerBatonnets(candidate[0], candidate[1]);
     }
 
     /**
@@ -71,6 +71,6 @@ public class ControleurJeuNim extends Controleur{
     protected void setOption(){
         //appel de l'ihm et transfère dans le plateau
         int batonnetMax = ihm.setOptionNim();
-        plateau.setOption(batonnetMax);
+        ((PlateauNim)plateau).setOption(batonnetMax);
     }
 }

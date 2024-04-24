@@ -1,14 +1,15 @@
-package modele;
+package modele.nim;
 
 import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
 import exception.NombreBatonnetsInvalide;
 import exception.NumeroTasInvalide;
+import modele.abstrait.Plateau;
 
 /**
  * Classe représentant un plateau de jeu de Nim
  * hérite de Plateau
- * @see modele.Plateau
+ * @see Plateau
  */
 public class PlateauNim extends Plateau {
     /**
@@ -130,38 +131,4 @@ public class PlateauNim extends Plateau {
             this.maxBatonnets = maxBatonnets;
         }
     }
-
-    /**
-     * Méthode non utilisable
-     * @deprecated
-     */
-    public void placerJeton(byte colonne, byte joueur) throws ColonnePleine, FormatReponseInvalide{throw new UnsupportedOperationException("Méthode non implémentée");}
-
-    /**
-     * Méthode non utilisable
-     * @deprecated
-     */
-    public byte verifierVictoire(){
-        throw new UnsupportedOperationException("Méthode non implémentée");
-    }
-
-    /**
-     * Méthode non utilisable
-     * @deprecated
-     */
-    public void rotation(boolean sens, int joueur){throw new UnsupportedOperationException("Méthode non implémentée");}
-
-    /**
-     * Méthode non utilisable
-     * @deprecated
-     */
-    public void setRotations(boolean i){
-        throw new UnsupportedOperationException("Méthode non implémentée");
-    }
-
-    /**
-     * Méthode non utilisable
-     * @deprecated
-     */
-    public boolean isRotations(int numJoueur){throw new UnsupportedOperationException("Méthode non implémentée");}
 }

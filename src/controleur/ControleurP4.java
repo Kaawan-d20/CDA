@@ -4,7 +4,7 @@ import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
 import exception.PlusDeRotations;
 import modele.Joueur;
-import modele.PlateauP4;
+import modele.p4.PlateauP4;
 import vue.Ihm;
 
 /**
@@ -28,9 +28,8 @@ public class ControleurP4 extends Controleur{
      * crée le PlateauP4 de jeu et lance la partie.
      */
     public void jouer() {
-        initJoueur();
         plateau = new PlateauP4();
-        toursDeJeu();
+        super.jouer();
     }
 
     /**
@@ -39,17 +38,17 @@ public class ControleurP4 extends Controleur{
      * @throws ColonnePleine Si la colonne est pleine.
      */
     protected void getCoup() throws FormatReponseInvalide, ColonnePleine, PlusDeRotations {
-        if (plateau.isRotations(numeroJoueurCourant)) {
+        if (((PlateauP4)plateau).isRotations(numeroJoueurCourant)) {
             if (ihm.demanderCoupOuRotation(getNomJoueurCourant())) {
                 byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
-                plateau.placerJeton((byte) (candidate - 1), (byte) (numeroJoueurCourant + 1));
+                ((PlateauP4)plateau).placerJeton((byte) (candidate - 1), (byte) (numeroJoueurCourant + 1));
             } else {
                 boolean candidate = ihm.demanderRotation(getNomJoueurCourant());
-                plateau.rotation(candidate,getNumeroJoueurCourant());
+                ((PlateauP4)plateau).rotation(candidate,getNumeroJoueurCourant());
             }
         } else {
             byte candidate = ihm.demanderCoupP4(getNomJoueurCourant());
-            plateau.placerJeton((byte) (candidate - 1), (byte) (numeroJoueurCourant + 1));
+            ((PlateauP4)plateau).placerJeton((byte) (candidate - 1), (byte) (numeroJoueurCourant + 1));
         }
     }
 
@@ -58,7 +57,7 @@ public class ControleurP4 extends Controleur{
      * et gére l'affiche du vainqueur prendre aussi en compte la possibilité d'un ex aequo
      */
     protected void victoire(){
-        byte idVainqueur = plateau.verifierVictoire();
+        byte idVainqueur = ((PlateauP4)plateau).verifierVictoire();
         if (idVainqueur == 0) {
             ihm.afficherVictoire(getNomJoueurCourant(), getJoueurCourant().getNbVictoires(), nombrePartie, true);
         } else {
@@ -76,6 +75,6 @@ public class ControleurP4 extends Controleur{
     protected void setOption(){
         //appel de l'ihm et transfère dans le plateau
         boolean option = ihm.demanderActivationRotation();
-        plateau.setRotations(option);
+        ((PlateauP4)plateau).setRotations(option);
     }
 }

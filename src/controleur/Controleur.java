@@ -2,7 +2,9 @@ package controleur;
 
 import exception.*;
 import modele.Joueur;
-import modele.Plateau;
+import modele.abstrait.Plateau;
+import modele.nim.PlateauNim;
+import modele.p4.PlateauP4;
 import vue.Ihm;
 
 /**
@@ -22,8 +24,8 @@ public abstract class Controleur {
 
     /** Objet Plateau pouvant représenter ses sous-classes PlateauNim ou PlateauP4
      * @see Plateau
-     * @see modele.PlateauNim
-     * @see modele.PlateauP4*/
+     * @see PlateauNim
+     * @see PlateauP4 */
     protected Plateau plateau;
 
     /**
@@ -41,6 +43,12 @@ public abstract class Controleur {
         for (int i = 0; i < nbJoueur; i++) {
             lesJoueurs[i] = new Joueur(ihm.demanderNomJoueur(i+1));
         }
+    }
+
+
+    public void jouer(){
+        initJoueur();
+        toursDeJeu();
     }
 
 
@@ -146,14 +154,6 @@ public abstract class Controleur {
      */
     protected abstract void victoire();
 
-    /**
-     * <p>Méthode abstraite</p>
-     * <p>Doit appeler initJoueur() pour initialiser les joueurs,
-     * doit aussi crée le plateau du jeu, ainsi que faire appel à toursDeJeu() pour lancer le jeu</p>
-     * @see Controleur#initJoueur()
-     * @see Controleur#toursDeJeu()
-     */
-    public abstract void jouer();
 
     /**
      * <p>Méthode abstraite</p>
