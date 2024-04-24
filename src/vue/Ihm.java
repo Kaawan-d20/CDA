@@ -1,9 +1,9 @@
 package vue;
 
-import exception.NombreTasInvalides;
-import exception.FormatReponseInvalide;
+import modele.abstrait.CoupP4;
 import modele.nim.CoupNim;
-import modele.p4.CoupP4;
+import modele.p4.CoupP4Coup;
+import modele.p4.CoupP4Rotation;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -229,6 +229,20 @@ public class Ihm {
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Demande à l'utilisateur s'il souhaite jouer un coup ou faire une rotation
      * @return true pour coup et false pour rotation
@@ -257,7 +271,7 @@ public class Ihm {
      * @param nomJoueur Le nom du joueur pour lequel la demande est effectuée.
      * @return Un byte contenant le numéro de colonne.
      */
-    public CoupP4 demanderCoupP4(String nomJoueur) {
+    public CoupP4Coup demanderCoupP4(String nomJoueur) {
         while(true){
             System.out.println("Dans quelle colonne voulez-vous jouer " + nomJoueur + " ?");
             if (scanner.hasNextByte()) {
@@ -265,7 +279,7 @@ public class Ihm {
                 if (scanner.hasNextLine()) {
                     scanner.nextLine();
                 }
-                return new CoupP4(candidate);
+                return new CoupP4Coup(candidate);
             }
             scanner.nextLine();
             afficherErreur("Veuillez entrer un entier compris entre 1 et 7");
@@ -276,7 +290,7 @@ public class Ihm {
      * Demande à l'utilisateur dans quel sens effectuer la rotation
      * @return true pour horaire et false pour anti-horaire
      */
-    public boolean demanderRotation(String nomJoueur) {
+    public CoupP4Rotation demanderRotation(String nomJoueur) {
         Pattern pattern = Pattern.compile("^[h|a]$"); //Permet de créer le regex.
         while (true) {
             System.out.println(nomJoueur + ", voulez vous effectuer la rotation dans le sens horaire ↻ (h) ou anti-horaire ↺ (a) ?");
@@ -285,7 +299,7 @@ public class Ihm {
                 Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
                 // On vérifie la réponse et retourne true si c'est "h" et false si c'est "a".
                 if (matcher.find()) {
-                    return line.equals("h");
+                    return new CoupP4Rotation(line.equals("h"));
                 }
             }
             afficherErreur("Vous avez répondu avec autre chose que 'h' ou 'a'.");

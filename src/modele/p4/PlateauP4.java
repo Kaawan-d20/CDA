@@ -2,8 +2,6 @@ package modele.p4;
 
 import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
-import exception.NombreBatonnetsInvalide;
-import exception.NumeroTasInvalide;
 import exception.PlusDeRotations;
 import modele.abstrait.Plateau;
 
@@ -18,7 +16,7 @@ public class PlateauP4 extends Plateau {
     /**
      * Stock la position où le dernier jeton a été posé
      */
-    private CoupP4 dernierCoup = new CoupP4((byte) 0, (byte) 0);
+    private CoupP4Coup dernierCoup = new CoupP4Coup((byte) 0, (byte) 0);
     /**
      * Stocker si la derniere action etait une rotation
      */
@@ -65,7 +63,7 @@ public class PlateauP4 extends Plateau {
             for (byte i = 0; i < 7; i++) {
                 for (byte j = 0; j < 7; j++) {
                     if (plateau[i][j] != 0) {
-                        byte candidate = verifierVictoireCase(new CoupP4(i,j));
+                        byte candidate = verifierVictoireCase(new CoupP4Coup(i,j));
                         if (candidate != 0) {
                             return candidate;
                         }
@@ -85,7 +83,7 @@ public class PlateauP4 extends Plateau {
      * @param coup Objet représentant le coup
      * @return le numéro du gagnant si le jeton est gagnant, 0 sinon
      */
-    public byte verifierVictoireCase(CoupP4 coup) {
+    public byte verifierVictoireCase(CoupP4Coup coup) {
         /*Structure du tableau
          *   0 : Ligne horizontale (-)
          *   1 : Ligne verticale (|)
@@ -184,7 +182,7 @@ public class PlateauP4 extends Plateau {
      * @throws FormatReponseInvalide Si le numéro de colonne demandé est inexistant
      * @throws ColonnePleine Si la colonne demander est pleine
      */
-    public void placerJeton(CoupP4 coup) throws FormatReponseInvalide, ColonnePleine {
+    public void placerJeton(CoupP4Coup coup) throws FormatReponseInvalide, ColonnePleine {
         if (coup.getColonne()<0 || coup.getColonne()>6){
             throw new FormatReponseInvalide("Veuillez entrer un entier compris entre 1 et 7");
         }
@@ -250,15 +248,14 @@ public class PlateauP4 extends Plateau {
 
     /**
      * Fonction qui permet de faire tourner le plateau dans un sens
-     * @param sens Le sens de la rotation true pour horaire et false pour antihoraire
-     * @param joueur Le numéro du joueur
+     * @param coup Objet représentant le coup
      * @throws PlusDeRotations Si le joueur n'a plus de rotation disponible
      */
-    public void rotation(boolean sens, int joueur)  throws PlusDeRotations {
-        if (nbRotations[joueur] > 0) {
-            nbRotations[joueur]--;
+    public void rotation(CoupP4Rotation coup)  throws PlusDeRotations {
+        if (nbRotations[coup.getJoueur()-1] > 0) {
+            nbRotations[coup.getJoueur()-1]--;
             wasRotation = true;
-            if (sens) {
+            if (coup.getSens()) {
                 rotationHoraire();
             } else {
                 rotationAntiHoraire();
