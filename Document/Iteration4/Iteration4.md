@@ -216,9 +216,9 @@ classDiagram
         # getJoueurCourant() Joueur
         # getNomJoueurCourant() String
 
-        # abstract getCoup() void
-        # abstract victoire() void
-        # abstract setOption
+        # getCoup() void*
+        # victoire() void*
+        # setOption() void*
     }
 
     class ControleurJeuNim{
@@ -243,8 +243,8 @@ classDiagram
 
     class Plateau {
         <<abstract>>
-        + abstract reset() void
-        + abstract verifierFin() void
+        + reset() void*
+        + verifierFin() void*
     }
     class PlateauNim {
         - int nombreTas
@@ -378,7 +378,10 @@ classDiagram
     }
 
 
-
+    CoupNim --|> Coup
+    CoupP4 --|> Coup
+    CoupP4Coup --|> CoupP4
+    CoupP4Rotation --|> CoupP4
 
 
 
