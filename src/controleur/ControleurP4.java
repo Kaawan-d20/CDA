@@ -2,8 +2,12 @@ package controleur;
 
 import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
-import exception.PlusDeRotations;
-import modele.Joueur;
+import modele.abstrait.CoupP4;
+import modele.joueur.IA;
+import modele.joueur.IANim;
+import modele.joueur.IAP4;
+import modele.joueur.Joueur;
+import modele.nim.PlateauNim;
 import modele.p4.CoupP4Coup;
 import modele.p4.CoupP4Rotation;
 import modele.p4.PlateauP4;
@@ -40,14 +44,25 @@ public class ControleurP4 extends Controleur{
      * @throws ColonnePleine Si la colonne est pleine.
      */
     protected void getCoup() throws FormatReponseInvalide, ColonnePleine {
-        if ( ((PlateauP4)plateau).isRotations(numeroJoueurCourant) && !ihm.demanderCoupOuRotation(getNomJoueurCourant()) ) {
-            CoupP4Rotation coup = ihm.demanderRotation(getNomJoueurCourant());
-            coup.setJoueur(numeroJoueurCourant);
-            ((PlateauP4)plateau).rotation(coup);
+        CoupP4 coup;
+        if (getJoueurCourant().isHuman()){
+            ihm.afficherPlateau(plateau.toString());
+            if ( ((PlateauP4)plateau).isRotations(numeroJoueurCourant) && !ihm.demanderCoupOuRotation(getNomJoueurCourant()) ) {
+                coup = ihm.demanderRotation(getNomJoueurCourant());
+            } else {
+                coup = ihm.demanderCoupP4(getNomJoueurCourant());
+            }
         } else {
-            CoupP4Coup coupP4Coup = ihm.demanderCoupP4(getNomJoueurCourant());
-            coupP4Coup.setJoueur(numeroJoueurCourant);
-            ((PlateauP4)plateau).placerJeton(coupP4Coup);
+            coup = ((IAP4) getJoueurCourant()).demanderCoup((PlateauP4) plateau);
+            ihm.afficherCoup(coup);
+        }
+
+        coup.setJoueur(numeroJoueurCourant);
+
+        if (coup.isRotation()) {
+            ((PlateauP4)plateau).rotation((CoupP4Rotation) coup);
+        } else {
+            ((PlateauP4)plateau).placerJeton((CoupP4Coup) coup);
         }
     }
 
@@ -75,5 +90,9 @@ public class ControleurP4 extends Controleur{
         //appel de l'ihm et transfère dans le plateau
         boolean option = ihm.demanderActivationRotation();
         ((PlateauP4)plateau).setRotations(option);
+    }
+
+    protected IA getIA(){
+        return new IAP4();
     }
 }

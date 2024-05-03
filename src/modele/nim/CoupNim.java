@@ -58,4 +58,9 @@ public class CoupNim extends Coup {
     public int getTas() {
         return tas;
     }
+
+    @Override
+    public String toString() {
+        return "Le coup est " + tas + " " + nbBatonnets;
+    }
 }

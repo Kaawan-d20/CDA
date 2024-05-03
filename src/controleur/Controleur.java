@@ -1,7 +1,9 @@
 package controleur;
 
 import exception.*;
-import modele.Joueur;
+import modele.joueur.IA;
+import modele.joueur.IANim;
+import modele.joueur.Joueur;
 import modele.abstrait.Plateau;
 import modele.nim.PlateauNim;
 import modele.p4.PlateauP4;
@@ -46,10 +48,18 @@ public abstract class Controleur {
      * Méthode permettant d'initialiser un certain nombre de joueurs (pour l'instant, fixé à 2)
      */
     protected void initJoueur() {
-        int nbJoueur = 2; //Possibilité de demander à l'ihm un nombre de joueurs ou par le biais d'un futur paramètre
-        lesJoueurs = new Joueur[nbJoueur];
+        int nbJoueur;
+        if (ihm.demanderSeulOuMulti()){
+            nbJoueur = 1;
+        } else {
+            nbJoueur = 2;
+        }
+        lesJoueurs = new Joueur[2];
         for (int i = 0; i < nbJoueur; i++) {
             lesJoueurs[i] = new Joueur(ihm.demanderNomJoueur(i+1));
+        }
+        for (int i = nbJoueur; i < 2; i++) {
+            lesJoueurs[i] = getIA();
         }
     }
 
@@ -72,7 +82,6 @@ public abstract class Controleur {
             boolean estCoupCorrect = false;
             while (!estCoupCorrect){
                 try{
-                    ihm.afficherPlateau(plateau.toString());
                     getCoup();
                     estCoupCorrect = true;
                 } catch (NombreBatonnetsInvalide | NumeroTasInvalide | ColonnePleine | FormatReponseInvalide |
@@ -161,4 +170,6 @@ public abstract class Controleur {
      * <p>Doit demander l'activation de l'option à l'ihm et demander au plateau d'activer ou non l'option</p>
      */
     protected abstract void setOption();
+
+    protected abstract IA getIA();
 }

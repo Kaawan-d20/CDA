@@ -130,4 +130,8 @@ public class PlateauNim extends Plateau {
             this.maxBatonnets = maxBatonnets;
         }
     }
+
+    public boolean isLimite() {
+        return isLimite;
+    }
 }

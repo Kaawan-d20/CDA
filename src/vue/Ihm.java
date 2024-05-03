@@ -1,5 +1,6 @@
 package vue;
 
+import modele.abstrait.Coup;
 import modele.abstrait.CoupP4;
 import modele.nim.CoupNim;
 import modele.p4.CoupP4Coup;
@@ -27,6 +28,26 @@ public class Ihm {
     }
 
     //Méthode non spécifique à un jeu
+
+    /**
+     * Méthode permettant de demander à l'utilisateur s'il joue seul ou à deux.
+     */
+    public boolean demanderSeulOuMulti() {
+        // Le pattern s'assure que la ligne contient uniquement "y" ou "n".
+        Pattern pattern = Pattern.compile("^[1|2]$"); //Permet de créer le regex.
+        while (true) {
+            System.out.println("A combien voulez vous jouer ? (1 ou 2)");
+            if (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
+                // On vérifie la réponse et retourne true si c'est "y" et false si c'est "n".
+                if (matcher.find()) {
+                    return line.equals("1");
+                }
+            }
+            afficherErreur("Vous avez répondu avec autre chose que `c` ou `g`.");
+        }
+    }
 
     /**
      * Demande à l'utilisateur à quel jeu il veut jouer ("nim" ou "p4")
@@ -76,6 +97,10 @@ public class Ihm {
      */
     public void afficherPlateau(String plateau) {
         System.out.println(plateau);
+    }
+
+    public void afficherCoup(Coup coup) {
+        System.out.println(coup);
     }
 
     /**

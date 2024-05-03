@@ -1,6 +1,8 @@
 package controleur;
 
 import exception.*;
+import modele.joueur.IA;
+import modele.joueur.IANim;
 import modele.nim.CoupNim;
 import modele.nim.PlateauNim;
 import vue.Ihm;
@@ -51,7 +53,14 @@ public class ControleurJeuNim extends Controleur{
      * @throws NumeroTasInvalide Si le tas demandé est inconnue.
      */
     protected void getCoup() throws NombreBatonnetsInvalide, NumeroTasInvalide {
-        CoupNim candidate = ihm.demanderCoupNim(getNomJoueurCourant());
+        CoupNim candidate;
+        if (getJoueurCourant().isHuman()){
+            ihm.afficherPlateau(plateau.toString());
+            candidate = ihm.demanderCoupNim(getNomJoueurCourant());
+        } else {
+            candidate = ((IANim) getJoueurCourant()).demanderCoup((PlateauNim) plateau);
+            ihm.afficherCoup(candidate);
+        }
         ((PlateauNim) plateau).retirerBatonnets(candidate);
     }
 
@@ -72,5 +81,9 @@ public class ControleurJeuNim extends Controleur{
         //appel de l'ihm et transfère dans le plateau
         int batonnetMax = ihm.setOptionNim();
         ((PlateauNim)plateau).setOption(batonnetMax);
+    }
+
+    protected IA getIA(){
+        return new IANim();
     }
 }

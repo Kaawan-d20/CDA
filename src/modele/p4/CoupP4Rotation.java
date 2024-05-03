@@ -26,4 +26,17 @@ public class CoupP4Rotation extends CoupP4 {
     public boolean getSens() {
         return sens;
     }
+
+
+    public boolean isRotation() {
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        if (sens) {
+            return "Le coup est une rotation dans le sens horaire";
+        }
+        return "Le coup est une rotation dans le sens anti-horaire";
+    }
 }

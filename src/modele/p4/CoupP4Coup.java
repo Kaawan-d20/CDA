@@ -57,4 +57,14 @@ public class CoupP4Coup extends CoupP4 {
     public void setLigne(byte ligne) {
         this.ligne = ligne;
     }
+
+
+    public boolean isRotation() {
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Le coup est colonne " + (colonne+1);
+    }
 }

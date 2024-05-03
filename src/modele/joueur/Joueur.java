@@ -1,13 +1,16 @@
-package modele;
+package modele.joueur;
 
 /**
  * Classe représentant un joueur
  */
 public class Joueur implements Comparable<Joueur> {
     /** Le nom du Joueur*/
-    private String nom;
+    protected String nom;
     /** Le nombre de victoires du Joueur*/
-    private int nbVictoires;
+    protected int nbVictoires;
+
+    protected boolean isHuman;
+
 
     /**
      * Permet de créer un nouvel objet Joueur qui permet de stocker le nom et le nombre de victoires d'un joueur.
@@ -17,6 +20,7 @@ public class Joueur implements Comparable<Joueur> {
     public Joueur(String nom) {
         this.nom = nom;
         this.nbVictoires = 0;
+        this.isHuman = true;
     }
 
     /**
@@ -53,5 +57,9 @@ public class Joueur implements Comparable<Joueur> {
     @Override
     public int compareTo(Joueur autreJoueur) {
         return getNbVictoires() - autreJoueur.getNbVictoires();
+    }
+
+    public boolean isHuman() {
+        return isHuman;
     }
 }

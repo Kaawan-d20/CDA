@@ -26,4 +26,6 @@ public abstract class CoupP4 extends Coup{
     public void setJoueur(int joueurCourant) {
         this.joueur = (byte) (joueurCourant + 1);
     }
+
+    public abstract boolean isRotation();
 }
