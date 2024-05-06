@@ -18,7 +18,7 @@ public class CoupP4Coup extends CoupP4 {
 
     /**
      * Constructeur d'un coup du jeu de puissance 4
-     * @param colonne La colonne choisie par l'utilisateur
+     * @param colonne La colonne choisie par l'utilisateur (c ∈ [1,7])
      */
     public CoupP4Coup(byte colonne) {
         this.colonne = (byte) (colonne - 1);

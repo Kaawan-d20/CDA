@@ -30,9 +30,17 @@ public class PlateauP4 extends Plateau {
      */
     private byte[] nbRotations = {4,4};
     /**
-     * Permet de construire un nouveau PlateauNim.
+     * Permet de construire un nouveau PlateauP4 sans arguments (plateau vide).
      */
     public PlateauP4() {}
+
+    /**
+     * Permet de construire un nouveau PlateauP4 copie d'un autre plateau.
+     */
+    public PlateauP4(byte[][] plateau) {
+        this.plateau = plateau;
+    }
+
 
     /**
      * <p>Remplit le plateau en créant le plateau</p>
@@ -149,6 +157,77 @@ public class PlateauP4 extends Plateau {
         return 0;
     }
 
+
+
+
+    public int compterMaxJetonsAlignés(CoupP4Coup coup) {
+        /*Structure du tableau
+         *   0 : Ligne horizontale (-)
+         *   1 : Ligne verticale (|)
+         *   2 : Ligne diagonale partant de en haut à gauche jusqu'à en bas à droite (\)
+         *   3 : Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite (/)
+         */
+        byte[][] lignes = new byte[4][7];
+        byte color = plateau[coup.getLigne()][coup.getColonne()];
+
+        if (color == 0){
+            return 0;
+        }
+
+        lignes[0] = plateau[coup.getLigne()]; // Remplissage du tableau pour la ligne horizontale
+
+        for (int i=0; i < 7; i++) { // Remplissage du tableau pour la ligne verticale
+            lignes[1][i] = plateau[i][coup.getColonne()];
+        }
+        // Ligne diagonale partant de en haut à gauche jusqu'à en bas à droite
+        int lig = coup.getLigne();
+        int col = coup.getColonne();
+        while (lig >= 0 && col >= 0) { // Monte à gauche
+            lignes[2][lig] = plateau[lig][col];
+            lig--;
+            col--;
+        }
+        lig = coup.getLigne() + 1;
+        col = coup.getColonne() + 1;
+        while (lig < 7 && col < 7) { // Descend à droite
+            lignes[2][lig] = plateau[lig][col];
+            lig++;
+            col++;
+        }
+        // Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite
+        lig = coup.getLigne();
+        col = coup.getColonne();
+        while (lig < 7 && col >= 0) { // Descend à gauche
+            lignes[3][lig] = plateau[lig][col] ;
+            lig++;
+            col--;
+        }
+        lig = coup.getLigne() -1;
+        col = coup.getColonne() +1;
+        while (lig >= 0 && col < 7) { // Monte à droite
+            lignes[3][lig] = plateau[lig][col];
+            lig--;
+            col++;
+        }
+        //Vérification si 4 jetons sont alignés
+        int maxLigne = 0;
+        for (byte[] direction : lignes) {
+            int compteur = 0;
+            for (byte jeton : direction) {
+                if (jeton == color) {
+                    compteur++;
+                } else {
+                    compteur = 0;
+                }
+                if (compteur > maxLigne) {
+                    maxLigne = compteur;
+                }
+            }
+
+        }
+        return maxLigne;
+    }
+
     /**
      * Permet de vérifier si le plateau est plein
      * @return true si le plateau est plein, sinon false
@@ -166,8 +245,6 @@ public class PlateauP4 extends Plateau {
 
     /**
      * <p>Permet de retourner l'état du plateau sous la forme d'un tableau de byte</p>
-     * <p>Inutilisé, pourra être supprimé si jamais utilisé
-     * (sera probablement utilisée quand les IA seront implémenté)</p>
      *
      * @return un tableau représentant le plateau de puissance 4
      */
@@ -175,6 +252,15 @@ public class PlateauP4 extends Plateau {
         return plateau;
     }
 
+    public PlateauP4 copie() {
+        byte[][] plateauCopie = new byte[7][7];
+        for (byte ligne = 0; ligne < plateau.length; ligne++){
+            for (byte pion = 0; pion < plateau[ligne].length; pion++){
+                plateauCopie[ligne][pion] = plateau[ligne][pion];
+            }
+        }
+        return new PlateauP4(plateauCopie);
+    }
     /**
      * <p>Permet de placer un jeton dans une colonne</p>
      * <p>Parcours la colonne à partir du bas et place le jeton dès qu'une case est vide (0)</p>
