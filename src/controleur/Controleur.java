@@ -155,7 +155,7 @@ public abstract class Controleur {
      * <p>Méthode abstraite</p>
      * <p>Doit demander le coup à l'ihm et demander au plateau de réaliser le coup</p>
      */
-    protected abstract void getCoup() throws FormatReponseInvalide, NombreBatonnetsInvalide, NumeroTasInvalide, ColonnePleine, PlusDeRotations;
+    protected abstract void getCoup() throws FormatReponseInvalide, NombreBatonnetsInvalide, NumeroTasInvalide, ColonnePleine, PlusDeRotations, JeuInvalideException;
 
     /**
      * <p>Méthode abstraite</p>

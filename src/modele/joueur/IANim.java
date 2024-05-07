@@ -1,5 +1,6 @@
 package modele.joueur;
 
+import exception.JeuInvalideException;
 import modele.nim.CoupNim;
 import modele.nim.PlateauNim;
 
@@ -16,7 +17,7 @@ public class IANim extends IA{
     }
 
 
-    public CoupNim demanderCoup(PlateauNim plateau){
+    public CoupNim demanderCoup(PlateauNim plateau) throws JeuInvalideException {
         if (plateau.isLimite()){
             return demanderCoupAleatoire(plateau);
         } else {
@@ -36,7 +37,25 @@ public class IANim extends IA{
         return new CoupNim(coupPossible.get(indice));
     }
 
-    private CoupNim demanderCoupGagnant(PlateauNim plateau){
-        return demanderCoupAleatoire(plateau); // TODO : A remplacer par le bon code
+    private CoupNim demanderCoupGagnant(PlateauNim plateau) throws JeuInvalideException {
+        int[] lesTas = plateau.getPlateau();
+        int resultatXor = lesTas[0];
+        for (int i = 1; i < lesTas.length; i++) {
+            resultatXor = resultatXor ^ lesTas[i];
+        }
+        if (resultatXor == 0) {
+            for (int i = 0; i < lesTas.length; i++) {
+                if (lesTas[i] != 0) {
+                    return new CoupNim (i, 1);
+                }
+            }
+        } else {
+            for (int i = 0; i < lesTas.length; i++) {
+                if ((lesTas[i] ^ resultatXor) < lesTas[i]) {
+                    return new CoupNim (i, (lesTas[i] - (lesTas[i] ^ resultatXor)));
+                }
+            }
+        }
+        throw new JeuInvalideException("Je ne vois vraiment pas comment vous êtes arrivé(e) là. Cette erreur n'existe que pour faire plaisir à IntelliJ et cet état est sensé être mathématiquement inateignable.");
     }
 }

@@ -52,7 +52,7 @@ public class ControleurJeuNim extends Controleur{
      * @throws NombreBatonnetsInvalide Si le nombre de bâtonnets dans le tas à inférieur au retrait demandé ou que la limite de bâtonnets par coup a été atteinte.
      * @throws NumeroTasInvalide Si le tas demandé est inconnue.
      */
-    protected void getCoup() throws NombreBatonnetsInvalide, NumeroTasInvalide {
+    protected void getCoup() throws NombreBatonnetsInvalide, NumeroTasInvalide, JeuInvalideException {
         CoupNim candidate;
         if (getJoueurCourant().isHuman()){
             ihm.afficherPlateau(plateau.toString());
