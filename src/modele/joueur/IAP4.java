@@ -72,7 +72,8 @@ public class IAP4 extends IA{
             PlateauP4 copie = plateauOrigine.copie();
             copie.rotation(coup);
             // Magic number, l'IA joue les jaunes donc n°2
-            if (copie.verifierVictoire() == 2) {
+            int vainqueur = copie.verifierVictoire();
+            if (vainqueur == 2) {
                 return coup;
             }
         }
@@ -124,7 +125,7 @@ public class IAP4 extends IA{
                 PlateauP4 copie3 = copie.copie();
                 copie2.rotation(lesRotationsAdverses[0]);
                 copie3.rotation(lesRotationsAdverses[1]);
-                if (copie.verifierVictoire() != 1 || copie2.verifierVictoire() != 1 || copie3.verifierVictoire() != 1) {
+                if (copie.verifierVictoire() != 1 && copie2.verifierVictoire() != 1 && copie3.verifierVictoire() != 1) {
                     return coup;
                 }
             } catch (Exception exn) {

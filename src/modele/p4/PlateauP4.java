@@ -71,7 +71,7 @@ public class PlateauP4 extends Plateau {
             for (byte i = 0; i < 7; i++) {
                 for (byte j = 0; j < 7; j++) {
                     if (plateau[i][j] != 0) {
-                        byte candidate = verifierVictoireCase(new CoupP4Coup(i,j));
+                        byte candidate = verifierVictoireCase(new CoupP4Coup(j,i));
                         if (candidate != 0) {
                             return candidate;
                         }

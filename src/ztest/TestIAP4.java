@@ -139,23 +139,20 @@ public class TestIAP4 {
             new CoupP4Coup((byte) 4),
     };
 
-
     private PlateauP4 plateauHoraireIA = new PlateauP4(new byte[][]
             {
                     new byte[] {0,0,0,0,0,0,0},
                     new byte[] {0,0,0,0,0,0,0},
-                    new byte[] {0,0,0,0,0,0,0},
-                    new byte[] {0,0,0,0,0,0,0},
-                    new byte[] {0,0,0,0,0,0,1},
-                    new byte[] {0,0,0,0,0,1,1},
-                    new byte[] {2,2,0,2,2,1,1},
-
+                    new byte[] {0,0,1,0,0,0,0},
+                    new byte[] {0,0,2,0,0,0,0},
+                    new byte[] {0,0,2,0,0,0,0},
+                    new byte[] {0,0,2,0,0,0,0},
+                    new byte[] {0,0,1,0,0,0,2},
             }
     );
 
     private CoupP4Rotation[] coupPlateauHoraireIA = {
-            new CoupP4Rotation(true),
-            new CoupP4Rotation(false)
+            new CoupP4Rotation(true)
     };
 
 
@@ -163,35 +160,65 @@ public class TestIAP4 {
             {
                     new byte[] {0,0,0,0,0,0,0},
                     new byte[] {0,0,0,0,0,0,0},
-                    new byte[] {0,0,0,0,0,0,0},
-                    new byte[] {0,0,0,0,0,0,0},
-                    new byte[] {0,0,0,0,0,0,1},
-                    new byte[] {0,0,0,0,0,1,1},
-                    new byte[] {2,2,0,2,2,1,1},
-
+                    new byte[] {0,0,1,0,0,0,0},
+                    new byte[] {0,0,2,0,0,0,0},
+                    new byte[] {0,0,2,0,0,0,0},
+                    new byte[] {0,0,2,0,0,0,0},
+                    new byte[] {2,0,1,0,0,0,0},
             }
     );
 
     private CoupP4Rotation[] coupPlateauAntiHoraireIA = {
-            new CoupP4Rotation(true),
-            new CoupP4Rotation(false)
+            new CoupP4Rotation(false),
     };
 
 
+    private PlateauP4 plateauHoraireJoueur = new PlateauP4(new byte[][]
+            {
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {1,0,0,0,0,0,0},
+                    new byte[] {2,0,0,1,0,0,2},
+                    new byte[] {1,0,0,2,1,0,2},
+                    new byte[] {2,2,1,2,1,1,1},
+            }
+    );
+
+    private CoupP4[] coupPlateauHoraireJoueur = {
+            new CoupP4Coup((byte) 1),
+            new CoupP4Coup((byte) 2),
+            new CoupP4Coup((byte) 3),
+            new CoupP4Coup((byte) 4),
+            new CoupP4Coup((byte) 5),
+            new CoupP4Coup((byte) 6),
+            new CoupP4Rotation(true, (byte) 2),
+            new CoupP4Rotation(false, (byte) 2),
+    };
 
 
+    private PlateauP4 plateauAntiHoraireJoueur = new PlateauP4(new byte[][]
+            {
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,1},
+                    new byte[] {2,0,0,1,0,0,2},
+                    new byte[] {2,0,1,2,0,0,1},
+                    new byte[] {1,1,1,2,1,2,2},
+            }
+    );
 
-
-
-
-
-
-
-
-
-
-
-
+    private CoupP4[] coupPlateauAntiHoraireJoueur = {
+            new CoupP4Coup((byte) 2),
+            new CoupP4Coup((byte) 3),
+            new CoupP4Coup((byte) 4),
+            new CoupP4Coup((byte) 5),
+            new CoupP4Coup((byte) 6),
+            new CoupP4Coup((byte) 7),
+            new CoupP4Rotation(true, (byte) 2),
+            new CoupP4Rotation(false, (byte) 2),
+    };
 
 
     private HashMap<PlateauP4,CoupP4[]> mapPlateau = new HashMap<>();
@@ -204,6 +231,10 @@ public class TestIAP4 {
         mapPlateau.put(plateau3Joueur,coupPlateau3Joueur);
         mapPlateau.put(plateau2IA,coupPlateau2IA);
         mapPlateau.put(plateau2Joueur,coupPlateau2Joueur);
+        mapPlateau.put(plateauHoraireIA,coupPlateauHoraireIA);
+        mapPlateau.put(plateauAntiHoraireIA,coupPlateauAntiHoraireIA);
+        mapPlateau.put(plateauHoraireJoueur,coupPlateauHoraireJoueur);
+        mapPlateau.put(plateauAntiHoraireJoueur,coupPlateauAntiHoraireJoueur);
     }
 
     public boolean test(){
