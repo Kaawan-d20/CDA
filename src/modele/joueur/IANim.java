@@ -46,13 +46,13 @@ public class IANim extends IA{
         if (resultatXor == 0) {
             for (int i = 0; i < lesTas.length; i++) {
                 if (lesTas[i] != 0) {
-                    return new CoupNim (i, 1);
+                    return new CoupNim (i+1, 1);
                 }
             }
         } else {
             for (int i = 0; i < lesTas.length; i++) {
                 if ((lesTas[i] ^ resultatXor) < lesTas[i]) {
-                    return new CoupNim (i, (lesTas[i] - (lesTas[i] ^ resultatXor)));
+                    return new CoupNim (i+1, (lesTas[i] - (lesTas[i] ^ resultatXor)));
                 }
             }
         }

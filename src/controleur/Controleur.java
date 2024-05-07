@@ -84,7 +84,7 @@ public abstract class Controleur {
                 try{
                     getCoup();
                     estCoupCorrect = true;
-                } catch (NombreBatonnetsInvalide | NumeroTasInvalide | ColonnePleine | FormatReponseInvalide |
+                } catch (JeuInvalideException | NombreBatonnetsInvalide | NumeroTasInvalide | ColonnePleine | FormatReponseInvalide |
                          PlusDeRotations exception){
                     ihm.afficherErreur(exception.getMessage());
                 }
