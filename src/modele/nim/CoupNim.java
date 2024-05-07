@@ -2,6 +2,8 @@ package modele.nim;
 
 import modele.abstrait.Coup;
 
+import java.util.Objects;
+
 /**
  * Classe représentant un coup du jeu de Nim hérite de Coup
  */
@@ -62,5 +64,13 @@ public class CoupNim extends Coup {
     @Override
     public String toString() {
         return "Le coup est " + tas + " " + nbBatonnets;
+    }
+
+    @Override
+    public boolean equals(Object autre) {
+        if (this == autre) return true;
+        if (autre == null || getClass() != autre.getClass()) return false;
+        CoupNim coupNim = (CoupNim) autre;
+        return tas == coupNim.tas && nbBatonnets == coupNim.nbBatonnets;
     }
 }

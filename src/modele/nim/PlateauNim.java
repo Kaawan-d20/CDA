@@ -40,6 +40,14 @@ public class PlateauNim extends Plateau {
         this.nombreTas = nombreTas;
     }
 
+    public PlateauNim(int[] tas) {
+        this.nombreTas = tas.length;
+        this.lesTas = new Tas[nombreTas];
+        for (int i = 0; i < tas.length; i++) {
+            lesTas[i] = new Tas(tas[i]);
+        }
+    }
+
     /**
      * <p>Remplit le plateau en créant les tas</p>
      * <p>Remplace les tas déjà existant</p>
