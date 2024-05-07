@@ -2,6 +2,8 @@ package modele.p4;
 
 import modele.abstrait.CoupP4;
 
+import java.util.Objects;
+
 /**
  * Classe représentant un coup de puissance 4 hérite du CoupP4
  */
@@ -66,5 +68,13 @@ public class CoupP4Coup extends CoupP4 {
     @Override
     public String toString() {
         return "Le coup est colonne " + (colonne+1);
+    }
+
+    @Override
+    public boolean equals(Object autre) {
+        if (this == autre) return true;
+        if (autre == null || getClass() != autre.getClass()) return false;
+        CoupP4Coup that = (CoupP4Coup) autre;
+        return colonne == that.getColonne();
     }
 }

@@ -67,6 +67,7 @@ public class IAP4 extends IA{
 
 
     public CoupP4 demanderCoup(PlateauP4 plateauOrigine){
+        // On vérifie si l'IA peut gagner en faisant une rotation
         for (CoupP4Rotation coup : lesRotations) {
             PlateauP4 copie = plateauOrigine.copie();
             copie.rotation(coup);
@@ -93,11 +94,11 @@ public class IAP4 extends IA{
                 // On calcule la taille de la plus grande ligne formée par le jeton.
                 int tailleLigneIA = copieIA.compterMaxJetonsAlignés(lesPlacements[i]);
                 int tailleLigneJoueur = copieJoueur.compterMaxJetonsAlignés(lesPlacementsAdverses[i]);
-                System.out.println(lesPlacements[i]);
+                /*System.out.println(lesPlacements[i]);
                 System.out.println("ia");
                 System.out.println(tailleLigneIA);
                 System.out.println("j");
-                System.out.println(tailleLigneJoueur);
+                System.out.println(tailleLigneJoueur);*/
                 // Si la ligne a le potentiel de former une ligne plus longue pour l'IA, ou si les deux
                 // lignes sont de même taille
                 if (tailleLigneIA > tailleLigneJoueur) {
@@ -120,9 +121,10 @@ public class IAP4 extends IA{
             try {
                 copie.placerJeton(coup);
                 PlateauP4 copie2 = copie.copie();
-                copie.rotation(lesRotationsAdverses[0]);
-                copie2.rotation(lesRotationsAdverses[1]);
-                if (copie.verifierVictoire() != 1 || copie2.verifierVictoire() != 1) {
+                PlateauP4 copie3 = copie.copie();
+                copie2.rotation(lesRotationsAdverses[0]);
+                copie3.rotation(lesRotationsAdverses[1]);
+                if (copie.verifierVictoire() != 1 || copie2.verifierVictoire() != 1 || copie3.verifierVictoire() != 1) {
                     return coup;
                 }
             } catch (Exception exn) {
