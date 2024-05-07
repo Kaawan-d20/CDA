@@ -13,7 +13,7 @@ public class CoupP4Rotation extends CoupP4 {
 
     /**
      * Constructeur d'une rotation du jeu de puissance 4
-     * @param sens
+     * @param sens Le sens de rotation (sens horaire = true)
      */
     public CoupP4Rotation(boolean sens) {
         this.sens = sens;

@@ -3,6 +3,7 @@ package ztest;
 import modele.abstrait.CoupP4;
 import modele.joueur.IAP4;
 import modele.p4.CoupP4Coup;
+import modele.p4.CoupP4Rotation;
 import modele.p4.PlateauP4;
 
 import java.util.Arrays;
@@ -115,8 +116,9 @@ public class TestIAP4 {
     );
 
     private CoupP4Coup[] coupPlateau2IA = {
-            new CoupP4Coup((byte) 1),
-            new CoupP4Coup((byte) 4)
+            new CoupP4Coup((byte) 5),
+            new CoupP4Coup((byte) 6),
+            new CoupP4Coup((byte) 7)
     };
 
     private PlateauP4 plateau2Joueur = new PlateauP4(new byte[][]
@@ -137,7 +139,62 @@ public class TestIAP4 {
             new CoupP4Coup((byte) 4),
     };
 
-    private HashMap<PlateauP4,CoupP4Coup[]> mapPlateau = new HashMap<>();
+
+    private PlateauP4 plateauHoraireIA = new PlateauP4(new byte[][]
+            {
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,1},
+                    new byte[] {0,0,0,0,0,1,1},
+                    new byte[] {2,2,0,2,2,1,1},
+
+            }
+    );
+
+    private CoupP4Rotation[] coupPlateauHoraireIA = {
+            new CoupP4Rotation(true),
+            new CoupP4Rotation(false)
+    };
+
+
+    private PlateauP4 plateauAntiHoraireIA = new PlateauP4(new byte[][]
+            {
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,0},
+                    new byte[] {0,0,0,0,0,0,1},
+                    new byte[] {0,0,0,0,0,1,1},
+                    new byte[] {2,2,0,2,2,1,1},
+
+            }
+    );
+
+    private CoupP4Rotation[] coupPlateauAntiHoraireIA = {
+            new CoupP4Rotation(true),
+            new CoupP4Rotation(false)
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private HashMap<PlateauP4,CoupP4[]> mapPlateau = new HashMap<>();
 
     {
         mapPlateau.put(plateauVide,coupPlateauVide);
@@ -156,19 +213,13 @@ public class TestIAP4 {
         int courant = 0;
         for (PlateauP4 plateau : mapPlateau.keySet()){
             CoupP4 resultat = ia.demanderCoup(plateau);
-            System.out.println(resultat);
             boolean etatResultat = false;
             for (CoupP4 coup : mapPlateau.get(plateau)){
                 etatResultat |= coup.equals(resultat);
             }
-            if (!etatResultat){
-                System.out.println("problème");
-            }
             etat[courant] = etatResultat;
             temoin[courant++] = true;
         }
-        System.out.println(mapPlateau.keySet());
-        System.out.println(Arrays.toString(etat));
         return Arrays.equals(etat, temoin);
     }
 }

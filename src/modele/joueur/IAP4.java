@@ -76,7 +76,7 @@ public class IAP4 extends IA{
                 return coup;
             }
         }
-        // Aucune des rotation ne mene a une victoire, on essaie maintenant les différents coups en
+        // Aucune des rotations ne mene a une victoire, on essaie maintenant les différents coups en
         // leur assignant un score.
         ArrayList<CoupP4Coup>[] scoreCoups = new ArrayList[7];
         for (int i = 0; i < scoreCoups.length; i++) {
@@ -103,9 +103,9 @@ public class IAP4 extends IA{
                 // lignes sont de même taille
                 if (tailleLigneIA > tailleLigneJoueur) {
                     // On référence la valeur
-                    scoreCoups[scoreTailleIa[tailleLigneIA]].add(lesPlacements[i]);
+                    scoreCoups[scoreTailleIa[tailleLigneIA]-1].add(lesPlacements[i]);
                 } else {
-                    scoreCoups[scoreTailleJoueur[tailleLigneJoueur]].add(lesPlacements[i]);
+                    scoreCoups[scoreTailleJoueur[tailleLigneJoueur]-1].add(lesPlacements[i]);
                 }
             // Coup invalide (ligne pleine)
             } catch (Exception exn) {
