@@ -1,17 +1,23 @@
 package main;
 
 import controleur.Controleur;
-import controleur.ControleurJeuNim;
+import controleur.ControleurNim;
 import controleur.ControleurP4;
 import vue.Ihm;
 
-
-public class main {
+/**
+ * La classe Main pour le choix du jeu.
+ */
+public class Main {
+    /**
+     * La méthode Main pour le choix du jeu.
+     * @param args Paramètres args.
+     */
     public static void main(String[] args) {
         Ihm ihm = new Ihm();
         Controleur controleur;
         if (ihm.demanderJeu()){
-            controleur = new ControleurJeuNim(ihm);
+            controleur = new ControleurNim(ihm);
         } else {
             controleur = new ControleurP4(ihm);
         }

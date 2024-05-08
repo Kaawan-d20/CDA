@@ -1,4 +1,4 @@
 /**
- * Package contenant les classes modélisant les éléments des jeux
+ * Package contenant les classes du modèle.
  */
 package modele;

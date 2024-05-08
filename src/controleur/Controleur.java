@@ -2,51 +2,36 @@ package controleur;
 
 import exception.*;
 import modele.joueur.IA;
-import modele.joueur.IANim;
 import modele.joueur.Joueur;
 import modele.abstrait.Plateau;
-import modele.nim.PlateauNim;
-import modele.p4.PlateauP4;
 import vue.Ihm;
 
 /**
- * Classe abstraite du contrôleur contenant les squelettes des méthodes, ainsi que les attributs
+ * Classe abstraite du contrôleur contenant les squelettes des méthodes, ainsi que les attributs.
  */
 public abstract class Controleur {
-    /** Numéro du joueur courant, x ∈ [0 ; 1]**/
+    /** Numéro du joueur courant, x ∈ [0 ; 1]. **/
     protected int numeroJoueurCourant;
 
-    /** Nombre de parties jouées, incrémentée dans toursDeJeu()
-     * @see #toursDeJeu() */
+    /** Nombre de parties jouées. */
     protected  int nombrePartie = 0;
 
-    /** Array contenant les objets Joueur représentant les joueurs
-     * @see Joueur*/
+    /** Array contenant les objets Joueur représentant les joueurs. */
     protected Joueur[] lesJoueurs;
 
-    /** Objet Plateau pouvant représenter ses sous-classes PlateauNim ou PlateauP4
-     * @see Plateau
-     * @see PlateauNim
-     * @see PlateauP4 */
+    /** Objet Plateau pouvant représenter ses sous-classes PlateauNim ou PlateauP4. */
     protected Plateau plateau;
 
-    /**
-     * Objet Interface Humain Machine chargé de récupérer les commandes du joueur et d'afficher l'état de la partie
-     * @see Ihm
-     */
+    /** Objet Interface Humain Machine chargé de récupérer les commandes du joueur et d'afficher l'état de la partie. */
     protected Ihm ihm;
 
-    /**
-     * Méthode initialisant les joueurs et lance la partie
-     */
+    /** Méthode initialisant les joueurs et lance la partie. */
     public void jouer(){
         initJoueur();
         toursDeJeu();
     }
 
-    /**
-     * Méthode permettant d'initialiser un certain nombre de joueurs (pour l'instant, fixé à 2)
-     */
+    /** Méthode permettant d'initialiser un certain nombre de joueurs (humain ou IA).*/
     protected void initJoueur() {
         int nbJoueur;
         if (ihm.demanderSeulOuMulti()){
@@ -64,12 +49,12 @@ public abstract class Controleur {
     }
 
     /**
-     * <p>Squelette du déroulement d'une partie appel des méthodes de ses sous-classes</p>
+     * <p>Squelette du déroulement d'une partie appel des méthodes de ses sous-classes.</p>
      * <ul>
-     *     <li>Incrémentation des variables et initialisation du plateau</li>
-     *     <li>Demande du coup</li>
-     *     <li>Vérification de la victoire</li>
-     *     <li>Rappel de la méthode ou fin du programme</li>
+     *     <li>Incrémentation des variables et initialisation du plateau.</li>
+     *     <li>Demande du coup.</li>
+     *     <li>Vérification de la victoire.</li>
+     *     <li>Rappel de la méthode ou fin du programme.</li>
      * </ul>
      */
     protected void toursDeJeu() {
@@ -84,7 +69,7 @@ public abstract class Controleur {
                 try{
                     getCoup();
                     estCoupCorrect = true;
-                } catch (JeuInvalideException | NombreBatonnetsInvalide | NumeroTasInvalide | ColonnePleine | FormatReponseInvalide |
+                } catch (NombreBatonnetsInvalide | NumeroTasInvalide | ColonnePleine | FormatReponseInvalide |
                          PlusDeRotations exception){
                     ihm.afficherErreur(exception.getMessage());
                 }
@@ -123,16 +108,6 @@ public abstract class Controleur {
     }
 
     /**
-     * <p>Renvoie le numéro du joueur actuellement en cours.</p>
-     * <p>Pas utilisée pour l'instant, pourra être retirée si besoin</p>
-     *
-     * @return Le numéro du joueur courant.
-     */
-    protected int getNumeroJoueurCourant() {
-        return numeroJoueurCourant;
-    }
-
-    /**
      * Renvoie l'objet Joueur correspondant au joueur actuellement en cours.
      *
      * @return Le joueur courant.
@@ -152,24 +127,28 @@ public abstract class Controleur {
 
     //Déclaration des méthodes abstraite
     /**
-     * <p>Méthode abstraite</p>
-     * <p>Doit demander le coup à l'ihm et demander au plateau de réaliser le coup</p>
+     * <p>Méthode abstraite.</p>
+     * <p>Doit demander le coup et demander au plateau de réaliser le coup.</p>
      */
-    protected abstract void getCoup() throws FormatReponseInvalide, NombreBatonnetsInvalide, NumeroTasInvalide, ColonnePleine, PlusDeRotations, JeuInvalideException;
+    protected abstract void getCoup() throws FormatReponseInvalide, NombreBatonnetsInvalide, NumeroTasInvalide, ColonnePleine, PlusDeRotations;
 
     /**
-     * <p>Méthode abstraite</p>
+     * <p>Méthode abstraite.</p>
      * <p>Doit géré l'affichage du vainqueur,
-     * doit aussi prendre en compte la possibilité d'un ex aequo</p>
+     * doit aussi prendre en compte la possibilité d'un ex aequo.</p>
      */
     protected abstract void victoire();
 
-
     /**
-     * <p>Méthode abstraite</p>
-     * <p>Doit demander l'activation de l'option à l'ihm et demander au plateau d'activer ou non l'option</p>
+     * <p>Méthode abstraite.</p>
+     * <p>Doit demander l'activation de l'option à l'Ihm et demander au plateau d'activer ou non l'option.</p>
      */
     protected abstract void setOption();
 
+    /**
+     * <p>Méthode abstraite.</p>
+     * <p>Retourne une instance de l'IA correspondant au jeu.</p>
+     * @return Une instance de l'IA du jeu.
+     */
     protected abstract IA getIA();
 }

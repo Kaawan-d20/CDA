@@ -1,4 +1,4 @@
 /**
- * Package de contenant le main du puissance 4
+ * Package de contenant le Main du Puissance 4.
  */
 package main.p4;

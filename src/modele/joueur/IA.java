@@ -1,13 +1,12 @@
 package modele.joueur;
 
+/**
+ * Classe abstraite représentant les IA.
+ */
 public abstract class IA extends Joueur{
-    /**
-     * Permet de créer un nouvel objet Joueur qui permet de stocker le nom et le nombre de victoires d'un joueur.
-     *
-     * @param nom : nom du joueur
-     */
-    public IA(String nom) {
-        super(nom);
+    /** Appelle le constructeur de la super classe et met isHuman à false. */
+    protected IA() {
+        super("IA");
         isHuman = false;
     }
 }

@@ -1,11 +1,11 @@
 package exception;
 /**
- * Exception levée lorsqu'un joueur entre un coup invalide, (c'est-à-dire n'étant pas au format 'm n')
+ * Exception levée lorsqu'un joueur entre un coup invalide.
  */
 public class FormatReponseInvalide extends Exception{
     /**
-     * Constructeur de l'exception FormatReponseInvalide
-     * @param message message de l'exception
+     * Constructeur de l'exception FormatReponseInvalide.
+     * @param message Message de l'exception.
      */
     public FormatReponseInvalide(String message) {
         super(message);

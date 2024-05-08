@@ -1,4 +1,4 @@
 /**
- * Package contenant les exceptions personnalisées
+ * Package contenant les exceptions personnalisées.
  */
 package exception;

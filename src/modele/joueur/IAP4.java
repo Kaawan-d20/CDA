@@ -1,6 +1,5 @@
 package modele.joueur;
 
-import modele.abstrait.Coup;
 import modele.abstrait.CoupP4;
 import modele.p4.CoupP4Coup;
 import modele.p4.CoupP4Rotation;
@@ -9,80 +8,79 @@ import modele.p4.PlateauP4;
 import java.util.ArrayList;
 
 public class IAP4 extends IA{
+    // Permets de pré générer une seule fois la totalité des coups possibles.
 
-    /**
-     * Permet de pré-generer une seule fois la totalitées des coups possibles.
-     */
+    /** Les rotations de l'IA. */
     private static CoupP4Rotation[] lesRotations = {
-            new CoupP4Rotation(true),
-            new CoupP4Rotation(false)
+            new CoupP4Rotation(true, (byte) 1),
+            new CoupP4Rotation(false, (byte) 1)
     };
 
+    /** Les rotations du joueur. */
     private static CoupP4Rotation[] lesRotationsAdverses = {
-            new CoupP4Rotation(true),
-            new CoupP4Rotation(false)
+            new CoupP4Rotation(true, (byte) 0),
+            new CoupP4Rotation(false, (byte) 0)
     };
+
+    /** Les coups de l'IA. */
     private static CoupP4Coup[] lesPlacements = {
-            new CoupP4Coup((byte) 1),
-            new CoupP4Coup((byte) 2),
-            new CoupP4Coup((byte) 3),
-            new CoupP4Coup((byte) 4),
-            new CoupP4Coup((byte) 5),
-            new CoupP4Coup((byte) 6),
-            new CoupP4Coup((byte) 7)
+            new CoupP4Coup((byte) 1, 1),
+            new CoupP4Coup((byte) 2, 1),
+            new CoupP4Coup((byte) 3, 1),
+            new CoupP4Coup((byte) 4, 1),
+            new CoupP4Coup((byte) 5, 1),
+            new CoupP4Coup((byte) 6, 1),
+            new CoupP4Coup((byte) 7, 1)
     };
 
+    /** Les coups du joueur. */
     private static CoupP4Coup[] lesPlacementsAdverses = {
-            new CoupP4Coup((byte) 1),
-            new CoupP4Coup((byte) 2),
-            new CoupP4Coup((byte) 3),
-            new CoupP4Coup((byte) 4),
-            new CoupP4Coup((byte) 5),
-            new CoupP4Coup((byte) 6),
-            new CoupP4Coup((byte) 7)
+            new CoupP4Coup((byte) 1, 0),
+            new CoupP4Coup((byte) 2, 0),
+            new CoupP4Coup((byte) 3, 0),
+            new CoupP4Coup((byte) 4, 0),
+            new CoupP4Coup((byte) 5, 0),
+            new CoupP4Coup((byte) 6, 0),
+            new CoupP4Coup((byte) 7, 0)
     };
 
+    /** Score attribué au coup en fonction de la longueur qui correspond aux indices pour l'IA. */
     private static int[] scoreTailleIa = {1,1,3,5,7};
+
+    /** Score attribué au coup en fonction de la longueur qui correspond aux indices pour le joueur. */
     private static int[] scoreTailleJoueur = {1,1,2,4,6};
 
-
-    /**
-     * Permet de créer un nouvel objet IA.
-     */
+    /** Permet de créer un nouvel objet IA. */
     public IAP4() {
-        super("IA");
-        for (CoupP4 coup : lesRotations) {
-            coup.setJoueur(1);
-        }
-        for (CoupP4 coup : lesRotationsAdverses) {
-            coup.setJoueur(0);
-        }
-        for (CoupP4 coup : lesPlacements) {
-            coup.setJoueur(1);
-        }
-        for (CoupP4 coup : lesPlacementsAdverses) {
-            coup.setJoueur(0);
-        }
+        super();
     }
 
-
+    /**
+     * Méthode permettant d'obtenir un coup pour le jeu du Puissance 4.
+     * @param plateauOrigine Le plateau du jeu.
+     * @return Un coup à jouer.
+     */
     public CoupP4 demanderCoup(PlateauP4 plateauOrigine){
-        // On vérifie si l'IA peut gagner en faisant une rotation
-        for (CoupP4Rotation coup : lesRotations) {
-            PlateauP4 copie = plateauOrigine.copie();
-            copie.rotation(coup);
-            // Magic number, l'IA joue les jaunes donc n°2
-            int vainqueur = copie.verifierVictoire();
-            if (vainqueur == 2) {
-                return coup;
+        // On vérifie que l'IA peut faire des rotations.
+        if (plateauOrigine.isRotations(1)) {
+            // On vérifie si l'IA peut gagner en faisant une rotation.
+            for (CoupP4Rotation coup : lesRotations) {
+                PlateauP4 copie = plateauOrigine.copie();
+                copie.rotation(coup);
+                // L'IA joue les jaunes donc elle est le joueur n°2.
+                if (copie.verifierVictoire() == 2) {
+                    return coup;
+                }
             }
         }
-        // Aucune des rotations ne mene a une victoire, on essaie maintenant les différents coups en
-        // leur assignant un score.
+
+        // Aucune des rotations ne mène à une victoire, on essaie maintenant les différents coups en leur assignant un score.
+        // Initialisation du tableau des scores.
         ArrayList<CoupP4Coup>[] scoreCoups = new ArrayList[7];
         for (int i = 0; i < scoreCoups.length; i++) {
             scoreCoups[i] = new ArrayList<>();
         }
+
         for (int i = 0; i < lesPlacements.length; i++) {
             PlateauP4 copieIA = plateauOrigine.copie();
             PlateauP4 copieJoueur = plateauOrigine.copie();
@@ -93,47 +91,45 @@ public class IAP4 extends IA{
                 copieJoueur.placerJeton(lesPlacementsAdverses[i]);
 
                 // On calcule la taille de la plus grande ligne formée par le jeton.
-                int tailleLigneIA = copieIA.compterMaxJetonsAlignés(lesPlacements[i]);
-                int tailleLigneJoueur = copieJoueur.compterMaxJetonsAlignés(lesPlacementsAdverses[i]);
-                /*System.out.println(lesPlacements[i]);
-                System.out.println("ia");
-                System.out.println(tailleLigneIA);
-                System.out.println("j");
-                System.out.println(tailleLigneJoueur);*/
-                // Si la ligne a le potentiel de former une ligne plus longue pour l'IA, ou si les deux
-                // lignes sont de même taille
+                int tailleLigneIA = copieIA.compterMaxJetonsAlignes(lesPlacements[i]);
+                int tailleLigneJoueur = copieJoueur.compterMaxJetonsAlignes(lesPlacementsAdverses[i]);
+                // Si la ligne a le potentiel de former une ligne plus longue pour l'IA, ou si les deux lignes sont de même taille.
                 if (tailleLigneIA > tailleLigneJoueur) {
-                    // On référence la valeur
+                    // On référence la valeur.
                     scoreCoups[scoreTailleIa[tailleLigneIA]-1].add(lesPlacements[i]);
                 } else {
                     scoreCoups[scoreTailleJoueur[tailleLigneJoueur]-1].add(lesPlacements[i]);
                 }
-            // Coup invalide (ligne pleine)
+            // Coup invalide (ligne pleine).
             } catch (Exception exn) {
                 scoreCoups[0].add(lesPlacements[i]);
             }
-            copieJoueur = null;
-            copieIA = null;
         }
-    for (int i = 6; i > 0; i-- ) {
-        ArrayList<CoupP4Coup> liste = scoreCoups[i];
-        for (CoupP4Coup coup : liste) {
-            PlateauP4 copie = plateauOrigine.copie();
-            try {
-                copie.placerJeton(coup);
-                PlateauP4 copie2 = copie.copie();
-                PlateauP4 copie3 = copie.copie();
-                copie2.rotation(lesRotationsAdverses[0]);
-                copie3.rotation(lesRotationsAdverses[1]);
-                if (copie.verifierVictoire() != 1 && copie2.verifierVictoire() != 1 && copie3.verifierVictoire() != 1) {
-                    return coup;
-                }
-            } catch (Exception exn) {
-                continue;
-            }
 
+        for (int i = 6; i >= 0; i-- ) {
+            ArrayList<CoupP4Coup> liste = scoreCoups[i];
+            for (CoupP4Coup coup : liste) {
+                PlateauP4 copie = plateauOrigine.copie();
+                try {
+                    copie.placerJeton(coup);
+                    if (plateauOrigine.isRotations(0)) { // Si l'adversaire peut faire des rotations.
+                        PlateauP4 copieHoriaire = copie.copie();
+                        PlateauP4 copieAntiHoraire = copie.copie();
+                        copieHoriaire.rotation(lesRotationsAdverses[0]);
+                        copieAntiHoraire.rotation(lesRotationsAdverses[1]);
+                        if (copie.verifierVictoire() != 1 && copieHoriaire.verifierVictoire() != 1 && copieAntiHoraire.verifierVictoire() != 1) {
+                            return coup;
+                        }
+                    }
+                    else { // Si l'adversaire ne peut pas faire des rotations.
+                        if (copie.verifierVictoire() != 1) {
+                            return coup;
+                        }
+                    }
+                } catch (Exception ignored) {}
+            }
         }
-    }
-    return new CoupP4Coup((byte) 5); // Jamais atteint.
+
+        return null; // Jamais atteint.
     }
 }

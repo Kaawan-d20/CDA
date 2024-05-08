@@ -2,58 +2,56 @@ package modele.p4;
 
 import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
-import exception.PlusDeRotations;
 import modele.abstrait.Plateau;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
- * Classe représentant un plateau de jeu de puissance 4
+ * Classe représentant un plateau de jeu de puissance 4.
  */
 public class PlateauP4 extends Plateau {
-    /**
-     * Le tableau représentant le plateau de puissance 4
-     */
+    /** Le tableau représentant le plateau de puissance 4. */
     private byte[][] plateau;
-    /**
-     * Stock la position où le dernier jeton a été posé
-     */
+
+    /** Stock la position où le dernier jeton a été posé. */
     private CoupP4Coup dernierCoup = new CoupP4Coup((byte) 0, (byte) 0);
-    /**
-     * Stocker si la dernière action était une rotation
-     */
+
+    /** Stocker si la dernière action était une rotation. */
     private boolean wasRotation = false;
-    /**
-     * Toggle des rotations
-     */
+
+    /** Toggle des rotations. */
     private boolean rotations;
-    /**
-     * Compte le nombre de rotations effectuées par les joueurs
-     */
+
+    /** Compte le nombre de rotations effectuées par les joueurs. */
     private byte[] nbRotations = {4,4};
-    /**
-     * Permet de construire un nouveau PlateauP4 sans arguments (plateau vide).
-     */
+
+    /** Permet de construire un nouveau PlateauP4 sans arguments (plateau vide). */
     public PlateauP4() {}
 
-    /**
-     * Permet de construire un nouveau PlateauP4 copie d'un autre plateau.
-     */
+    /** Permet de construire un nouveau PlateauP4 copie d'un autre plateau. */
     public PlateauP4(byte[][] plateau) {
         this.plateau = plateau;
     }
 
+    /** Permet de construire un nouveau PlateauP4 copie d'un autre plateau. */
+    public PlateauP4(byte[][] plateau, CoupP4Coup dernierCoup, boolean wasRotation, boolean rotations, byte[] nbRotations) {
+        this.plateau = plateau;
+        this.dernierCoup = dernierCoup;
+        this.wasRotation = wasRotation;
+        this.rotations = rotations;
+        this.nbRotations = nbRotations;
+    }
 
-    /**
-     * <p>Remplit le plateau en créant le plateau</p>
-     * <p>Remplace le plateau déjà existant</p>
-     */
+    /** Remplit le plateau en créant le plateau ou remplace le plateau déjà existant. Et reset les rotations. */
     public void reset() {
         plateau = new byte[7][7];
+        nbRotations = new byte[]{4, 4};
     }
 
     /**
-     * Permet de verifier si une partie est finie, c'est-à-dire si 4 pions sont alignés ou le plateau est plein
-     *
-     * @return true si la partie est fini, sinon false
+     * Permet de verifier si une partie est finie, c'est-à-dire si 4 pions sont alignés ou le plateau est plein.
+     * @return true si la partie est fini, sinon false.
      */
     public boolean verifierFin() {
         return (verifierVictoire() !=0) || estPlein();
@@ -61,13 +59,13 @@ public class PlateauP4 extends Plateau {
 
     /**
      * Permet de vérifier si une partie est gagnée, c'est-à-dire s'il y a une ligne de 4 pions ou plus consécutifs de même couleur
-     * à partir du dernier coup joué si la derniere action etait de placer un jeton, ou de n'importe ou si la derniere
-     * action etait une rotation.
+     * à partir du dernier coup joué si la dernière action était de placer un jeton, ou de n'importe où si la dernière
+     * action était une rotation.
      *
-     * @return le numéro du gagnant si la partie est gagnée, sinon 0
+     * @return Le numéro du gagnant si la partie est gagnée, sinon 0.
      */
     public byte verifierVictoire() {
-        if (wasRotation) {
+        if (wasRotation) { // Si c'est une rotation, on vérifie pour chaque case contenant un jeton.
             for (byte i = 0; i < 7; i++) {
                 for (byte j = 0; j < 7; j++) {
                     if (plateau[i][j] != 0) {
@@ -79,68 +77,75 @@ public class PlateauP4 extends Plateau {
                 }
             }
             return 0;
-        } else {
+        } else { // Sinon, on vérifie seulement à l'emplacement du coup.
             return verifierVictoireCase(dernierCoup);
         }
     }
 
     /**
-     * Permet de verifier si un jeton placé aux coordonnées x,y est gagnant c'est-à-dire s'il appartient a
-     * une ligne de 4 pions ou plus consécutifs de même couleur
+     * Méthode permettant d'obtenir les lignes à vérifier autour d'un coup.
+     * Structure du tableau :
+     *   0 : Ligne horizontale (-).
+     *   1 : Ligne verticale (|).
+     *   2 : Ligne diagonale partant de en haut à gauche jusqu'à en bas à droite (\).
+     *   3 : Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite (/).
+     * @param coup L'endroit d'où il faut générer le tableau.
+     * @return Le tableau contenant les coups adjacent.
+     */
+    private byte[][] getLignePosition(CoupP4Coup coup){
+        byte[][] lignes = new byte[4][7];
+
+        // Remplissage du tableau pour la ligne horizontale.
+        lignes[0] = plateau[coup.getLigne()];
+
+        // Remplissage du tableau pour la ligne verticale.
+        for (int i=0; i < 7; i++) {
+            lignes[1][i] = plateau[i][coup.getColonne()];
+        }
+
+        // Ligne diagonale partant de en haut à gauche jusqu'à en bas à droite.
+        int lig = coup.getLigne();
+        int col = coup.getColonne();
+        while (lig >= 0 && col >= 0) { // Monte à gauche.
+            lignes[2][lig] = plateau[lig--][col--];
+        }
+        lig = coup.getLigne() + 1;
+        col = coup.getColonne() + 1;
+        while (lig < 7 && col < 7) { // Descend à droite.
+            lignes[2][lig] = plateau[lig++][col++];
+        }
+
+        // Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite.
+        lig = coup.getLigne();
+        col = coup.getColonne();
+        while (lig < 7 && col >= 0) { // Descend à gauche.
+            lignes[3][lig] = plateau[lig++][col--] ;
+        }
+        lig = coup.getLigne() -1;
+        col = coup.getColonne() +1;
+        while (lig >= 0 && col < 7) { // Monte à droite.
+            lignes[3][lig] = plateau[lig--][col++];
+        }
+
+        return lignes;
+    }
+
+    /**
+     * Permet de verifier si un jeton placé aux coordonnées x, y est gagnant, c'est-à-dire s'il appartient à
+     * une ligne de 4 pions ou plus consécutifs de même couleur.
      *
-     * @param coup Objet représentant le coup
-     * @return le numéro du gagnant si le jeton est gagnant, 0 sinon
+     * @param coup Objet représentant le coup.
+     * @return Le numéro du gagnant si le jeton est gagnant, 0 sinon.
      */
     public byte verifierVictoireCase(CoupP4Coup coup) {
-        /*Structure du tableau
-         *   0 : Ligne horizontale (-)
-         *   1 : Ligne verticale (|)
-         *   2 : Ligne diagonale partant de en haut à gauche jusqu'à en bas à droite (\)
-         *   3 : Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite (/)
-         */
-        byte[][] lignes = new byte[4][7];
+        // Vérification que l'emplacement du coup n'est pas un jeton vide.
         byte color = plateau[coup.getLigne()][coup.getColonne()];
-
         if (color == 0){
             return 0;
         }
 
-        lignes[0] = plateau[coup.getLigne()]; // Remplissage du tableau pour la ligne horizontale
-
-        for (int i=0; i < 7; i++) { // Remplissage du tableau pour la ligne verticale
-            lignes[1][i] = plateau[i][coup.getColonne()];
-        }
-        // Ligne diagonale partant de en haut à gauche jusqu'à en bas à droite
-        int lig = coup.getLigne();
-        int col = coup.getColonne();
-        while (lig >= 0 && col >= 0) { // Monte à gauche
-            lignes[2][lig] = plateau[lig][col];
-            lig--;
-            col--;
-        }
-        lig = coup.getLigne() + 1;
-        col = coup.getColonne() + 1;
-        while (lig < 7 && col < 7) { // Descend à droite
-            lignes[2][lig] = plateau[lig][col];
-            lig++;
-            col++;
-        }
-        // Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite
-        lig = coup.getLigne();
-        col = coup.getColonne();
-        while (lig < 7 && col >= 0) { // Descend à gauche
-            lignes[3][lig] = plateau[lig][col] ;
-            lig++;
-            col--;
-        }
-        lig = coup.getLigne() -1;
-        col = coup.getColonne() +1;
-        while (lig >= 0 && col < 7) { // Monte à droite
-            lignes[3][lig] = plateau[lig][col];
-            lig--;
-            col++;
-        }
-        //Vérification si 4 jetons sont alignés
+        byte[][] lignes = getLignePosition(coup);
+        // Vérification si 4 jetons sont alignés.
         for (byte[] direction : lignes) {
             int compteur = 0;
             for (byte jeton : direction) {
@@ -158,58 +163,20 @@ public class PlateauP4 extends Plateau {
     }
 
 
-
-
-    public int compterMaxJetonsAlignés(CoupP4Coup coup) {
-        /*Structure du tableau
-         *   0 : Ligne horizontale (-)
-         *   1 : Ligne verticale (|)
-         *   2 : Ligne diagonale partant de en haut à gauche jusqu'à en bas à droite (\)
-         *   3 : Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite (/)
-         */
-        byte[][] lignes = new byte[4][7];
+    /**
+     * Permet de savoir combien de jeton sont aligné autour d'un coup.
+     * @param coup Objet représentant le coup.
+     * @return Le nombre maximum de jetons qui sont alignés.
+     */
+    public int compterMaxJetonsAlignes(CoupP4Coup coup) {
+        // Vérification que l'emplacement du coup n'est pas un jeton vide.
         byte color = plateau[coup.getLigne()][coup.getColonne()];
-
         if (color == 0){
             return 0;
         }
 
-        lignes[0] = plateau[coup.getLigne()]; // Remplissage du tableau pour la ligne horizontale
-
-        for (int i=0; i < 7; i++) { // Remplissage du tableau pour la ligne verticale
-            lignes[1][i] = plateau[i][coup.getColonne()];
-        }
-        // Ligne diagonale partant de en haut à gauche jusqu'à en bas à droite
-        int lig = coup.getLigne();
-        int col = coup.getColonne();
-        while (lig >= 0 && col >= 0) { // Monte à gauche
-            lignes[2][lig] = plateau[lig][col];
-            lig--;
-            col--;
-        }
-        lig = coup.getLigne() + 1;
-        col = coup.getColonne() + 1;
-        while (lig < 7 && col < 7) { // Descend à droite
-            lignes[2][lig] = plateau[lig][col];
-            lig++;
-            col++;
-        }
-        // Ligne diagonale partant de en bas à gauche jusqu'à en haut à droite
-        lig = coup.getLigne();
-        col = coup.getColonne();
-        while (lig < 7 && col >= 0) { // Descend à gauche
-            lignes[3][lig] = plateau[lig][col] ;
-            lig++;
-            col--;
-        }
-        lig = coup.getLigne() -1;
-        col = coup.getColonne() +1;
-        while (lig >= 0 && col < 7) { // Monte à droite
-            lignes[3][lig] = plateau[lig][col];
-            lig--;
-            col++;
-        }
-        //Vérification si 4 jetons sont alignés
+        byte[][] lignes = getLignePosition(coup);
+        // Calcule du nombre maximum de jetons alignés.
         int maxLigne = 0;
         for (byte[] direction : lignes) {
             int compteur = 0;
@@ -223,14 +190,13 @@ public class PlateauP4 extends Plateau {
                     maxLigne = compteur;
                 }
             }
-
         }
         return maxLigne;
     }
 
     /**
-     * Permet de vérifier si le plateau est plein
-     * @return true si le plateau est plein, sinon false
+     * Permet de vérifier si le plateau est plein.
+     * @return true si le plateau est plein, sinon false.
      */
     public boolean estPlein(){
         for (byte[] ligne : plateau){
@@ -244,14 +210,17 @@ public class PlateauP4 extends Plateau {
     }
 
     /**
-     * <p>Permet de retourner l'état du plateau sous la forme d'un tableau de byte</p>
-     *
-     * @return un tableau représentant le plateau de puissance 4
+     * Permet de retourner l'état du plateau sous la forme d'un tableau de byte.
+     * @return un tableau représentant le plateau de puissance 4.
      */
     public byte[][] getPlateau(){
         return plateau;
     }
 
+    /**
+     * Permet d'obtenir une copie profonde du plateau.
+     * @return Une copie profonde du plateau.
+     */
     public PlateauP4 copie() {
         byte[][] plateauCopie = new byte[7][7];
         for (byte ligne = 0; ligne < plateau.length; ligne++){
@@ -259,18 +228,19 @@ public class PlateauP4 extends Plateau {
                 plateauCopie[ligne][pion] = plateau[ligne][pion];
             }
         }
-        return new PlateauP4(plateauCopie);
+        return new PlateauP4(plateauCopie, dernierCoup.copie(), wasRotation, rotations, nbRotations.clone());
     }
+
     /**
-     * <p>Permet de placer un jeton dans une colonne</p>
-     * <p>Parcours la colonne à partir du bas et place le jeton dès qu'une case est vide (0)</p>
-     * @param coup Objet représentant le coup
-     * @throws FormatReponseInvalide Si le numéro de colonne demandé est inexistant
-     * @throws ColonnePleine Si la colonne demander est pleine
+     * <p>Permet de placer un jeton dans une colonne.</p>
+     * <p>Parcours la colonne à partir du bas et place le jeton dès qu'une case est vide (0).</p>
+     * @param coup Objet représentant le coup.
+     * @throws FormatReponseInvalide Si le numéro de colonne demandé est inexistant.
+     * @throws ColonnePleine Si la colonne demander est pleine.
      */
     public void placerJeton(CoupP4Coup coup) throws FormatReponseInvalide, ColonnePleine {
         if (coup.getColonne()<0 || coup.getColonne()>6){
-            throw new FormatReponseInvalide("Veuillez entrer un entier compris entre 1 et 7");
+            throw new FormatReponseInvalide("Veuillez entrer un entier compris entre 1 et 7.");
         }
         boolean estPlein = true;
         for (byte ligne = 6; ligne >= 0; ligne--) {
@@ -284,7 +254,7 @@ public class PlateauP4 extends Plateau {
             }
         }
         if (estPlein){
-            throw new ColonnePleine("Le jeton ne peut pas être placé ");
+            throw new ColonnePleine("Le jeton ne peut pas être placé.");
         }
     }
 
@@ -301,29 +271,30 @@ public class PlateauP4 extends Plateau {
         for (byte[] ligne : plateau){
             for (byte contenu : ligne){
                 if (contenu == 0){
-                    string+= "⚫ ";
+                    string += "⚫ ";
                 } else if (contenu == 1) {
-                    string+= "🔴 ";
+                    string += "🔴 ";
                 }else {
-                    string+= "🟡 " ;
+                    string += "🟡 " ;
                 }
             }
-            string+="\n";
+            string += "\n";
         }
         return string;
     }
 
     /**
-     * Méthode qui permet d'activer ou désactiver la rotation
-     * @param i true ou false pour activer
+     * Méthode qui permet d'activer ou désactiver la rotation.
+     * @param i true ou false pour activer.
      */
     public void setRotations(boolean i){
         this.rotations= i;
     }
 
     /**
-     * Getter pour savoir si la rotation est activé
-     * @return l'état d'activation de la rotation
+     * Getter pour savoir si la rotation est activé pour un joueur.
+     * @param numJoueur Le numéro du joueur.
+     * @return l'état d'activation de la rotation.
      */
     public boolean isRotations(int numJoueur) {
         if (!rotations) {
@@ -333,8 +304,8 @@ public class PlateauP4 extends Plateau {
     }
 
     /**
-     * Fonction qui permet de faire tourner le plateau dans un sens
-     * @param coup Objet représentant le coup
+     * Fonction qui permet de faire tourner le plateau dans un sens.
+     * @param coup Objet représentant le coup.
      */
     public void rotation(CoupP4Rotation coup) {
         nbRotations[coup.getJoueur()-1]--;
@@ -346,34 +317,28 @@ public class PlateauP4 extends Plateau {
         }
     }
 
-    /**
-     * Fonction qui permet de faire tourner le plateau dans le sens horaire
-     */
+    /** Fonction qui permet de faire tourner le plateau dans le sens horaire. */
     private void rotationHoraire() {
         byte[][] nouveau = new byte[7][7];
         for (int i = 0; i < 7; i++) { // la ligne à transformer en colonne
             int k = 6; // la profondeur à laquelle placer le prochain jeton
             for (int j = 6; j >= 0; j--) { // le parcours de la ligne
                 if (plateau[i][j] != 0) {
-                    nouveau[k][6-i] = plateau[i][j];
-                    k--;
+                    nouveau[k--][6-i] = plateau[i][j];
                 }
             }
         }
         plateau = nouveau;
     }
 
-    /**
-     * Fonction qui permet de faire tourner le plateau dans le sens horaire
-     */
+    /** Fonction qui permet de faire tourner le plateau dans le sens horaire. */
     private void rotationAntiHoraire() {
         byte[][] nouveau = new byte[7][7];
         for (int i = 0; i < 7; i++) { //la ligne à transformer en colonne
             int k = 6; // la profondeur à laquelle placer le prochain jeton
             for (int j = 0; j < 7; j++) { // le parcours de la ligne
                 if (plateau[i][j] != 0) {
-                    nouveau[k][i] = plateau[i][j];
-                    k--;
+                    nouveau[k--][i] = plateau[i][j];
                 }
             }
         }

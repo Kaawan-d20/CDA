@@ -1,4 +1,4 @@
 /**
- * Package de contenant le main de Nim
+ * Package de contenant le Main de Nim.
  */
 package main.nim;

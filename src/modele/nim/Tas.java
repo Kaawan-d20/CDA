@@ -3,15 +3,15 @@ package modele.nim;
 import exception.NombreBatonnetsInvalide;
 
 /**
- * Classe représentant un tas de bâtonnets du jeu de Nim
+ * Classe représentant un tas de bâtonnets du jeu de Nim.
  */
 public class Tas {
-    /** Le nombre de bâtonnets contenu dans le tas*/
+    /** Le nombre de bâtonnets contenu dans le tas.*/
     private int nombreBatonnet;
 
     /**
      * Permet de construire un objet Tas.
-     * @param nombreBatonnet : le nombre de bâtonnets dans le tas, doit être > 0
+     * @param nombreBatonnet : le nombre de bâtonnets dans le tas, doit être supérieur 0.
      */
     public Tas(int nombreBatonnet) {
         this.nombreBatonnet = nombreBatonnet;
@@ -34,9 +34,8 @@ public class Tas {
     }
 
     /**
-     * Retourne le nombre de bâtonnets du tas : getter.
-     *
-     * @return Le nombre de bâtonnets contenu dans le tas
+     * Getter du nombre de bâtonnets du tas.
+     * @return Le nombre de bâtonnets contenu dans le tas.
      */
     public int getNombre() {
         return nombreBatonnet;
@@ -51,13 +50,12 @@ public class Tas {
     }
 
     /**
-     * Permet d'afficher le tas de bâtonnets sous forme de string
+     * Permet d'afficher le tas de bâtonnets sous forme de string.
      *
-     * @return une String au format  n * "|"
+     * @return une String au format  n * "|".
      */
     @Override
     public String toString() {
         return "|".repeat(nombreBatonnet);
     }
-
 }

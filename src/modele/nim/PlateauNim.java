@@ -1,45 +1,36 @@
 package modele.nim;
 
-import exception.ColonnePleine;
-import exception.FormatReponseInvalide;
 import exception.NombreBatonnetsInvalide;
 import exception.NumeroTasInvalide;
 import modele.abstrait.Plateau;
 
 /**
- * Classe représentant un plateau de jeu de Nim
- * hérite de Plateau
- * @see Plateau
+ * Classe représentant un plateau de jeu de Nim hérite de Plateau.
  */
 public class PlateauNim extends Plateau {
-    /**
-     * Le tableau contenant les tas
-     */
+    /** Le tableau contenant les tas. */
     private Tas[] lesTas;
-    /**
-     * Le nombre de tas
-     */
+    /** Le nombre de tas. */
     private int nombreTas;
 
-    /**
-     * Le nombre Maximum de bâtonnets retirable par coups
-     */
+    /** Le nombre Maximum de bâtonnets retirable par coups. */
     private int maxBatonnets;
-    /**
-     * L'état d'activation de la limite
-     */
+    /** L'état d'activation de la limite. */
     private boolean isLimite;
 
     /**
      * Permet de construire un nouveau PlateauNim, en fonction d'un nombre de tas.
-     *
-     * @param nombreTas : nombre de tas à créer dans le plateau
+     * @param nombreTas Le nombre de tas à créer dans le plateau.
      */
     public PlateauNim(int nombreTas) {
         this.lesTas = new Tas[nombreTas];
         this.nombreTas = nombreTas;
     }
 
+    /**
+     * Permet de construire un nouveau PlateauNim, en fonction du tableau passée en paramètre.
+     * @param tas Un tableau représentant les tas souhaité.
+     */
     public PlateauNim(int[] tas) {
         this.nombreTas = tas.length;
         this.lesTas = new Tas[nombreTas];
@@ -48,10 +39,7 @@ public class PlateauNim extends Plateau {
         }
     }
 
-    /**
-     * <p>Remplit le plateau en créant les tas</p>
-     * <p>Remplace les tas déjà existant</p>
-     */
+    /** Remplit le plateau en créant les tas ou remplace les tas déjà existant. */
     public void reset() {
         for (int i = 0; i < nombreTas; i++) {
             lesTas[i] = new Tas(2*(i+1)-1);
@@ -59,9 +47,8 @@ public class PlateauNim extends Plateau {
     }
 
     /**
-     * Permet de verifier si une partie est finie, c'est-à-dire si tous les tas sont vides
-     *
-     * @return true si la partie est fini, sinon false
+     * Permet de verifier si une partie est finie, c'est-à-dire si tous les tas sont vides.
+     * @return true si la partie est fini, sinon false.
      */
     public boolean verifierFin() {
         boolean b = true;
@@ -72,11 +59,8 @@ public class PlateauNim extends Plateau {
     }
 
     /**
-     * <p>Permet de retourner l'état du plateau sous la forme d'un tableau d'entier</p>
-     * <p>Inutilisé, pourra être supprimé si jamais utilisé
-     * (sera probablement utilisée quand les IA seront implémenté)</p>
-     *
-     * @return un tableau contenant le nombre de bâtonnets de chaque tas, au format [1, 3, 5]
+     * Permet de retourner l'état du plateau sous la forme d'un tableau d'entier.
+     * @return un tableau contenant le nombre de bâtonnets de chaque tas, au format [1, 3, 5].
      */
     public int[] getPlateau() {
         int[] plateau = new int[nombreTas];
@@ -89,7 +73,7 @@ public class PlateauNim extends Plateau {
     /**
      * Retire un nombre spécifié de bâtonnets d'un tas spécifié sur le plateau.
      *
-     * @param coup Objet représentant le coup
+     * @param coup Objet représentant le coup.
      * @throws NumeroTasInvalide Si le numéro du tas est invalide (hors des limites ou égal à zéro).
      * @throws NombreBatonnetsInvalide Si le nombre de bâtonnets à retirer est invalide (négatif ou supérieur au nombre actuel de bâtonnets dans le tas) ou que la limite est atteinte.
      */
@@ -126,8 +110,8 @@ public class PlateauNim extends Plateau {
     }
 
     /**
-     * Setter pour le nombre Maximum de bâtonnets retirable en un coup
-     * @param maxBatonnets le nombre maximum de bâtonnets (pour ne pas avoir de limite 0)
+     * Setter pour le nombre Maximum de bâtonnets retirable en un coup.
+     * @param maxBatonnets le nombre maximum de bâtonnets (pour ne pas avoir de limite 0).
      */
     public void setOption(int maxBatonnets) {
         if (maxBatonnets == 0) {
@@ -139,7 +123,19 @@ public class PlateauNim extends Plateau {
         }
     }
 
+    /**
+     * Getter de l'activation de la limite.
+     * @return true si la limite est activée, sinon false.
+     */
     public boolean isLimite() {
         return isLimite;
+    }
+
+    /**
+     * Getter du nombre maximum de bâtonnets retirable par coup.
+     * @return Le nombre maximum de bâtonnets retirable par coup.
+     */
+    public int getMaxBatonnets() {
+        return maxBatonnets;
     }
 }

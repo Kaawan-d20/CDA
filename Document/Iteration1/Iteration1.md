@@ -154,8 +154,8 @@ Dans la class ControleurJeuNim la méthode jouer est celle qui est appeler par l
 ```java
 public static void main(String[] args) {
     Ihm ihm = new Ihm();
-    ControleurJeuNim controleurJeuNim=new ControleurJeuNim(ihm);
-    controleurJeuNim.jouer();
+    ControleurJeuNim controleurNim=new ControleurJeuNim(ihm);
+    controleurNim.jouer();
 }
 ```
 

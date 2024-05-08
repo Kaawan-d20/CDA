@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class Ihm {
     /**
-     * Le scanner qui permet de récupérer les inputs de l'utilisateur
+     * Le scanner qui permet de récupérer les inputs de l'utilisateur.
      */
     private Scanner scanner;
 
@@ -27,41 +27,42 @@ public class Ihm {
         scanner = new Scanner(System.in);
     }
 
-    //Méthode non spécifique à un jeu
+    // Méthode non spécifique à un jeu.
 
     /**
      * Méthode permettant de demander à l'utilisateur s'il joue seul ou à deux.
+     * @return true pour seul et false pour multi.
      */
     public boolean demanderSeulOuMulti() {
-        // Le pattern s'assure que la ligne contient uniquement "y" ou "n".
+        // Le pattern s'assure que la ligne contient uniquement "1" ou "2".
         Pattern pattern = Pattern.compile("^[1|2]$"); //Permet de créer le regex.
         while (true) {
-            System.out.println("A combien voulez vous jouer ? (1 ou 2)");
+            System.out.println("A combien voulez vous jouer ? (1 ou 2).");
             if (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
-                // On vérifie la réponse et retourne true si c'est "y" et false si c'est "n".
+                // On vérifie la réponse et retourne true si c'est "1" et false si c'est "2".
                 if (matcher.find()) {
                     return line.equals("1");
                 }
             }
-            afficherErreur("Vous avez répondu avec autre chose que `c` ou `g`.");
+            afficherErreur("Vous avez répondu avec autre chose que 1 ou 2.");
         }
     }
 
     /**
-     * Demande à l'utilisateur à quel jeu il veut jouer ("nim" ou "p4")
-     * @return true pour Nim et false pour Puissance 4
+     * Demande à l'utilisateur à quel jeu il veut jouer ("nim" ou "p4").
+     * @return true pour Nim et false pour Puissance 4.
      */
     public boolean demanderJeu() {
-        // Le pattern s'assure que la ligne contient uniquement "y" ou "n".
+        // Le pattern s'assure que la ligne contient uniquement "nim" ou "p4".
         Pattern pattern = Pattern.compile("^(nim|p4)$"); //Permet de créer le regex.
         while (true) {
-            System.out.println("Quel jeu voulez vous jouer ? Nim (nim) ou Puissance 4 (p4)");
+            System.out.println("Quel jeu voulez vous jouer ? Nim (nim) ou Puissance 4 (p4).");
             if (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
-                // On vérifie la réponse et retourne true si c'est "y" et false si c'est "n".
+                // On vérifie la réponse et retourne true si c'est "nim" et false si c'est "p4".
                 if (matcher.find()) {
                     return line.equals("nim");
                 }
@@ -85,20 +86,23 @@ public class Ihm {
                 if (!candidate.isBlank()){
                     return candidate;
                 }
-                afficherErreur("Le nom du joueur ne doit pas est uniquement composée de caractère invisible");
+                afficherErreur("Le nom du joueur ne doit pas est uniquement composée de caractère invisible.");
             }
         }
     }
 
     /**
-     * Affiche le plateau passé sous la forme d'une String
-     *
-     * @param plateau le plateau sous forme de string
+     * Affiche le plateau passé sous la forme d'une String.
+     * @param plateau le plateau sous forme de string.
      */
     public void afficherPlateau(String plateau) {
         System.out.println(plateau);
     }
 
+    /**
+     * Affiche le coup passé sous la forme d'une String.
+     * @param coup le coup sous forme de string.
+     */
     public void afficherCoup(Coup coup) {
         System.out.println(coup);
     }
@@ -109,7 +113,7 @@ public class Ihm {
      * @param nomJoueur   Le nom du joueur gagnant.
      * @param nbVictoires Le nombre de victoires du joueur.
      * @param nbParties   Le nombre total de parties jouées.
-     * @param isExAequo   Valeur booléenne représentant une éventuelle égalité
+     * @param isExAequo   Valeur booléenne représentant une éventuelle égalité.
      */
     public void afficherVictoire(String nomJoueur, int nbVictoires, int nbParties, boolean isExAequo) {
         if (isExAequo) {
@@ -132,7 +136,7 @@ public class Ihm {
         // Le pattern s'assure que la ligne contient uniquement "y" ou "n".
         Pattern pattern = Pattern.compile("^[y|n]$"); //Permet de créer le regex.
         while (true) {
-            System.out.println("Voulez-vous rejouer une partie ? (y/n)");
+            System.out.println("Voulez-vous rejouer une partie ? (y/n).");
             if (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
@@ -141,7 +145,6 @@ public class Ihm {
                     return line.equals("y");
                 }
             }
-
             afficherErreur("Vous avez répondu avec autre chose que `y` ou `n`.");
         }
     }
@@ -155,23 +158,23 @@ public class Ihm {
         System.out.println("\n\n⚠ " + message);
     }
 
-    //Méthode du jeu de Nim
+    //Méthode du jeu de Nim.
 
     /**
-     * <p>Demande au joueur le nombre maximum de bâtonnets à retirer en un seul coup</p>
-     * @return un entier strictement positif
+     * Demande au joueur le nombre maximum de bâtonnets à retirer en un seul coup.
+     * @return un entier strictement positif.
      */
     public int setOptionNim() {
         Pattern pattern = Pattern.compile("^[0-9]+$");
         while (true) {
-            System.out.println("Veuillez entrer le nombre maximum de bâtonnet retirable d'un seul coup (0 pour ne pas mettre de limite).");
+            System.out.println("Veuillez entrer le nombre maximum de bâtonnets retirable d'un seul coup (0 pour ne pas mettre de limite).");
             if (scanner.hasNextLine()) {
                 String candidate = scanner.nextLine();
                 Matcher matcher = pattern.matcher(candidate);
                 if (matcher.find()) {
                     return Integer.parseInt(candidate);
                 } else {
-                    afficherErreur("Merci d'entrer un entier positif");
+                    afficherErreur("Merci d'entrer un entier positif.");
                 }
             }
         }
@@ -179,7 +182,6 @@ public class Ihm {
 
     /**
      * Demande à l'utilisateur le nombre de tas pour jouer, boucle tant que l'utilisateur n'entre pas un entier.
-     *
      * @return Le nombre de tas saisi par l'utilisateur.
      */
     public int demanderNbTas() {
@@ -192,7 +194,6 @@ public class Ihm {
                 return candidate;
             }
             scanner.nextLine();
-
             afficherErreur("Format de réponse invalide.");
         }
     }
@@ -201,7 +202,7 @@ public class Ihm {
      * <p>Demande à un joueur de saisir un coup pour le jeu Nim.</p>
      * <p>Affiche un message d'invitation et attend une réponse de l'utilisateur.</p>
      * <p>La réponse doit être au format `m n`, où `m` est le numéro du tas et `n` est le nombre de bâtonnets à retirer.</p>
-     * <p>Boucle tant que la réponse n'est pas au format `m n`</p>
+     * <p>Boucle tant que la réponse n'est pas au format `m n`.</p>
      *
      * @param nomJoueur Le nom du joueur pour lequel la demande est effectuée.
      * @return Un tableau d'entiers de taille 2, contenant le numéro du tas et le nombre de bâtonnets à retirer [m, n].
@@ -212,7 +213,7 @@ public class Ihm {
         Pattern pattern = Pattern.compile("^[0-9]+ [0-9]+$"); //Permet de créer le regex.
         while (true){
             System.out.println("Quel coup voulez-vous jouer " + nomJoueur + " ?\nVeuillez jouer un coup au format" +
-                    " `m n`\nOù `m` est le numéro du tas, et `n` le nombre de bâtonnet à retirer");
+                    " `m n`\nOù `m` est le numéro du tas, et `n` le nombre de bâtonnet à retirer.");
             if (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
@@ -227,21 +228,21 @@ public class Ihm {
                     return new CoupNim(candidate);
                 }
             }
-            // Si la réponse de l'utilisateur ne correspond pas au format attendu, on affiche une erreur
+            // Si la réponse de l'utilisateur ne correspond pas au format attendu, on affiche une erreur.
             afficherErreur("Format de réponse invalide.");
         }
     }
 
-    // Méhtode du jeu de Puissance 4
+    // Méthode du jeu de Puissance 4.
 
     /**
-     * Demande à l'utilisateur s'il souhaite activer les rotations
-     * @return true pour oui et false pour non
+     * Demande à l'utilisateur s'il souhaite activer les rotations.
+     * @return true pour oui et false pour non.
      */
     public boolean demanderActivationRotation() {
         Pattern pattern = Pattern.compile("^[y|n]$"); //Permet de créer le regex.
         while (true) {
-            System.out.println("Voulez vous activer la rotation ? (y/n)");
+            System.out.println("Voulez vous activer la rotation ? (y/n).");
             if (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 Matcher matcher = pattern.matcher(line); // Permet de créer un objet auquel on demande si la String correspond au regex.
@@ -255,8 +256,8 @@ public class Ihm {
     }
 
     /**
-     * Demande à l'utilisateur s'il souhaite jouer un coup ou faire une rotation
-     * @return true pour coup et false pour rotation
+     * Demande à l'utilisateur s'il souhaite jouer un coup ou faire une rotation.
+     * @return true pour coup et false pour rotation.
      */
     public boolean demanderCoupOuRotation(String nomJoueur) {
         Pattern pattern = Pattern.compile("^[c|r]$"); //Permet de créer le regex.
@@ -277,7 +278,7 @@ public class Ihm {
     /**
      * <p>Demande à un joueur de saisir le numéro d'une colonne pour le jeu de puissance 4.</p>
      * <p>Affiche un message d'invitation et attend une réponse de l'utilisateur.</p>
-     * <p>La réponse doit être un entier sinon boucle</p>
+     * <p>La réponse doit être un entier sinon boucle.</p>
      *
      * @param nomJoueur Le nom du joueur pour lequel la demande est effectuée.
      * @return Un byte contenant le numéro de colonne.
@@ -293,16 +294,16 @@ public class Ihm {
                 return new CoupP4Coup(candidate);
             }
             scanner.nextLine();
-            afficherErreur("Veuillez entrer un entier compris entre 1 et 7");
+            afficherErreur("Veuillez entrer un entier compris entre 1 et 7.");
         }
     }
 
     /**
-     * Demande à l'utilisateur dans quel sens effectuer la rotation
-     * @return true pour horaire et false pour anti-horaire
+     * Demande à l'utilisateur dans quel sens effectuer la rotation.
+     * @return true pour horaire et false pour anti-horaire.
      */
     public CoupP4Rotation demanderRotation(String nomJoueur) {
-        Pattern pattern = Pattern.compile("^[h|a]$"); //Permet de créer le regex.
+        Pattern pattern = Pattern.compile("^[h|a]$"); // Permet de créer le regex.
         while (true) {
             System.out.println(nomJoueur + ", voulez vous effectuer la rotation dans le sens horaire ↻ (h) ou anti-horaire ↺ (a) ?");
             if (scanner.hasNextLine()) {

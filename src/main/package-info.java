@@ -1,4 +1,4 @@
 /**
- * Package de Main.
+ * Package contenant les différents Main.
  */
 package main;

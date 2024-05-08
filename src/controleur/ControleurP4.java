@@ -4,22 +4,17 @@ import exception.ColonnePleine;
 import exception.FormatReponseInvalide;
 import modele.abstrait.CoupP4;
 import modele.joueur.IA;
-import modele.joueur.IANim;
 import modele.joueur.IAP4;
 import modele.joueur.Joueur;
-import modele.nim.PlateauNim;
 import modele.p4.CoupP4Coup;
 import modele.p4.CoupP4Rotation;
 import modele.p4.PlateauP4;
 import vue.Ihm;
 
 /**
- * Classe du contrôleur du jeu de puissance 4,
- * hérite de Controleur
- * @see Controleur
+ * Classe du contrôleur du jeu de puissance 4, hérite de Contrôleur.
  */
 public class ControleurP4 extends Controleur{
-
     /**
      * Initialise un nouveau contrôleur de jeu de puissance 4 avec une interface utilisateur spécifiée.
      *
@@ -30,8 +25,8 @@ public class ControleurP4 extends Controleur{
     }
 
     /**
-     * Initialise une nouvelle partie en demandant les noms des joueurs,
-     * crée le PlateauP4 de jeu et lance la partie.
+     * Initialise le plateau,
+     * puis appel son implémentation dans la super classe.
      */
     public void jouer() {
         plateau = new PlateauP4();
@@ -39,20 +34,20 @@ public class ControleurP4 extends Controleur{
     }
 
     /**
-     * Demande le coup à l'ihm et demander au plateau de réaliser le coup.
+     * Demande le coup et demander au plateau de réaliser le coup.
      * @throws FormatReponseInvalide Si la réponse n'est pas compris entre 1 et 7.
      * @throws ColonnePleine Si la colonne est pleine.
      */
     protected void getCoup() throws FormatReponseInvalide, ColonnePleine {
         CoupP4 coup;
-        if (getJoueurCourant().isHuman()){
+        if (getJoueurCourant().isHuman()){ // Si le joueur est humain.
             ihm.afficherPlateau(plateau.toString());
-            if ( ((PlateauP4)plateau).isRotations(numeroJoueurCourant) && !ihm.demanderCoupOuRotation(getNomJoueurCourant()) ) {
+            if ( ((PlateauP4)plateau).isRotations(numeroJoueurCourant) && !ihm.demanderCoupOuRotation(getNomJoueurCourant()) ) { // Si la rotation du plateau est activée et que le joueur a encore des rotations.
                 coup = ihm.demanderRotation(getNomJoueurCourant());
             } else {
                 coup = ihm.demanderCoupP4(getNomJoueurCourant());
             }
-        } else {
+        } else { // Si le joueur est une IA.
             coup = ((IAP4) getJoueurCourant()).demanderCoup((PlateauP4) plateau);
             ihm.afficherCoup(coup);
         }
@@ -68,7 +63,7 @@ public class ControleurP4 extends Controleur{
 
     /**
      * Incrément le nombre de victoires du joueur courant
-     * et gére l'affiche du vainqueur prendre aussi en compte la possibilité d'un ex aequo
+     * et gére l'affiche du vainqueur prendre aussi en compte la possibilité d'un ex aequo.
      */
     protected void victoire(){
         byte idVainqueur = ((PlateauP4)plateau).verifierVictoire();
@@ -83,15 +78,19 @@ public class ControleurP4 extends Controleur{
     }
 
     /**
-     * Demande à l'ihm si l'utilisateur veut activer ou non la contrainte de rotation,
+     * Demande à l'Ihm si l'utilisateur veut activer ou non la contrainte de rotation,
      * puis demande au plateau de l'activer.
      */
     protected void setOption(){
-        //appel de l'ihm et transfère dans le plateau
+        //appel de l'Ihm et transfère dans le plateau
         boolean option = ihm.demanderActivationRotation();
         ((PlateauP4)plateau).setRotations(option);
     }
 
+    /**
+     * Retourne une instance de l'IA correspondant au jeu de Puissance 4.
+     * @return Une instance de l'IA du jeu de Puissance 4.
+     */
     protected IA getIA(){
         return new IAP4();
     }

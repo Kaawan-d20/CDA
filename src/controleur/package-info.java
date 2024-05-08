@@ -1,4 +1,4 @@
 /**
- * Package contenant les contrôleurs des jeux
+ * Package contenant les contrôleurs des jeux.
  */
 package controleur;

@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Jeu Choix" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="main.main" />
+    <option name="MAIN_CLASS_NAME" value="main.Main" />
     <module name="CDA" />
     <extension name="coverage">
       <pattern>

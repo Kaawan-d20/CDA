@@ -1,19 +1,19 @@
 package main.nim;
 
-import controleur.ControleurJeuNim;
+import controleur.ControleurNim;
 import vue.Ihm;
 
 /**
- * La classe Main.
+ * La classe Main pour le jeu de Nim.
  */
 public class Main {
     /**
-     * La méthode main.
-     * @param args Paramètres args
+     * La méthode Main pour le jeu de Nim.
+     * @param args Paramètres args.
      */
     public static void main (String[] args) {
         Ihm ihm = new Ihm();
-        ControleurJeuNim controleurJeuNim = new ControleurJeuNim(ihm);
-        controleurJeuNim.jouer();
+        ControleurNim controleurNim = new ControleurNim(ihm);
+        controleurNim.jouer();
     }
 }
