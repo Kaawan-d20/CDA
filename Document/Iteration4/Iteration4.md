@@ -197,198 +197,251 @@ graph LR
 
 
 ```mermaid
+
 classDiagram
-    class Main{ 
-        + main() void
-    }
+    direction BT
 
     class Controleur {
         <<abstract>>
-        # int numeroJoueurCourant
-        # int nombrePartie
-
-        + jouer() void 
-        # initJoueur() void
-        # tourDeJeu() void
-        # tourSuivant() void
-        # finPartie() void
-        # getNumeroJoueurCourant() int
-        # getJoueurCourant() Joueur
-        # getNomJoueurCourant() String
-
-        # getCoup() void*
-        # victoire() void*
-        # setOption() void*
+    + Controleur() 
+    # Plateau plateau
+    # Ihm ihm
+    # Joueur[] lesJoueurs
+    # int nombrePartie
+    # int numeroJoueurCourant
+    # getIA() IA
+    # getCoup() void
+    # setOption() void
+    # getJoueurCourant() Joueur
+    # finPartie() void
+    # tourSuivant() void
+    # getNomJoueurCourant() String
+    + jouer() void
+    # toursDeJeu() void
+    # victoire() void
+    # initJoueur() void
     }
-
-    class ControleurJeuNim{
-        + ControleurJeuNim(Ihm ihm)
-
-        + jouer() void
-        # getCoup() void
-        # victoire() void
-        # setOption() void
+    class ControleurNim {
+    + ControleurNim(Ihm) 
+    + jouer() void
+    # victoire() void
+    # getIA() IA
+    # setOption() void
+    # getCoup() void
     }
-
-    class ControleurP4{
-        + ControleurP4(Ihm ihm)
-        + jouer() void
-        # getCoup() void
-        # victoire() void
-        # setOption() void
+    class ControleurP4 {
+    + ControleurP4(Ihm) 
+    # victoire() void
+    # setOption() void
+    # getIA() IA
+    + jouer() void
+    # getCoup() void
     }
-
-    Controleur <|-- ControleurJeuNim
-    Controleur <|-- ControleurP4
-
-    class Plateau {
+    class Coup {
         <<abstract>>
-        + reset() void*
-        + verifierFin() void*
+    + Coup() 
     }
-    class PlateauNim {
-        - int nombreTas
-        - int maxBatonnets
-        - bool isLimite
-
-        + PlateauNim(int nombreTas)
-        + reset() void
-        + verifierFin() bool
-        + getPlateau() int[]
-        + retirerBatonnets(CoupNim coup) void
-        + toString() String
-        + setOption(int maxBatonnets) void
-    }
-
-    class PlateauP4 {
-        - byte[][] plateau
-        - CoupP4 dernierCoup
-        - bool wasRotation
-        - bool rotation
-        - byte[] nbRotation
-
-        + PlateauP4()
-        + reset() void
-        + verifierFin() bool
-        + verifierVictoire() byte
-        + verifierVictoireCase(CoupP4Coup coup) byte
-        + estPlein() bool
-        + getPlateau() byte[][]
-        + placerJeton(CoupP4Coup coup) void
-        + toString() String 
-        + setRotation(boolean i) void
-        + isRotations(int numJoueur) bool
-        + rotation(CoupP4Rotation coup) void
-        - rotationHoraire() void
-        - rotationAntiHoraire() void
-
-
-    }
-
-    Plateau <|-- PlateauNim
-    Plateau <|-- PlateauP4
-
-
-    class Tas {
-        - int nombreBatonnet
-
-        + Tas (int nombreBatonnet)
-        + retirerBatonnet(int n) void
-        + getNombre() int
-        + estVide() bool
-        + toString() String
-    }
-
-    class Joueur {
-        - String nom
-        - int nbVictoires
-
-        + Joueur(String nom)
-        + getNom() String
-        + getNbVictoires() int
-        + incrementVictoires() void
-        + compareTo(Joueur autreJoueur) int
-    }
-
-
-
-
-
-    class Ihm {
-        # Scanner scanner
-
-        + Ihm()
-
-        + demanderJeu() bool
-        + demanderNomJoueur(int numJoueur) String
-        + afficherPlateau(String plateau) void
-        + afficherVictoire(String nomJoueur, int nbVictoires, int nbParties, bool isExAequo) void
-        + demanderJouerEncore() bool
-        + afficherErreur(String message) void
-
-        + setOptionNim() int
-        + demanderNbTas() int
-        + demanderCoupNim(String nomJoueur) CoupNim
-        
-        + demanderActivationRotation() bool
-        + demanderCoupOuRotation(String nomJoueur) bool
-        + demanderCoupP4(String nomJoueur) CoupP4Coup
-        + demanderRotation(String nomJoueur) CoupP4Rotation
-    }
-
-
-    class Coup {<<abstract>>}
     class CoupNim {
-        - int tas
-        - int nbBatonnets
-
-        + CoupNim(int tab, int nbBatonnets)
-        + CoupNim(int[])
-
-        + getCoup() int[]
-        + getNbBatonnets() int
-        + getTas() int
+    + CoupNim(int, int) 
+    + CoupNim(int[]) 
+    - int tas
+    - int nbBatonnets
+    + getNbBatonnets() int
+    + getTas() int
+    + toString() String
+    + equals(Object) boolean
+    + getCoup() int[]
     }
     class CoupP4 {
         <<abstract>>
-        # byte joueur
-        
-        + getJoueur() byte
-        + setJoueur(int joueurCourant) void
+    + CoupP4() 
+    # byte joueur
+    + getJoueur() byte
+    + setJoueur(int) void
+    + isRotation() boolean
     }
-
     class CoupP4Coup {
-        - byte colonne
-        - byte ligne
-
-        + CoupP4Coup(byte colonne)
-        + CoupP4Coup(byte colonne, byte ligne)
-
-        + getColonne() byte
-        + getLigne() byte
-        + setLigne(byte ligne) void
+    + CoupP4Coup(byte, int) 
+    + CoupP4Coup(byte, byte) 
+    + CoupP4Coup(byte) 
+    - byte colonne
+    - byte ligne
+    + setLigne(byte) void
+    + getColonne() byte
+    # copie() CoupP4Coup
+    + toString() String
+    + isRotation() boolean
+    + getLigne() byte
+    + equals(Object) boolean
     }
-
     class CoupP4Rotation {
-        - bool sens
+    + CoupP4Rotation(boolean) 
+    + CoupP4Rotation(boolean, byte) 
+    - boolean sens
+    + toString() String
+    + equals(Object) boolean
+    + getSens() boolean
+    + isRotation() boolean
+    }
 
-        + CoupP4Rotation(bool sens)
+    class IA {
+        <<abstract>>
+    # IA() 
+    }
+    class IANim {
+    + IANim() 
+    - demanderCoupAleatoire(PlateauNim) CoupNim
+    - demanderCoupGagnant(PlateauNim) CoupNim?
+    + demanderCoup(PlateauNim) CoupNim
+    }
+    class IAP4 {
+    + IAP4() 
+    - CoupP4Rotation[] lesRotationsAdverses
+    - int[] scoreTailleIa
+    - CoupP4Rotation[] lesRotations
+    - CoupP4Coup[] lesPlacements
+    - CoupP4Coup[] lesPlacementsAdverses
+    - int[] scoreTailleJoueur
+    + demanderCoup(PlateauP4) CoupP4
+    }
+    class Ihm {
+    + Ihm() 
+    - Scanner scanner
+    + afficherVictoire(String, int, int, boolean) void
+    + demanderNomJoueur(int) String
+    + demanderJeu() boolean
+    + demanderJouerEncore() boolean
+    + demanderCoupNim(String) CoupNim
+    + demanderRotation(String) CoupP4Rotation
+    + demanderActivationRotation() boolean
+    + afficherCoup(Coup) void
+    + afficherErreur(String) void
+    + demanderSeulOuMulti() boolean
+    + demanderCoupP4(String) CoupP4Coup
+    + demanderNbTas() int
+    + demanderCoupOuRotation(String) boolean
+    + setOptionNim() int
+    + afficherPlateau(String) void
+    }
 
-        + getSens() bool
+    class Joueur {
+    + Joueur(String) 
+    # String nom
+    # boolean isHuman
+    # int nbVictoires
+    + isHuman() boolean
+    + compareTo(Joueur) int
+    + incrementVictoires() void
+    + getNom() String
+    + getNbVictoires() int
+    }
+    class Main {
+    + Main() 
+    + main(String[]) void
+    }
+    class Plateau {
+        <<abstract>>
+    + Plateau() 
+    + verifierFin() boolean
+    + reset() void
+    }
+    class PlateauNim {
+    + PlateauNim(int) 
+    + PlateauNim(int[]) 
+    - int maxBatonnets
+    - boolean isLimite
+    - int nombreTas
+    - Tas[] lesTas
+    + toString() String
+    + reset() void
+    + isLimite() boolean
+    + retirerBatonnets(CoupNim) void
+    + setOption(int) void
+    + verifierFin() boolean
+    + getPlateau() int[]
+    + getMaxBatonnets() int
+    }
+    class PlateauP4 {
+    + PlateauP4(byte[][]) 
+    + PlateauP4(byte[][], CoupP4Coup, boolean, boolean, byte[]) 
+    + PlateauP4() 
+    - boolean rotations
+    - byte[] nbRotations
+    - byte[][] plateau
+    - boolean wasRotation
+    - CoupP4Coup dernierCoup
+    + estPlein() boolean
+    - rotationHoraire() void
+    + compterMaxJetonsAlignes(CoupP4Coup) int
+    + toString() String
+    + setRotations(boolean) void
+    + isRotations(int) boolean
+    + verifierVictoireCase(CoupP4Coup) byte
+    - rotationAntiHoraire() void
+    + copie() PlateauP4
+    + placerJeton(CoupP4Coup) void
+    + verifierFin() boolean
+    - getLignePosition(CoupP4Coup) byte[][]
+    + reset() void
+    + verifierVictoire() byte
+    + rotation(CoupP4Rotation) void
+    + getPlateau() byte[][]
+    }
+
+    class Tas {
+    + Tas(int) 
+    - int nombreBatonnet
+    + getNombre() int
+    + retirerBatonnet(int) void
+    + toString() String
+    + estVide() boolean
     }
 
 
-    CoupNim --|> Coup
-    CoupP4 --|> Coup
-    CoupP4Coup --|> CoupP4
-    CoupP4Rotation --|> CoupP4
+    ControleurNim  --|>  Controleur 
+    ControleurP4  --|>  Controleur 
+    CoupNim  --|>  Coup 
+    CoupP4  --|>  Coup 
+    CoupP4Coup  --|>  CoupP4 
+    CoupP4Rotation  --|>  CoupP4 
+    IA  --|>  Joueur 
+    IANim  --|>  IA 
+    IAP4  --|>  IA 
+    PlateauNim  --|>  Plateau 
+    PlateauP4  --|>  Plateau
 
 
 
-    Controleur --> "1" Plateau
-    Controleur --> "1" Ihm
-    Tas "1..n" --* PlateauNim : lesTas
-    Controleur --> "2" Joueur : lesJoueurs
+
+
+
+
+
+
+
+
+
+
+    Controleur --> "1" Ihm 
+    %%Controleur  ..>  Joueur : «create»
+    Controleur --> "1..*" Joueur : lesJoueurs
+    Controleur --> "1" Plateau 
+    %%ControleurNim  ..>  IANim : «create»
+    %%ControleurNim  ..>  PlateauNim : «create»
+    %%ControleurP4  ..>  IAP4 : «create»
+    %%ControleurP4  ..>  PlateauP4 : «create»
+    %%IANim  ..>  CoupNim : «create»
+    %%IAP4 "1" *--> "lesPlacements *" CoupP4Coup 
+    %%IAP4  ..>  CoupP4Coup : «create»
+    %%IAP4  ..>  CoupP4Rotation : «create»
+    %%IAP4 "1" *--> "lesRotations *" CoupP4Rotation 
+    Ihm  ..>  CoupNim : «create»
+    Ihm  ..>  CoupP4Rotation : «create»
+    Ihm  ..>  CoupP4Coup : «create»
+    %%PlateauNim  ..>  Tas : «create»
+    PlateauNim *--> "1..*" Tas : lesTas
+    %%PlateauP4  ..>  CoupP4Coup : «create»
+    %%PlateauP4 "1" *--> "dernierCoup 1" CoupP4Coup 
 ``` 
 
 
@@ -398,11 +451,11 @@ classDiagram
 
 ### 24/03/2024 (Fin des exams)
 
-Dany : Refactor des problèmes de l'itération 3
+Dany : Refactor des problèmes de l'itération 3, IA Nim (Aléatoire)
 
-Nathan : 
+Nathan : IA Puissance 4
 
-Agathe : 
+Agathe : IA Nim (Gagnant)
 
 # Utilisation de l'IA
 ## Itération 4
