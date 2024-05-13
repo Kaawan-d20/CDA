@@ -11,6 +11,7 @@ public abstract class Plateau {
 
     /**
      * Méthode permettant de savoir si quelqu'un à gagner.
+     * @return true si la partie est fini, sinon false.
      */
     public abstract boolean verifierFin();
 }

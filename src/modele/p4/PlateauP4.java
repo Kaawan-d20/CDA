@@ -29,13 +29,21 @@ public class PlateauP4 extends Plateau {
     /** Permet de construire un nouveau PlateauP4 sans arguments (plateau vide). */
     public PlateauP4() {}
 
-    /** Permet de construire un nouveau PlateauP4 copie d'un autre plateau. */
+    /** Permet de construire un nouveau PlateauP4 copie d'un autre plateau.
+     * @param plateau Un plateau déjà rempli.
+     */
     public PlateauP4(byte[][] plateau) {
         this.plateau = plateau;
     }
 
-    /** Permet de construire un nouveau PlateauP4 copie d'un autre plateau. */
-    public PlateauP4(byte[][] plateau, CoupP4Coup dernierCoup, boolean wasRotation, boolean rotations, byte[] nbRotations) {
+    /** Permet de construire un nouveau PlateauP4 copie d'un autre plateau.
+     * @param plateau Un plateau.
+     * @param dernierCoup Le dernierCoup.
+     * @param wasRotation Le WasRotation.
+     * @param rotations L'activation des rotations.
+     * @param nbRotations Le nombre de rotations des joueurs.
+     * */
+    private PlateauP4(byte[][] plateau, CoupP4Coup dernierCoup, boolean wasRotation, boolean rotations, byte[] nbRotations) {
         this.plateau = plateau;
         this.dernierCoup = dernierCoup;
         this.wasRotation = wasRotation;

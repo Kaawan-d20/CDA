@@ -7,6 +7,9 @@ import modele.p4.PlateauP4;
 
 import java.util.ArrayList;
 
+/**
+ * Classe représentant la stratégie du jeu de Puissance 4.
+ */
 public class IAP4 extends IA{
     // Permets de pré générer une seule fois la totalité des coups possibles.
 

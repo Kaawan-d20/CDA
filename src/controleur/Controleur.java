@@ -69,8 +69,7 @@ public abstract class Controleur {
                 try{
                     getCoup();
                     estCoupCorrect = true;
-                } catch (NombreBatonnetsInvalide | NumeroTasInvalide | ColonnePleine | FormatReponseInvalide |
-                         PlusDeRotations exception){
+                } catch (NombreBatonnetsInvalide | NumeroTasInvalide | ColonnePleine | FormatReponseInvalide exception){
                     ihm.afficherErreur(exception.getMessage());
                 }
             }
@@ -129,8 +128,12 @@ public abstract class Controleur {
     /**
      * <p>Méthode abstraite.</p>
      * <p>Doit demander le coup et demander au plateau de réaliser le coup.</p>
+     * @throws FormatReponseInvalide Si la réponse n'est pas compris entre 1 et 7.
+     * @throws NombreBatonnetsInvalide Si le nombre de bâtonnets dans le tas à inférieur au retrait demandé ou que la limite de bâtonnets par coup a été atteinte.
+     * @throws NumeroTasInvalide Si le tas demandé est inconnue.
+     * @throws ColonnePleine Si la colonne est pleine.
      */
-    protected abstract void getCoup() throws FormatReponseInvalide, NombreBatonnetsInvalide, NumeroTasInvalide, ColonnePleine, PlusDeRotations;
+    protected abstract void getCoup() throws FormatReponseInvalide, NombreBatonnetsInvalide, NumeroTasInvalide, ColonnePleine;
 
     /**
      * <p>Méthode abstraite.</p>

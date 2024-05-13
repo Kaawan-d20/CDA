@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"controleur"},{"l":"exception"},{"l":"main"},{"l":"main.nim"},{"l":"main.p4"},{"l":"modele"},{"l":"vue"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"controleur"},{"l":"exception"},{"l":"main"},{"l":"main.nim"},{"l":"main.p4"},{"l":"modele.abstrait"},{"l":"modele.joueur"},{"l":"modele.nim"},{"l":"modele.p4"},{"l":"vue"}];updateSearchResults();

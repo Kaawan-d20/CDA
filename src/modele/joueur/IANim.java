@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Classe représentant les différentes stratégies du jeu de Nim.
+ */
 public class IANim extends IA{
     /**
      * Permet de créer un nouvel objet IANim.

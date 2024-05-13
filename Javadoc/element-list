@@ -3,5 +3,8 @@ exception
 main
 main.nim
 main.p4
-modele
+modele.abstrait
+modele.joueur
+modele.nim
+modele.p4
 vue

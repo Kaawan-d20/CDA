@@ -257,6 +257,7 @@ public class Ihm {
 
     /**
      * Demande à l'utilisateur s'il souhaite jouer un coup ou faire une rotation.
+     * @param nomJoueur Le nom du joueur.
      * @return true pour coup et false pour rotation.
      */
     public boolean demanderCoupOuRotation(String nomJoueur) {
@@ -300,6 +301,7 @@ public class Ihm {
 
     /**
      * Demande à l'utilisateur dans quel sens effectuer la rotation.
+     * @param nomJoueur Le nom du joueur.
      * @return true pour horaire et false pour anti-horaire.
      */
     public CoupP4Rotation demanderRotation(String nomJoueur) {
