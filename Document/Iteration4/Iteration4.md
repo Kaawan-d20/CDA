@@ -22,17 +22,20 @@ graph LR
 1. L'utilisateur lance le programme
 2. Le système demande à l'utilisateur à quel jeu il veux jouer
 3. L'utilisateur répond à la question
-4. UC: Nim
+4. Le système demande à l'utilisateur s'il est seul ou à deux
+5. L'utilisateur répond à la question
+6. UC: Nim
 
 ### Extensions
 
-4. a L'utilisateur à répondu puissance 4
-    1. UC : Puissance 4
+4\. b L'utilisateur à répondu autre chose
 
-4. b L'utilisateur à répondu autre chose
-    1. Le système affiche un message d'erreur
-    2. Retour au point 2 du scénario nominal
+1. Le système affiche un message d'erreur
+2. Retour au point 2 du scénario nominal
 
+6\. a L'utilisateur à répondu puissance 4
+
+1. UC : Puissance 4
 
 
 
@@ -70,52 +73,51 @@ graph LR
 
 ### Extensions
 
-4. a Le joueur répond autre chose ou un nombre inférieur à 1
-    1. Le système affiche un message d'erreur "le nombre de tas doit être un entier supérieur à 1"
-    2. Retour au point 2 du scénario nominal
+4\. a Le joueur répond autre chose ou un nombre inférieur à 1
+1. Le système affiche un message d'erreur "le nombre de tas doit être un entier supérieur à 1"
+2. Retour au point 2 du scénario nominal
 
-7. a L'utilisateur répond à la question avec une chaîne vide
-    1. Le système affiche un message d'erreur "Le nom ne peut pas être vide"
-    2. Retour au point 5 du scénario nominal
+7\. a L'utilisateur répond à la question avec une chaîne vide
+1. Le système affiche un message d'erreur "Le nom ne peut pas être vide"
+2. Retour au point 5 du scénario nominal
 
-10. a L'utilisateur répond à la question avec une chaîne vide
-    1. Le système affiche un message d'erreur "Le nom ne peut pas être vide"
-    2. Retour au point 8 du scénario nominal
+8\. a Le joueur joue seul
+1. Retour au point 11 du scénario nominal
 
-13. a Le joueur répond autre chose ou un nombre inférieur à 0 (peut être supérieur à quelque chose à définir)
-    1. Le système affiche un message d'erreur "le nombre de tas doit être un entier supérieur à 0"
-    2. Retour au point 11 du scénario nominal
+10\. a L'utilisateur répond à la question avec une chaîne vide
+1. Le système affiche un message d'erreur "Le nom ne peut pas être vide"
+2. Retour au point 8 du scénario nominal
 
-16. a Le joueur n'a pas entré une réponse au format $m\ n$
-    1. Le système affiche un message d'erreur "Le format de la réponse doit être $n\ m$"
-    2. Retour au point 14 du scénario nominal avec le même joueur
+13\. a Le joueur répond autre chose ou un nombre inférieur à 0
+1. Le système affiche un message d'erreur "la limite doit etre un entier superieur ou égal à 0"
+2. Retour au point 11 du scénario nominal
 
-16. b Le joueur a demandé un tas qui n'existe pas
-    1. Le système affiche un message d'erreur "Tas inexistant"
-    2. Retour au point 14 du scénario nominal avec le même joueur
+16\. a Le joueur n'a pas entré une réponse au format $m\ n$
+1. Le système affiche un message d'erreur "Le format de la réponse doit être $n\ m$"
+2. Retour au point 14 du scénario nominal avec le même joueur
 
-16. c Le joueur veut prendre un nombre d'allumette supérieur au nombre contenue dans le tas
-    1. Le système affiche un message d'erreur "Pas assez d'allumette dans ce tas"
-    2. Retour au point 14 du scénario nominal avec le même joueur
+16\. b Le joueur a demandé un tas qui n'existe pas
+1. Le système affiche un message d'erreur "Tas inexistant"
+2. Retour au point 14 du scénario nominal avec le même joueur
 
-16. d Le joueur veut prendre un nombre d'allumette supérieur à la limite
-    1. Le système affiche un message d'erreur "Le nombre max est ..."
-    2. Retour au point 14 du scénario nominal avec le même joueur
+16\. c Le joueur veut prendre un nombre d'allumette supérieur au nombre contenue dans le tas
+1. Le système affiche un message d'erreur "Pas assez d'allumette dans ce tas"
+2. Retour au point 14 du scénario nominal avec le même joueur
 
-16. e La partie n'est pas fini 
-    1. Retour au point 14 du scénario nominal avec l'autre joueur
+16\. d Le joueur veut prendre un nombre d'allumette supérieur à la limite
+1. Le système affiche un message d'erreur "Le nombre max est ..."
+2. Retour au point 14 du scénario nominal avec le même joueur
 
-19. a L'utilisateur à répondu autre chose que y ou n
-    1. Le système affiche un message d'erreur "Répondre avec "y" ou "n""
-    2. Retour au point 17 du scénario nominal
+16\. e La partie n'est pas fini 
+1. Retour au point 14 du scénario nominal avec l'autre joueur
 
-19. b L'utilisateur à choisi d’arrêter de jouer
-    1. Le système affiche le classement entre les deux joueur
-    2. Le système attend une action de l'utilisateur pour arrêter le programme
+19\. a L'utilisateur à répondu autre chose que y ou n
+1. Le système affiche un message d'erreur "Répondre avec "y" ou "n""
+2. Retour au point 17 du scénario nominal
 
-
-
-
+19\. b L'utilisateur à choisi d’arrêter de jouer
+1. Le système affiche le classement entre les deux joueur
+2. Le système attend une action de l'utilisateur pour arrêter le programme
 
 
 
@@ -150,46 +152,51 @@ graph LR
 
 ### Extensions
 
-- 4.a L'utilisateur répond à la question avec une chaîne vide
-    1. Retour au point 2 du scénario nominal
+4\. a L'utilisateur répond à la question avec une chaîne vide
+1. Le système affiche un message d'erreur "Le nom ne peut pas être vide"
+2. Retour au point 2 du scénario nominal
 
-- 7.a L'utilisateur répond à la question avec une chaîne vide
-    1. Retour au point 5 du scénario nominal
+5\. a Le joueur joue seul
+1. Retour au point 8 du scénario nominal
+
+7\. a L'utilisateur répond à la question avec une chaîne vide
+1. Le système affiche un message d'erreur "Le nom ne peut pas être vide"
+2. Retour au point 5 du scénario nominal
 
 
-- 10.a l'utilisateur répond autre chose que 'y' ou 'n'
-    1. le système affiche un message d'erreur
-    2. retour au point 8 du scénario nominal
+10\. a l'utilisateur répond autre chose que 'y' ou 'n'
+1. le système affiche un message d'erreur
+2. retour au point 8 du scénario nominal
 
-- 13.a L'utilisateur choisit un numéro de colonne $n \notin \lbrace x \in \N, \text{ tq } 1 \le x \le 7 \rbrace$
+13\. a L'utilisateur choisit un numéro de colonne entre 1 et 7
+1. Le système affiche un message d'erreur
+2. retour au point 11 du scénario nominal
+
+13\. b L'utilisateur choisit un numéro de colonne valide, mais la colonne est pleine
+1. Le système affiche un message d'erreur
+2. retour au point 11 du scénario nominal
+
+13\. c L'utilisateur choisit de faire tourner le plateauNim
+1. Le système vérifie que l'option est activée
     1. Le système affiche un message d'erreur
     2. retour au point 11 du scénario nominal
+2. Le système fait tourner la grille
+3. retour au point 11 du scénario nominal
 
-- 13.b L'utilisateur choisit un numéro de colonne valide, mais la colonne est pleine
-    1. Le système affiche un message d'erreur
-    2. retour au point 11 du scénario nominal
+13\. a La partie n'est pas finie
+1. Le système change le joueur qui doit jouer
+2. retour au point 11 du scénario nominal
 
-- 13.c L'utilisateur choisit de faire tourner le plateauNim
-    1. Le système vérifie que l'option est activée
-        1. Le système affiche un message d'erreur
-        2. retour au point 11 du scénario nominal
-    2. Le système fait tourner la grille
-    2. retour au point 13 du scénario nominal
+16\. a l'utilisateur répond autre chose que 'y' ou 'n'
+1. le système affiche un message d'erreur
+2. retour au point 14 du scénario nominal
 
-- 13.a La partie n'est pas finie
-    1. Le système change le joueur qui doit jouer
-    2. retour au point 11 du scénario nominal
-
-- 16.a l'utilisateur répond autre chose que 'y' ou 'n'
-    1. le système affiche un message d'erreur
-    2. retour au point 14 du scénario nominal
-
-- 16.b L'utilisateur répond 'n'
-    1. le système affiche le gagnant et le nombre de victoire du gagnant
-        - Il n'y a pas de gagnant
-            1. le système affiche ex æquo et le nombre de victoire des joueurs (il est identique pour les deux)
-            2. Retour au point 2 de l'extension 16.b
-    2. fin du programme
+16\.b L'utilisateur répond 'n'
+1. le système affiche le gagnant et le nombre de victoire du gagnant
+    - Il n'y a pas de gagnant
+        1. le système affiche ex æquo et le nombre de victoire des joueurs (il est identique pour les deux)
+        2. Retour au point 2 de l'extension 16.b
+2. fin du programme
 
 
 
@@ -197,6 +204,7 @@ graph LR
 
 
 ```mermaid
+
 
 classDiagram
     direction BT
@@ -400,10 +408,10 @@ classDiagram
 
     ControleurNim  --|>  Controleur 
     ControleurP4  --|>  Controleur 
-    CoupNim  --|>  Coup 
     CoupP4  --|>  Coup 
     CoupP4Coup  --|>  CoupP4 
     CoupP4Rotation  --|>  CoupP4 
+    CoupNim  --|>  Coup 
     IA  --|>  Joueur 
     IANim  --|>  IA 
     IAP4  --|>  IA 
@@ -413,35 +421,12 @@ classDiagram
 
 
 
-
-
-
-
-
-
-
-
-
-    Controleur --> "1" Ihm 
-    %%Controleur  ..>  Joueur : «create»
-    Controleur --> "1..*" Joueur : lesJoueurs
     Controleur --> "1" Plateau 
-    %%ControleurNim  ..>  IANim : «create»
-    %%ControleurNim  ..>  PlateauNim : «create»
-    %%ControleurP4  ..>  IAP4 : «create»
-    %%ControleurP4  ..>  PlateauP4 : «create»
-    %%IANim  ..>  CoupNim : «create»
-    %%IAP4 "1" *--> "lesPlacements *" CoupP4Coup 
-    %%IAP4  ..>  CoupP4Coup : «create»
-    %%IAP4  ..>  CoupP4Rotation : «create»
-    %%IAP4 "1" *--> "lesRotations *" CoupP4Rotation 
-    Ihm  ..>  CoupNim : «create»
-    Ihm  ..>  CoupP4Rotation : «create»
-    Ihm  ..>  CoupP4Coup : «create»
-    %%PlateauNim  ..>  Tas : «create»
+    Controleur --> "1..*" Joueur : lesJoueurs
+    Controleur --> "1" Ihm 
+    Ihm  ..>  Coup : «create»
+    IA  ..>  Coup : «create»
     PlateauNim *--> "1..*" Tas : lesTas
-    %%PlateauP4  ..>  CoupP4Coup : «create»
-    %%PlateauP4 "1" *--> "dernierCoup 1" CoupP4Coup 
 ``` 
 
 
@@ -451,7 +436,7 @@ classDiagram
 
 ### 24/03/2024 (Fin des exams)
 
-Dany : Refactor des problèmes de l'itération 3, IA Nim (Aléatoire)
+Dany : Refactor (des problèmes de l'itération 3), IA Nim (Aléatoire)
 
 Nathan : IA Puissance 4
 
