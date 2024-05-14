@@ -97,7 +97,7 @@ public class IAP4 extends IA{
                 int tailleLigneIA = copieIA.compterMaxJetonsAlignes(lesPlacements[i]);
                 int tailleLigneJoueur = copieJoueur.compterMaxJetonsAlignes(lesPlacementsAdverses[i]);
                 // Si la ligne a le potentiel de former une ligne plus longue pour l'IA, ou si les deux lignes sont de même taille.
-                if (tailleLigneIA > tailleLigneJoueur) {
+                if (tailleLigneIA >= tailleLigneJoueur) {
                     // On référence la valeur.
                     scoreCoups[scoreTailleIa[tailleLigneIA]-1].add(lesPlacements[i]);
                 } else {
